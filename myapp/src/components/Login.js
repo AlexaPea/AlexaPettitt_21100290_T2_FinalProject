@@ -12,8 +12,10 @@ const Login = () => {
             </div>
 
             <div className='left-login'>
-                <h1>Log In</h1>
-
+            <form>
+                <h1>Hello Again!</h1>
+                <h2>Welcome back you've been missed!</h2>
+     
                 <label>
                     Email
                     <input type='email' placeholder='Please type email here'></input>
@@ -26,6 +28,9 @@ const Login = () => {
 
                 <button className='primary-btn'>Log In</button>
 
+                <h3>Don't have an account?</h3>
+                <button className='primary-btn create'>Create account</button>
+                </form>
             </div>
             
         </div>

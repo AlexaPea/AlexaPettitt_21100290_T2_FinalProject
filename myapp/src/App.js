@@ -7,6 +7,7 @@ import Appointments from './components/Appointments';
 import Doctors from './components/Doctors';
 import Patients from './components/Patients';
 import Login from './components/Login';
+import Register from './components/Register'
 // import Calendar from './components/Calendar';
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/Doctors' element = {<Doctors/>}/>
         <Route path='/Patients' element = {<Patients/>}/>
         <Route path='/Login' element = {<Login/>}/>
+        <Route path='/Register' element = {<Register/>}/>
       </Routes>
  
     </div>

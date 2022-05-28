@@ -1,11 +1,13 @@
 import React from 'react';
 import loginimg from '../Images/login.png';
+import Logo from '../Images/logo.png';
 
 const Login = () => {
     return (
         <div className='login-page'>
             
             <div className='right-login'>
+            <img className='logo-img' src={Logo}/>
                 <h1 className='login-heading'>PetCare</h1>
                 <h2 className='login-two'>Taking care of all your pet related needs.</h2>
                 <img className='login-img' src={loginimg}/>

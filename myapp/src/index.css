@@ -1073,6 +1073,8 @@ button{
 .right-login h1{
   margin-top: 80px;
   margin-bottom: 0px;
+  float: left;
+  margin-left: 5px;
 }
 .login-two{
   color: #ba7d90;
@@ -1081,7 +1083,7 @@ button{
   padding: 0;
   margin-left: 230px;
   text-align: left;
-  margin-top: 0px;
+  margin-top: 130px;
 }
 .login-img{
   width: 80%;
@@ -1114,13 +1116,14 @@ label{
   font-weight: 300;
   font-size: 20px;
   margin-top: -20px;
+  float: left;
 }
 
 form{
   width: 60%;
   margin: 0 auto;
   margin-top: 30px;
-  color: #4d4d4d
+  color: #2b2b2b;
 
 }
 
@@ -1151,4 +1154,197 @@ form{
   text-align: center;
   font-weight: 500;
   margin-top: 30px;
+}
+
+/*Register*/
+
+.left-register{
+  width: 40%;
+  height: 80vh;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 30px;
+  margin-left: 170px;
+  margin-top: 50px;
+  box-shadow:
+  0  5px 10px rgba(154,160,185,0.05),
+  0 15px 40px rgba(166,173,201,0.2);
+  background-color: #FFFFFF;
+  text-align: left;
+  float: left;
+}
+
+.left-register input, .left-register select{
+  width: 41%;
+  padding: 15px;
+  margin: 12px 0;
+  background-color: #e4e4e4;
+  border: none;
+  border-radius: 10px;
+  margin-right: 10px;
+
+}
+.left-register select{
+  width: 47%;
+}
+.left-register button{
+  width: 96%;
+  border-radius: 10px;
+  height: 50px;
+}
+
+.left-register h3{
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.left-register h1{
+  text-align: center;
+  margin-top: 25px;
+  
+}
+.left-register h2{
+  text-align: center;
+  font-weight: 300;
+  font-size: 20px;
+  margin-top: -20px;
+  margin-bottom: 5px;
+}
+
+.left-register form{
+  width: 80%;
+  margin-top: -23px;
+}
+
+.left-register [type="password"]{
+  width: 90%;
+}
+
+.message {
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  /* background-color: salmon; */
+  margin-bottom: 20px;
+   color: #b55151;
+   float: left;
+}
+
+.alertMiniModal{
+  
+  width: 200px;
+ 
+  /* height: 25px; */
+  /* background-color: rgb(245, 121, 90);
+  color: white; */
+  text-align: center;
+  position: absolute;
+  margin-top: 58px;
+  /* margin-left: -18%;
+  margin-top: 15px;
+  padding-top: 10px;
+  box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.18);
+-webkit-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.18);
+-moz-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.18); */
+}
+
+.alertMiniModalRight {
+  width: 250px;
+  margin-top: -10px;
+  text-align: center;
+  margin-left: 240px;
+  position: absolute;
+ 
+}
+
+
+
+.alertMiniModal small,.alertMiniModalRight small {
+  margin: 0;
+  padding: 0;
+  color: #a85f5f;
+  font-size: 12px;
+  margin-left: 25px;
+  margin-top: -25px;
+}
+
+/* .alertMiniModalRight p{
+  margin: 0;
+  padding: 0;
+}
+
+.alertMiniModal img{
+  width: 10px;
+  position: absolute;
+  right: -8px;
+  top: 2px;
+  width: 9px;
+  position: absolute;
+  right: -8px;
+  top: 5px;
+}
+
+.alertMiniModalRight img{
+  width: 10px;
+  position: absolute;
+  right: -8px;
+  top: 2px;
+  width: 9px;
+  position: absolute;
+  right: -8px;
+  top: 5px;
+}
+
+.alertMiniModalRight img{
+  width: 10px;
+  position: absolute;
+  left: -8px;
+  top: 2px;
+  width: 9px;
+  position: absolute;
+  right: -8px;
+  top: 5px;
+  transform: rotate(180deg);
+} */
+
+.statusIcon{
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  right: 30px;
+  margin-top: 6px;
+  border-radius: 5px;
+}
+
+.statusIconUser{
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 38%;
+  border-radius: 5px;
+}
+
+.errorImg{
+  width: 2px;
+float: left;
+color: #b55151;
+margin-top: 1.5px;
+}
+
+.login-link p{
+  color: #ba7d90;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 13px;
+  margin-top: -13px;
+}
+
+.logo-img{
+  float: left;
+  margin-top: 80px;
+  margin-left: 230px;
+  width: 40px;
 }

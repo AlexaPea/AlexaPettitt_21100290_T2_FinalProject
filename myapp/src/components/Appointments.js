@@ -1,14 +1,19 @@
 import React from 'react';
 import wave from '../Images/wave.png';
 import dp from '../Images/placeholder.jpg';
-import Calendar from './Calendar';
 import headImg from '../Images/headerImg2.png';
 import searchIcon from "../Images/search_icon.svg";
+import Navigation from './Navigation';
+import Calendar from './Calendar';
+import { UilPlus } from '@iconscout/react-unicons'
 
 
 const Appointments = () => {
+
+   
     return (
         <div>
+            <Navigation/>
 
             <div className='left-panel'>
             <div className='row1'>
@@ -40,18 +45,19 @@ const Appointments = () => {
                 <div className='block three'>
                     <h1 className='block-head'> 00 </h1>
                     <hr/>
-                    <h2 className='block-text'> Cancelations </h2>
+                    <h2 className='block-text'> Appointments </h2>
                 </div>
             </div>
 
             <div className='row3'>
                 <div className='calendar'>
-                    <div className='block-heading'> Calendar </div>
-                    {/* <Calendar/> */}
+                    <div className='block-heading' id='calendar-heading'> Calendar </div>
+                    <Calendar/>
 
                 </div>
                 <div className='appointments'>
                     <div className='block-heading'> Appointments </div>
+                    <button class='addBtn' id="btn"><div className='plus-icon'><UilPlus/></div></button>
                     <table className='appointments-table'>
                         <tr className='row-heading'>
                             <th>Doctor</th>
@@ -118,7 +124,7 @@ const Appointments = () => {
                             
                         </div>
 
-                        <button className='primary-btn'>Log Out</button>
+                        <button className='primary-btn' id='btn'>Log Out</button>
                         {/* <table className='reception'>
                             <tr>
                                 <td>balh</td>
@@ -131,8 +137,11 @@ const Appointments = () => {
 
                 <div className='tasks'>
                     <h1 className='tasks-head'>Tasks</h1>
+                    <button class='addBtn tasks' id="btn"><div className='plus-icon'><UilPlus/></div></button>
                     <div className='task-container'>
                         <div className='individual-task'>
+                            <h5>Email Mrs Poter</h5>
+                            <p>Regarding invoice</p>
 
                         </div>
                     </div>

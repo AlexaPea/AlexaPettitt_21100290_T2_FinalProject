@@ -3,11 +3,15 @@ import pet from '../Images/pet.jpg';
 import {UilEdit , UilArrowDown } from '@iconscout/react-unicons';
 import searchIcon from "../Images/search_icon.svg";
 import dp from '../Images/placeholder.jpg';
-import dog from '../Images/dog.png'
+import dog from '../Images/dog.png';
+import Navigation from './Navigation';
 
 const Patients = () => {
+    
     return (
+        
         <div>
+                <Navigation/>
 
 <br/>
             <div className='left-list'>

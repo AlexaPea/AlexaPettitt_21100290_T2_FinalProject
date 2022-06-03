@@ -351,7 +351,7 @@ const Login = () => {
 
                 {/* make rank automatically general */}
 
-                <button className='primary-btn' type='submit' onClick={handleSubmit}>Register</button>
+                <button className='primary-btn login' type='submit' onClick={handleSubmit}>Register</button>
 
                 <h3>Already have an account?</h3>
                 <a href='./' className='login-link'><p>Login</p></a>

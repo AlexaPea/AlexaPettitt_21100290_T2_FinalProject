@@ -2,11 +2,13 @@ import React from 'react';
 import searchIcon from "../Images/search_icon.svg";
 import dp from '../Images/placeholder.jpg';
 import family from '../Images/family.png';
-import {UilEdit , UilArrowDown } from '@iconscout/react-unicons'
+import {UilEdit , UilArrowDown } from '@iconscout/react-unicons';
+import Navigation from './Navigation';
 
 const Doctors = () => {
     return (
         <div className='vet-page'>
+                <Navigation/>
             <br/>
             <div className='left-list'>
                 <h3>Search Vet in PetCare</h3>
@@ -153,7 +155,7 @@ const Doctors = () => {
                         <input className='booking-input' type='time' placeholder='time'></input>
                         <input className='booking-input' type='number' placeholder='room'></input>
 
-                        <button className='primary-btn'>Book appointment</button>
+                        <button className='primary-btn' id='btn'>Book appointment</button>
                     </div>
 
                 </div>

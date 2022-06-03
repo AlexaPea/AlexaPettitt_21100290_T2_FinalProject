@@ -28,7 +28,7 @@ const Login = () => {
                     <input type='password' placeholder='Please type password here'></input>
                 </label>
 
-                <button className='primary-btn'>Log In</button>
+                <button className='primary-btn login'>Log In</button>
 
                 <h3>Don't have an account?</h3>
                 <button className='primary-btn create'>Create account</button>

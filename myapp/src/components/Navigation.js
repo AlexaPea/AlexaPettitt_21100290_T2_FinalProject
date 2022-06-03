@@ -12,9 +12,9 @@ const Navigation = () => {
             <div className="navContainer">
                                
                 <ul>
-                    <li><NavLink exact activeClassName="active" to="/"><div className="icon icon1"><UilSchedule/></div></NavLink></li>
-                    <li><NavLink activeClassName="active" to="/Doctors"><div className="icon icon2"><UilStethoscopeAlt/></div></NavLink></li>
-                    <li><NavLink activeClassName="active" to="/Patients"><div className="icon icon3"><UilUsersAlt/></div></NavLink></li>
+                    <li><NavLink exact activeClassName="active" to="/"><button className="icon icon1"><UilSchedule/></button></NavLink></li>
+                    <li><NavLink activeClassName="active" to="/Doctors"><button className="icon icon2"><UilStethoscopeAlt/></button></NavLink></li>
+                    <li><NavLink activeClassName="active" to="/Patients"><button className="icon icon3"><UilUsersAlt/></button></NavLink></li>
                 </ul>
 
        

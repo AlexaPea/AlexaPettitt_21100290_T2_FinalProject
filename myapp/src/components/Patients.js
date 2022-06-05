@@ -8,6 +8,8 @@ import Navigation from './Navigation';
 import Logo from '../Images/logo.png';
 import { useState, useEffect } from 'react';
 import Helmet from "react-helmet";
+import { UilPlus } from '@iconscout/react-unicons';
+import addClient from './addClient';
 
 const Patients = (props) => {
 
@@ -21,17 +23,30 @@ const Patients = (props) => {
         link.href = {Logo};
       }, []);
     
+       //  handleAddClient
+       const [isShown, setIsShown] = useState(false);
+
+       const handleAddClient = (event) => {
+       
+        setIsShown(current => !current);
+   
+     };
+
     return (
         
         <div>
+
             <Helmet>
                 <title>Clients</title>
                 <link rel="icon" href={Logo}/>
             </Helmet>
             <Navigation/>
+             {/* 👇️ show component on click */}
+             {isShown && <addClient />}
 
 <br/>
             <div className='left-list'>
+            <button class='addBtn two' id="btn" onClick={handleAddClient}><div className='plus-icon' ><UilPlus/></div></button>
                 <h3>Search client at PetCare</h3>
             <div className="search vet"><input type="text" placeholder="Search..."/><img src={searchIcon}/></div>  
             <small>Showing 00 Clients</small>
@@ -153,10 +168,6 @@ const Patients = (props) => {
                     <tr>
                         <th>Telephone</th>
                         <td>0671674070</td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                        <td>*****</td>
                     </tr>
                     <tr>
                         <th>Doctor Id</th>

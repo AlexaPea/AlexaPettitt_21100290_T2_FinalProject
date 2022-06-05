@@ -7,6 +7,9 @@ import Navigation from './Navigation';
 import Logo from '../Images/logo.png';
 import { useState, useEffect } from 'react'
 import Helmet from "react-helmet";
+import { UilPlus } from '@iconscout/react-unicons';
+import AddDoctor from './AddDoctor';
+
 
 const Doctors = (props) => {
 
@@ -21,15 +24,34 @@ const Doctors = (props) => {
       }, []);
 
 
+        //  handleAddDoc
+        const [isShown, setIsShown] = useState(false);
+
+        const handleAddDoc = (event) => {
+        
+         setIsShown(current => !current);
+    
+      };
+
+
     return (
         <div className='vet-page'>
+           
+          {/* 👇️ show component on click */}
+          {/* {isShown && <addDoctor />} */}
+        
             <Helmet>
                 <title>Vets</title>
                 <link rel="icon" href={Logo}/>
             </Helmet>
             <Navigation/>
+           
             <br/>
             <div className='left-list'>
+            {/* 👇️ show component on click */}
+          {isShown && <AddDoctor />}
+            
+            <button class='addBtn two' id="btn" onClick={handleAddDoc}><div className='plus-icon' ><UilPlus/></div></button>
                 <h3>Search Vet in PetCare</h3>
             <div className="search vet"><input type="text" placeholder="Search..."/><img src={searchIcon}/></div>  
             <small>Showing 00 Doctors</small>

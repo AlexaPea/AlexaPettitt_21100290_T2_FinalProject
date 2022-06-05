@@ -78,6 +78,8 @@ a{
   padding: 5px;
 }
 
+
+
 /*Dashboard layout*/
 .row1{
   width: 100%;
@@ -131,26 +133,24 @@ a{
   margin-top: -20px;
   float: left;
 }
-.row1 .wave{
-  width: 80px;
-  float: left;
-  margin-top: -35px;
+
+.wave-container{
+ background-color: #FFE696;
+ position: relative;
+ z-index: 0;
+ width: 40px;
+ height:40px;
+ border-radius: 60px;
+ margin-top: -50px;
+  margin-left: 450px;
 }
+.row2 .wave{
+  width: 25px;
+  float: left;
+  margin-top: 8px;
+  margin-left: 6px;
 
-/* .row1 .wave-container{
-  background-color: #2b2b2b;
-  width: 80px;
-  height: 80px;
-  border-radius: 60px;
-} */
-
-/* .headerimg{
-  width:380px;
-  margin-top:-75px;
-   transform: scaleX(-1); 
-  margin-left: 0px;
-  
-} */
+}
 
 .headerimg{
   width:300px;
@@ -205,14 +205,10 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 
 .block.one{
   /* background-color: rgb(255, 255, 255); */
-  width: 595px;
+  width: 654px;
 }
-.block.two{
-  /* background-color: #D1E2FB; */
-}
-.block.three{
-  /* background-color: #ffffff; */
-}
+
+
 
 /*row three design*/
 
@@ -795,6 +791,7 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
   height:200px;
   border-radius: 20px; 
   padding: 10px;
+  z-index: 1;
 }
 .booking-input{
   background-color: #e2e2e296;
@@ -1527,9 +1524,8 @@ margin-top: 1.5px;
 .addBtn{
   color: #D69EAF;
   background-color: #f5f5f5;
-  position: static;
   position: sticky;
-  margin-top: -40px;
+  margin-top: -50px;
   margin-left: 430px;
   cursor: pointer;
   border: none;
@@ -1591,11 +1587,12 @@ margin-top: 1.5px;
 
 .appointments-form{
   position: absolute;
+  z-index: 2;
   background-color: #fafafa;
-  height: 500px;
+  height: 350px;
   width: 450px;
-  margin-top: 80px;
-  margin-left: 450px;
+  margin-top: 150px;
+  margin-left: 480px;
   border-radius: 30px;
   box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
               -6px -6px 10px rgba(255, 255, 255, .5),
@@ -1628,4 +1625,225 @@ margin-top: 1.5px;
   margin-top: -15px;
 
 }
+/*book appointment*/
 
+.new-book-container.home{
+  padding: 10px;
+ 
+}
+.booking-input.home{
+  float: left;
+
+}
+
+#homeForm{
+  padding: 10px;
+  width: 400px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+#homeForm .primary-btn{
+  margin-top: 150px;
+  margin-left: -360px;
+}
+
+.closeBtn{
+  color: #D69EAF;
+  background-color: #f5f5f5;
+position: absolute;
+margin-top: 15px;
+  
+  margin-left: 150px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  height: 30px;
+  width: 30px;
+
+}
+
+/*greeting*/
+.greeting2{
+  margin-top: -125px;
+  margin-left: 50px;
+}
+
+#greeting-head-2{
+  font-size: 24px;
+}
+
+#greeting-msg-2{
+  font-size: 16px;
+  margin-left: 40px;
+  margin-top: -10px;
+  font-weight: 200;
+}
+
+.addBtn.two{
+  margin-top:30px;
+  margin-left: 160px;
+  position: absolute;
+
+}
+
+/*Add doc form*/
+
+.add-doctor{
+  background-color: #fafafa;
+  width: 500px;
+  height:480px;
+  margin-top: 100px;
+  margin-left: 400px;
+  z-index: 3;
+  position: absolute;
+
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
+  -6px -6px 10px rgba(255, 255, 255, .5),
+  6px 6px 8px rgba(255, 255, 255, .075),
+  6px 6px 10px rgba(0, 0, 0, .08);
+
+
+}
+
+#doctorForm{
+  margin: 15px;
+  margin-left: 70px;
+  width: 90%;
+}
+
+.booking-input.doc{
+  width: 152px;
+  float: left;
+
+}
+
+.booking-input.doc.full{
+  width: 330px;
+}
+
+.booking-input.doc.gen{
+  width: 165px;
+}
+
+
+.new-doc-container{
+  width: 90%;
+}
+
+.heading.doc h1{
+  margin-left: -90px;
+  margin-top: 30px;
+  color: #2b2b2b;
+  font-weight: 400;
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 25px;
+
+}
+
+.heading.doc h3{
+  margin-left: 60px;
+  color: #D69EAF;
+  margin-bottom: 30px;
+}
+
+.primary-btn.addVet{
+  margin-top: 22px;
+  margin-left: -50px;
+
+}
+
+/*Add task*/
+
+.task-form-container{
+  background-color: #fafafa;
+  width: 500px;
+  height:430px;
+  margin-top: 150px;
+  margin-left: 500px;
+  z-index: 3;
+  position: absolute;
+  border-radius: 30px;
+
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
+  -6px -6px 10px rgba(255, 255, 255, .5),
+  6px 6px 8px rgba(255, 255, 255, .075),
+  6px 6px 10px rgba(0, 0, 0, .08);
+
+}
+
+#addTask{
+  width: 75%;
+}
+
+.heading.doc h1{
+  margin-left: -90px;
+  margin-top: 30px;
+
+}
+
+.heading.doc h3{
+ margin-left: 60px;
+  margin-top: -40px;
+  color: #D69EAF;
+  margin-bottom: 20px;
+}
+
+.task-form-container input{
+
+    background-color: #e2e2e296;
+    color: #2b2b2b;
+    border: none;
+    padding:8px;
+    width: 100%;
+    float: left;
+    border-radius: 10px;
+    margin: 5px;
+  
+}
+.task-form-container textarea{
+
+  background-color: #e2e2e296;
+  color: #2b2b2b;
+  border: none;
+  padding:8px;
+  width: 100%;
+  height: 100px;
+  float: left;
+  border-radius: 10px;
+  margin: 5px;
+  font-family: poppins;
+
+}
+.task-form-container label{
+  text-align: left;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.task-form-container .heading h1{
+  color: #2b2b2b;
+  font-weight: 400;
+  font-size: 26px;
+  text-align: center;
+ 
+
+}
+.task-form-container h3{
+  color: #D69EAF;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+  margin-top: -15px;
+
+}
+
+.task-form-container .primary-btn{
+  margin-top: 20px;
+}
+
+.labelOne{
+  margin-top: -20px;
+}

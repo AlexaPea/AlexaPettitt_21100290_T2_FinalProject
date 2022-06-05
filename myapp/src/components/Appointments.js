@@ -9,6 +9,9 @@ import { UilPlus } from '@iconscout/react-unicons'
 import { useState, useEffect } from 'react'
 import Logo from '../Images/logo.png';
 import Helmet from "react-helmet";
+import { useNavigate } from 'react-router-dom';
+import MakeBooking from './MakeBooking';
+import AddTask from './AddTask';
 
 
 const Appointments = (props) => {
@@ -22,9 +25,49 @@ const Appointments = (props) => {
         }
         link.href = {Logo};
       }, []);
+
+    //  handleBooking
+    const [isShownBooking, setIsShownBooking] = useState(false);
+    const [isShownTask, setIsShownTask] = useState(false);
+
+    const handleBooking = (event) => {
+     
+        setIsShownBooking(current => !current);
+    
+      };
+
+      // show add task option
+
+      const addTask = (event) => {
+     
+        setIsShownTask(current => !current);
+    
+      };
+     
+
+      //Logout
+      const navigate = useNavigate();
+
+      const setLogOut = (e) => {
+   
+        sessionStorage.clear();
+    
+        navigate('/Login');
+    
+    
+      };
+      //current date and time
+      const current = new Date();
+  const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
       
     return (
         <div>
+             {/* 👇️ show component on click */}
+            {isShownBooking && <MakeBooking />}
+
+              {/* 👇️ show component on click */}
+              {isShownTask && <AddTask />}
+
          <Helmet>
             <title>Appointments</title>
             <link rel="icon" href={Logo}/>
@@ -36,11 +79,9 @@ const Appointments = (props) => {
             <div className='left-panel'>
             <div className='row1'>
                 <div className='greetiing'>
-                    <h1 className='greeting-head'> Hello Jessica </h1>
-                    <h2 className='greeting-msg'> Have a nice day at work </h2>
-                    <div className='.wave-container'>
-                        <img className='wave' src={wave}/>
-                    </div>
+                    <h1 className='greeting-head'>Dashboard</h1>
+                    <h2 className='greeting-msg'>{date} </h2>
+                 
                     <div className="search"><input type="text" placeholder="Search..."/><img src={searchIcon}/></div>  
                     
                     
@@ -52,6 +93,13 @@ const Appointments = (props) => {
             <div className='row2'>
                 <div className='block one'>
                 <img className='headerimg' src={headImg}/>
+                <div className='greeting2'>
+                    <h1 id='greeting-head-2'> Hello, Jessica </h1>
+                    <h2 id='greeting-msg-2'> Have a nice day at work! </h2>
+                    <div className='wave-container'>
+                        <img className='wave' src={wave}/>
+                    </div>
+                    </div>
                 </div>
 
                 {/* <div className='block two'>
@@ -75,7 +123,7 @@ const Appointments = (props) => {
                 </div>
                 <div className='appointments'>
                     <div className='block-heading'> Appointments </div>
-                    <button class='addBtn' id="btn"><div className='plus-icon'><UilPlus/></div></button>
+                    <button class='addBtn' id="btn" onClick={handleBooking}><div className='plus-icon' ><UilPlus/></div></button>
                     <table className='appointments-table'>
                         <tr className='row-heading'>
                             <th>Doctor</th>
@@ -142,7 +190,7 @@ const Appointments = (props) => {
                             
                         </div>
 
-                        <button className='primary-btn' id='btn'>Log Out</button>
+                        <button className='primary-btn' id='btn' onClick={setLogOut}>Log Out</button>
                         {/* <table className='reception'>
                             <tr>
                                 <td>balh</td>
@@ -155,7 +203,7 @@ const Appointments = (props) => {
 
                 <div className='tasks'>
                     <h1 className='tasks-head'>Tasks</h1>
-                    <button class='addBtn tasks' id="btn"><div className='plus-icon'><UilPlus/></div></button>
+                    <button class='addBtn tasks' id="btn" onClick={addTask}><div className='plus-icon'><UilPlus/></div></button>
                     <div className='task-container'>
                         <div className='individual-task'>
                             <h5>Email Mrs Poter</h5>
@@ -165,43 +213,13 @@ const Appointments = (props) => {
                     </div>
                     
                 </div>
+
+           
+
             </div>
 
-            <div className='appointments-form'>
-                <form>
-                    <div className='heading'>
-                        <h1>Make booking</h1>
-                        <h3>Let's get this clients pet booked!</h3>
-
-                    </div>
-
-                    <div className='new-book-container'>
-                        <input list="docList" className='booking-input' type='text' placeholder='doctor'/>
-                        <datalist id="docList">
-                            <option value="Sarah"/>
-                            <option value="Josh"/>
-                            <option value="Daina"/>
-                            <option value="Tanielle"/>
-                            <option value="Tony"/>
-                        </datalist>
-                        <input list="clientList" className='booking-input' type='text' placeholder='client'/>
-                        <datalist id="clientList">
-                            <option value="Sarah"/>
-                            <option value="Josh"/>
-                            <option value="Daina"/>
-                            <option value="Tanielle"/>
-                            <option value="Tony"/>
-                        </datalist>
-                        <input className='booking-input' type='date' placeholder='Date'/>
-                        <input className='booking-input' type='time' placeholder='time'/>
-                        <input className='booking-input' type='number' placeholder='room'/>
-
-                        <button className='primary-btn' id='btn'>Book appointment</button>
-                    </div>
-                  
-                </form>
-            </div>
-            
+                    
+                        
         </div>
     );
 };

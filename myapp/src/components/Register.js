@@ -370,7 +370,7 @@ const Login = (props) => {
                 <button className='primary-btn login' type='submit' onClick={handleSubmit}>Register</button>
 
                 <h3>Already have an account?</h3>
-                <a href='./' className='login-link'><p>Login</p></a>
+                <a href='/Login' className='login-link'><p>Login</p></a>
                 </form>
             </div>
             

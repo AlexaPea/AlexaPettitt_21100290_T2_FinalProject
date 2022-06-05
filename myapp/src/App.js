@@ -8,7 +8,7 @@ import Doctors from './components/Doctors';
 import Patients from './components/Patients';
 import Login from './components/Login';
 import Register from './components/Register'
-import Logo from './Images/logo.png';
+import MakeBooking from './components/MakeBooking';
 
 
 
@@ -28,7 +28,7 @@ function App() {
         <Route path='/Login' element = {<Login/>}/>
         <Route path='/Register' element = {<Register/>}/>
       </Routes>
- 
+
     </div>
   );
 }

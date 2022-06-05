@@ -6,14 +6,33 @@ import searchIcon from "../Images/search_icon.svg";
 import Navigation from './Navigation';
 import Calendar from './Calendar';
 import { UilPlus } from '@iconscout/react-unicons'
+import { useState, useEffect } from 'react'
+import Logo from '../Images/logo.png';
+
+import Helmet from "react-helmet";
 
 
-const Appointments = () => {
+const Appointments = (props) => {
 
-   
+    useEffect(() => {
+        const link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = 'icon';
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+        link.href = {Logo};
+      }, []);
+      
     return (
         <div>
+         <Helmet>
+            <title>PetCare</title>
+            <link rel="icon" href={Logo}/>
+         </Helmet>
+         
             <Navigation/>
+            
 
             <div className='left-panel'>
             <div className='row1'>
@@ -147,6 +166,41 @@ const Appointments = () => {
                     </div>
                     
                 </div>
+            </div>
+
+            <div className='appointments-form'>
+                <form>
+                    <div className='heading'>
+                        <h1>Make booking</h1>
+                        <h3>Let's get this clients pet booked!</h3>
+
+                    </div>
+
+                    <div className='new-book-container'>
+                        <input list="docList" className='booking-input' type='text' placeholder='doctor'/>
+                        <datalist id="docList">
+                            <option value="Sarah"/>
+                            <option value="Josh"/>
+                            <option value="Daina"/>
+                            <option value="Tanielle"/>
+                            <option value="Tony"/>
+                        </datalist>
+                        <input list="clientList" className='booking-input' type='text' placeholder='client'/>
+                        <datalist id="clientList">
+                            <option value="Sarah"/>
+                            <option value="Josh"/>
+                            <option value="Daina"/>
+                            <option value="Tanielle"/>
+                            <option value="Tony"/>
+                        </datalist>
+                        <input className='booking-input' type='date' placeholder='Date'/>
+                        <input className='booking-input' type='time' placeholder='time'/>
+                        <input className='booking-input' type='number' placeholder='room'/>
+
+                        <button className='primary-btn' id='btn'>Book appointment</button>
+                    </div>
+                  
+                </form>
             </div>
             
         </div>

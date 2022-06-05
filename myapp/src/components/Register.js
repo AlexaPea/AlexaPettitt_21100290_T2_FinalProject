@@ -1,7 +1,6 @@
 import React from 'react';
 import loginimg from '../Images/login.png';
 import axios from 'axios';
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Okay from '../Images/okay.svg';
 import NotOkay from '../Images/notOkay.svg';
@@ -9,9 +8,21 @@ import NotOkay from '../Images/notOkay.svg';
 import MiniModalLeft from './MiniModalLeft';
 import MiniModalRight from './MiniModalRight';
 import Logo from '../Images/logo.png';
+import { useState, useEffect } from 'react'
 
 
-const Login = () => {
+const Login = (props) => {
+
+    useEffect(() => {
+        const link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = 'icon';
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+        link.href = {Logo};
+      }, []);
+      
     
     //about useNavigate
     const navigate = useNavigate();

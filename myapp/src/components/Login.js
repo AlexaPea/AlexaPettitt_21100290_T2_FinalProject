@@ -1,8 +1,21 @@
 import React from 'react';
 import loginimg from '../Images/login.png';
 import Logo from '../Images/logo.png';
+import { useState, useEffect } from 'react'
 
-const Login = () => {
+const Login = (props) => {
+
+    useEffect(() => {
+        const link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = 'icon';
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+        link.href = {Logo};
+      }, []);
+      
+      
     return (
         <div className='login-page'>
             

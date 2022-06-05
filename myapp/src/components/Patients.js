@@ -5,8 +5,20 @@ import searchIcon from "../Images/search_icon.svg";
 import dp from '../Images/placeholder.jpg';
 import dog from '../Images/dog.png';
 import Navigation from './Navigation';
+import Logo from '../Images/logo.png';
+import { useState, useEffect } from 'react'
 
-const Patients = () => {
+const Patients = (props) => {
+
+    useEffect(() => {
+        const link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = 'icon';
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+        link.href = {Logo};
+      }, []);
     
     return (
         

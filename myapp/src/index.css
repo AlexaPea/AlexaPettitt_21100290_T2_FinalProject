@@ -789,7 +789,7 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 }
 
 .book-container{
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   width: 87%;
   margin-left: 12px;
   height:200px;
@@ -797,7 +797,7 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
   padding: 10px;
 }
 .booking-input{
-  background-color: #eaeaea96;
+  background-color: #e2e2e296;
   color: #2b2b2b;
   border: none;
   padding:8px;
@@ -1547,9 +1547,7 @@ margin-top: 1.5px;
  
 }
 
-.plus-icon{
-  margin: 0 auto;
-}
+
 
 /*Tasks*/
 .individual-task{
@@ -1586,5 +1584,48 @@ margin-top: 1.5px;
   border: 0;
   color: white;
   margin-left: -8px;
+}
+
+
+/*Appointments form*/
+
+.appointments-form{
+  position: absolute;
+  background-color: #fafafa;
+  height: 500px;
+  width: 450px;
+  margin-top: 80px;
+  margin-left: 450px;
+  border-radius: 30px;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
+              -6px -6px 10px rgba(255, 255, 255, .5),
+              6px 6px 8px rgba(255, 255, 255, .075),
+              6px 6px 10px rgba(0, 0, 0, .08);
+
+  /* visibility: hidden; */
+  
+}
+
+
+.appointments-form form{
+  padding: 0px;
+
+}
+
+.appointments-form .heading h1{
+  color: #2b2b2b;
+  font-weight: 400;
+  font-size: 26px;
+  text-align: center;
+ 
+
+}
+.appointments-form h3{
+  color: #D69EAF;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+  margin-top: -15px;
+
 }
 

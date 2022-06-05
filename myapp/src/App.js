@@ -1,4 +1,4 @@
-
+import { useState, useEffect } from 'react'
 import './App.css';
 import{Routes, Route} from 'react-router-dom';
 import{NavLink} from 'react-router-dom';
@@ -8,13 +8,23 @@ import Doctors from './components/Doctors';
 import Patients from './components/Patients';
 import Login from './components/Login';
 import Register from './components/Register'
-// import Calendar from './components/Calendar';
+import Logo from './Images/logo.png';
+import Helmet from "react-helmet";
+
+
 
 
 function App() {
+
+
   return (
     <div className="App">
 
+    <Helmet>
+      <title>PetCare</title>
+      <link rel="icon" href={Logo}/>
+  
+    </Helmet>
 
       <Routes>
         

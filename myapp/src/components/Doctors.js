@@ -4,8 +4,22 @@ import dp from '../Images/placeholder.jpg';
 import family from '../Images/family.png';
 import {UilEdit , UilArrowDown } from '@iconscout/react-unicons';
 import Navigation from './Navigation';
+import Logo from '../Images/logo.png';
+import { useState, useEffect } from 'react'
 
-const Doctors = () => {
+const Doctors = (props) => {
+
+    useEffect(() => {
+        const link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = 'icon';
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+        link.href = {Logo};
+      }, []);
+
+
     return (
         <div className='vet-page'>
                 <Navigation/>
@@ -149,11 +163,25 @@ const Doctors = () => {
                 <div className='book-option'>
                     <h3>New Booking</h3>
                     <div className='book-container'>
-                        <input className='booking-input' type='text' placeholder='doctor'></input>
-                        <input className='booking-input' type='text' placeholder='client'></input>
-                        <input className='booking-input' type='date' placeholder='Date'></input>
-                        <input className='booking-input' type='time' placeholder='time'></input>
-                        <input className='booking-input' type='number' placeholder='room'></input>
+                        <input list="docList" className='booking-input' type='text' placeholder='doctor'/>
+                        <datalist id="docList">
+                            <option value="Sarah"/>
+                            <option value="Josh"/>
+                            <option value="Daina"/>
+                            <option value="Tanielle"/>
+                            <option value="Tony"/>
+                        </datalist>
+                        <input list="clientList" className='booking-input' type='text' placeholder='client'/>
+                        <datalist id="clientList">
+                            <option value="Sarah"/>
+                            <option value="Josh"/>
+                            <option value="Daina"/>
+                            <option value="Tanielle"/>
+                            <option value="Tony"/>
+                        </datalist>
+                        <input className='booking-input' type='date' placeholder='Date'/>
+                        <input className='booking-input' type='time' placeholder='time'/>
+                        <input className='booking-input' type='number' placeholder='room'/>
 
                         <button className='primary-btn' id='btn'>Book appointment</button>
                     </div>

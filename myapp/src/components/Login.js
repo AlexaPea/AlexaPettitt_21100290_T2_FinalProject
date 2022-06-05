@@ -1,7 +1,8 @@
 import React from 'react';
 import loginimg from '../Images/login.png';
 import Logo from '../Images/logo.png';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import Helmet from "react-helmet";
 
 const Login = (props) => {
 
@@ -18,6 +19,10 @@ const Login = (props) => {
       
     return (
         <div className='login-page'>
+              <Helmet>
+                <title>Login</title>
+                <link rel="icon" href={Logo}/>
+            </Helmet>
             
             <div className='right-login'>
             <img className='logo-img' src={Logo}/>

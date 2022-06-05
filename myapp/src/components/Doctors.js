@@ -6,6 +6,7 @@ import {UilEdit , UilArrowDown } from '@iconscout/react-unicons';
 import Navigation from './Navigation';
 import Logo from '../Images/logo.png';
 import { useState, useEffect } from 'react'
+import Helmet from "react-helmet";
 
 const Doctors = (props) => {
 
@@ -22,7 +23,11 @@ const Doctors = (props) => {
 
     return (
         <div className='vet-page'>
-                <Navigation/>
+            <Helmet>
+                <title>Vets</title>
+                <link rel="icon" href={Logo}/>
+            </Helmet>
+            <Navigation/>
             <br/>
             <div className='left-list'>
                 <h3>Search Vet in PetCare</h3>

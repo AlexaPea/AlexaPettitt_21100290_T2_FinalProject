@@ -6,7 +6,8 @@ import dp from '../Images/placeholder.jpg';
 import dog from '../Images/dog.png';
 import Navigation from './Navigation';
 import Logo from '../Images/logo.png';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import Helmet from "react-helmet";
 
 const Patients = (props) => {
 
@@ -23,7 +24,11 @@ const Patients = (props) => {
     return (
         
         <div>
-                <Navigation/>
+            <Helmet>
+                <title>Clients</title>
+                <link rel="icon" href={Logo}/>
+            </Helmet>
+            <Navigation/>
 
 <br/>
             <div className='left-list'>

@@ -8,7 +8,6 @@ import Calendar from './Calendar';
 import { UilPlus } from '@iconscout/react-unicons'
 import { useState, useEffect } from 'react'
 import Logo from '../Images/logo.png';
-
 import Helmet from "react-helmet";
 
 
@@ -27,7 +26,7 @@ const Appointments = (props) => {
     return (
         <div>
          <Helmet>
-            <title>PetCare</title>
+            <title>Appointments</title>
             <link rel="icon" href={Logo}/>
          </Helmet>
          

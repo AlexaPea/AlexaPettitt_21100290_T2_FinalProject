@@ -7,7 +7,7 @@ const AddDoctor = () => {
         <div className='add-doctor'>
             <div className='add-doctor-form'>
                 <form id="doctorForm">
-                <button class='closeBtn' id="btn" ><div className='close-icon'><UilTimes/></div></button>
+                <button className='closeBtn' id="btn" ><div className='close-icon'><UilTimes/></div></button>
                     <div className='heading doc'>
                    
                         <h1>Add New Vet</h1>

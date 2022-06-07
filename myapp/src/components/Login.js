@@ -41,18 +41,24 @@ const Login = (props) => {
 
   }
 
+  const navigateRegister = () => {
+
+   navigate("/Register");
+
+  }
+
   const handleSubmit = (e) =>{
     e.preventDefault();
 
     console.log(inputs); //must remove this on hand in
 
-    axios.post('http://localhost:8888/project-api/userLogin.php', inputs)
+    axios.post('http://localhost:80/project-api/userLogin.php', inputs)
     .then(function(response){
       console.log(response);
 
       if(response.data === true){
         sessionStorage.setItem('activeUser', inputs.email); //sets active user in sessionStorage
-        navigate("/Appointments");
+        navigate("/");
       }else{
         console.log("Not working")
       }
@@ -92,7 +98,7 @@ const Login = (props) => {
                 <button className='primary-btn login' onClick={handleSubmit}>Log In</button>
 
                 <h3>Don't have an account?</h3>
-                <button className='primary-btn create' href='/Register'>Create account</button>
+                <button className='primary-btn create' onClick={navigateRegister}>Create account</button>
                 </form>
             </div>
             

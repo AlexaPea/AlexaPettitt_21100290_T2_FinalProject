@@ -130,6 +130,7 @@ const Doctors = (props) => {
                 <h2 className='start-heading'>Bio</h2>
                 <h4>Doctors general information</h4>
                 <table className='general-info first'>
+                    <tbody>
                     <tr>
                         <th>Name</th>
                         <td>Sam</td>
@@ -146,6 +147,7 @@ const Doctors = (props) => {
                         <th>Age</th>
                         <td>35</td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
              <hr className='devider-line'/>
@@ -153,6 +155,7 @@ const Doctors = (props) => {
                 <h2>Details</h2>
                 <h4>Doctors details which concern the practice</h4>
                 <table className='general-info two'>
+                <tbody>
                     <tr>
                         <th>Email</th>
                         <td>Sam@petcare.co.za</td>
@@ -173,7 +176,7 @@ const Doctors = (props) => {
                         <th>Room</th>
                         <td>1 35</td>
                     </tr>
-                    
+                    </tbody>
                 </table>
                 {/* <button className='primary-btn vet'>Edit</button> */}
             </div>

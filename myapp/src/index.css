@@ -1847,3 +1847,62 @@ margin-top: 15px;
 .labelOne{
   margin-top: -20px;
 }
+
+/*Add client form*/
+
+#add-client-form{
+
+  background-color: #fafafa;
+  width: 700px;
+  height:430px;
+  margin-top: 150px;
+  margin-left: 500px;
+  z-index: 3;
+  position: absolute;
+  border-radius: 30px;
+  padding: 20px;
+
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
+  -6px -6px 10px rgba(255, 255, 255, .5),
+  6px 6px 8px rgba(255, 255, 255, .075),
+  6px 6px 10px rgba(0, 0, 0, .08);
+
+
+}
+#add-client-form h1{
+  color: #2b2b2b;
+  font-weight: 400;
+  font-size: 26px;
+  text-align: center;
+}
+#add-client-form h3{
+  color: #D69EAF;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.owner-info-form .input-holder.owner{
+  width: 40%;
+  float: left;
+
+}
+.owner-info-form h3, .pet-info-form h3{
+ 
+  text-align: left;
+  color: #D69EAF;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: left;
+  margin-top: -15px;
+  margin-left: 10px;
+  margin-bottom: -5px;
+}
+.pet-info-form{
+  width: 40%;
+  margin-left: 80px;
+  float: left;
+
+}

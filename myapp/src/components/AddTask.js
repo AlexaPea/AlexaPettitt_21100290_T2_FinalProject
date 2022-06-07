@@ -6,7 +6,7 @@ const AddTask = () => {
         <div>
             <div className='task-form-container'>
                 <form id='addTask'>
-                <button class='closeBtn' id="btn" ><div className='close-icon'><UilTimes/></div></button>
+                <button className='closeBtn' id="btn" ><div className='close-icon'><UilTimes/></div></button>
                 <div className='heading task'>
                         <h1>Add Task</h1>
                         <h3>Let's get productive!</h3>

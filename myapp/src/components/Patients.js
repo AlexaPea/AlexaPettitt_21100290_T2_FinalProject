@@ -9,7 +9,7 @@ import Logo from '../Images/logo.png';
 import { useState, useEffect } from 'react';
 import Helmet from "react-helmet";
 import { UilPlus } from '@iconscout/react-unicons';
-import addClient from './addClient';
+import AddClient from './AddClient';
 
 const Patients = (props) => {
 
@@ -42,7 +42,8 @@ const Patients = (props) => {
             </Helmet>
             <Navigation/>
              {/* 👇️ show component on click */}
-             {isShown && <addClient />}
+             {isShown && <AddClient />}
+           
 
 <br/>
             <div className='left-list'>
@@ -80,6 +81,7 @@ const Patients = (props) => {
                 <h2>Pet Details</h2>
                 <h4>Details on clients pet</h4>
                 <table className='general-info two'>
+                    <tbody>
                     <tr>
                         <th>Breed</th>
                         <td>Golden Retriever</td>
@@ -92,6 +94,7 @@ const Patients = (props) => {
                         <th>Age</th>
                         <td>2</td>
                     </tr>
+                    </tbody>
                 </table>
                 <hr className='devider-line'/>
                 <div className='client-info two'>
@@ -101,6 +104,7 @@ const Patients = (props) => {
                     <div className='appointments-holder'>
 
                     <table className='appointments-table two'>
+                        <tbody>
                         <tr className='row-heading'>
                             <th>Doctor</th>
                             <th>Patient</th>
@@ -137,6 +141,7 @@ const Patients = (props) => {
                             <td>08:30 am</td>
                             <td>341</td>
                         </tr>
+                        </tbody>
                     </table>
 
                     </div>
@@ -151,16 +156,15 @@ const Patients = (props) => {
 
             <div className='right-pannel-client'>
                 <div className='edit-icon client'><UilEdit/></div>
-            {/* <div className='client-block main'>  <img className='client-block-img main' src={dp}/></div> */}
             <div className='client-maintext two'>  
                 <h1 className='owner-name'>Rachel Geller</h1>
                 <h3>Owner</h3>
-                {/* <div className='special'>Surgury</div> */}
             </div>
             <div className='client-info'>
             <h2>Contact Details</h2>
-                <h4>Doctors details which concern the practice</h4>
+                <h4>Client details which concern the practice</h4>
                 <table className='general-info two'>
+                    <tbody>
                     <tr>
                         <th>Email</th>
                         <td>Sam@petcare.co.za</td>
@@ -170,14 +174,11 @@ const Patients = (props) => {
                         <td>0671674070</td>
                     </tr>
                     <tr>
-                        <th>Doctor Id</th>
+                        <th>Patient Id</th>
                         <td>10528465</td>
                     </tr>
-                    <tr>
-                        <th>Room</th>
-                        <td>1 35</td>
-                    </tr>
-                    
+              
+                    </tbody>
                 </table>
             </div>
              <hr className='devider-line'/>
@@ -186,6 +187,7 @@ const Patients = (props) => {
             <h2>Medical Details</h2>
                 <h4>Insurance related</h4>
                 <table className='general-info two'>
+                <tbody>
                     <tr>
                         <th>Medical Aid Number</th>
                         <td>54544</td>
@@ -194,7 +196,7 @@ const Patients = (props) => {
                         <th>Id Number</th>
                         <td>0112158132</td>
                     </tr>
-
+                    </tbody>
                 </table>
             </div>
             

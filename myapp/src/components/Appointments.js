@@ -123,8 +123,9 @@ const Appointments = (props) => {
                 </div>
                 <div className='appointments'>
                     <div className='block-heading'> Appointments </div>
-                    <button class='addBtn' id="btn" onClick={handleBooking}><div className='plus-icon' ><UilPlus/></div></button>
+                    <button className='addBtn' id="btn" onClick={handleBooking}><div className='plus-icon' ><UilPlus/></div></button>
                     <table className='appointments-table'>
+                        <tbody>
                         <tr className='row-heading'>
                             <th>Doctor</th>
                             <th>Patient</th>
@@ -161,6 +162,7 @@ const Appointments = (props) => {
                             <td>08:30 am</td>
                             <td>341</td>
                         </tr>
+                        </tbody>
                     </table>
 
                 </div>
@@ -203,7 +205,7 @@ const Appointments = (props) => {
 
                 <div className='tasks'>
                     <h1 className='tasks-head'>Tasks</h1>
-                    <button class='addBtn tasks' id="btn" onClick={addTask}><div className='plus-icon'><UilPlus/></div></button>
+                    <button className='addBtn tasks' id="btn" onClick={addTask}><div className='plus-icon'><UilPlus/></div></button>
                     <div className='task-container'>
                         <div className='individual-task'>
                             <h5>Email Mrs Poter</h5>

@@ -18,7 +18,7 @@ const MakeBooking = () => {
         <div>
              <div className='appointments-form'>
                 <form id="homeForm">
-                <button class='closeBtn' id="btn" onClick={handleBooking}><div className='close-icon'><UilTimes/></div></button>
+                <button className='closeBtn' id="btn" onClick={handleBooking}><div className='close-icon'><UilTimes/></div></button>
                     <div className='heading'>
                    
                         <h1>Make booking</h1>

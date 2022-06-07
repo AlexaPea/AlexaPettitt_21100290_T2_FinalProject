@@ -107,7 +107,7 @@ const Login = (props) => {
     }
 
     const authenticateEmail = () => { //rather make it authenticate email
-        axios.post('http://localhost:8888/api/authenticateEmail.php', inputs)
+        axios.post('http://localhost:80/project-api/authenticateEmail.php', inputs)
         .then(function(response){
             //just to know what's happening
             console.log(response);
@@ -288,12 +288,12 @@ const Login = (props) => {
         if(result){
             console.log("There is an Error");
         }else{
-            axios.post('http://localhost:8888/api/addUser.php', inputs)
+            axios.post('http://localhost:80/project-api/addUser.php', inputs)
             .then(function(response){
                 console.log(response);
 
                 if(response.status === 200){
-                    navigate("/login");
+                    navigate("/");
                 }
 
             });
@@ -330,21 +330,21 @@ const Login = (props) => {
 
                 
                     {nameError}
-                    <input name='first' class="half-input" type='text' placeholder='First Name'onChange={firstVal}/>
+                    <input name='first' className="half-input" type='text' placeholder='First Name'onChange={firstVal}/>
               
 
                     {lastError}
-                    <input name='last' class="half-input" type='text' placeholder='Surname' onChange={lastVal}/>
+                    <input name='last' className="half-input" type='text' placeholder='Surname' onChange={lastVal}/>
              
                 
                   
                     {ageError}
-                    <input name='age' class="half-input" type='text' placeholder='Age' onChange={ageVal}/>
+                    <input name='age' className="half-input" type='text' placeholder='Age' onChange={ageVal}/>
                 
 
                     {genderError}
-                    <select name="gender" onChange={genderVal}>
-                        <option value="none" selected>Gender</option>
+                    <select name="gender" onChange={genderVal} defaultValue="none">
+                        <option value="none">Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">other</option>

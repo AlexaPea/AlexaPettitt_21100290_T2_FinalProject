@@ -1,14 +1,35 @@
 import React from 'react';
 import { UilTimes } from '@iconscout/react-unicons';
+import { useState, useEffect } from 'react';
+import MiniModalLeft from './FormModalLeft';
+import MiniModalRight from './FormModalRight';
+import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 const AddClient = () => {
+
+      //object will all inputs
+      const [inputs, setInputs] = useState({
+        first:'',
+        last:'',
+        clientId: '',
+        medicalAidNum: '',
+        room: '',
+        email:'',
+        age:'',
+        gender:'',
+        contact:'',
+        password:'',
+        passwordCon:'',
+    });
+
     return (
         <div className='addClient'>
             <form id='add-client-form'>
-            <button className='closeBtn' id="btn" ><div className='close-icon'><UilTimes/></div></button>
+            <button className='closeBtn addClient' id="btn" ><div className='close-icon'><UilTimes/></div></button>
                 <div className='greeting'>
                     <h1>Add Client</h1>
-                    <h3>Let's get this pet registered!</h3>
+                    <h3 className='subheading'>Let's get this pet registered!</h3>
                 </div>
                 <div className='owner-info-form'>
 
@@ -16,17 +37,17 @@ const AddClient = () => {
 
                     <div className='input-holder owner'>
                                                 
-                        <input className='booking-input doc full' type='text' placeholder='First Name'/>
+                        <input name='name' className='booking-input doc full' type='text' placeholder='First Name'/>
 
-                        <input className='booking-input doc full' type='text' placeholder='Last Name'/>
+                        <input name='surname' className='booking-input doc full' type='text' placeholder='Last Name'/>
 
-                        <input className='booking-input doc full' type='number' placeholder='Patient Id'/>
+                        <input name='clientId' className='booking-input doc full' type='number' placeholder='Patient Id'/>
 
-                        <input className='booking-input doc full' type='number' placeholder='Medical Aid Number'/>
+                        <input name='medicalAidNum' className='booking-input doc full' type='number' placeholder='Medical Aid Number'/>
 
-                        <input name='email' className="booking-input doc" type='email' placeholder='Email' />
+                        <input name='email' className="booking-input doc full" type='email' placeholder='Email' />
 
-                        <input name='contact' className="booking-input doc" type='text' placeholder='Contact Number'/>  
+                        <input name='contact' className="booking-input doc full" type='text' placeholder='Contact Number'/>  
 
 
                     </div>
@@ -39,13 +60,11 @@ const AddClient = () => {
 
                   <div className='input-holder pet'></div>
 
-                        <input className='booking-input doc full' type='text' placeholder='Name'/>
+                        <input name='petName' className='booking-input doc full' type='text' placeholder='Name'/>
 
-                        <input className='booking-input doc full' type='text' placeholder='Pet type'/>
+                        <input name='petType' className='booking-input doc full' type='text' placeholder='Pet type'/>
 
-                        <input className='booking-input doc full' type='text' placeholder='Breed'/>
-
-                        <input name='age' className="booking-input doc" type='text' placeholder='Age'/>
+                        <input name='age' className="booking-input doc half" type='text' placeholder='Age'/>
             
                         <select name="gender" className="booking-input doc gen">
                             <option value="none" selected>Gender</option>
@@ -55,6 +74,9 @@ const AddClient = () => {
                         </select>
 
                     </div>
+
+                    
+                    <button className='primary-btn addClient' id='btn'>Add Client</button>
 
                 
                     

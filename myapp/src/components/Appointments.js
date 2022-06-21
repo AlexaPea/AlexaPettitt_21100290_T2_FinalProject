@@ -26,6 +26,15 @@ const Appointments = (props) => {
         link.href = {Logo};
       }, []);
 
+      //get active user info
+      useEffect(()=>{
+        const userSession = sessionStorage.getItem('activeUser');
+        console.log(userSession);
+      if(userSession === '' || userSession === undefined){
+      navigate('/');
+      }
+      }, []);
+
     //  handleBooking
     const [isShownBooking, setIsShownBooking] = useState(false);
     const [isShownTask, setIsShownTask] = useState(false);
@@ -94,7 +103,7 @@ const Appointments = (props) => {
                 <div className='block one'>
                 <img className='headerimg' src={headImg}/>
                 <div className='greeting2'>
-                    <h1 id='greeting-head-2'> Hello, Jessica </h1>
+                    <h1 id='greeting-head-2'> Hello, {props.activeuser} </h1>
                     <h2 id='greeting-msg-2'> Have a nice day at work! </h2>
                     <div className='wave-container'>
                         <img className='wave' src={wave}/>

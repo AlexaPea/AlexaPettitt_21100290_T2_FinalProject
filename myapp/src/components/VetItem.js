@@ -24,52 +24,33 @@ const VetItem = (props) => {
     });
     
     
-      const [renderActiveVet, setRenderActiveVet] = useState();
-      const [activeVet, setActiveVet] = useState();
-    const [isActive, setIsActive] = useState(false);
 
-    const showVetInfo = (event) => {
-        event.currentTarget.classList.toggle('bg-salmon');
+const [state, setState] = useState();
+const showVetInfo = (event) => {
 
-        axios.post('http://localhost:80/project-api/readActiveDoctor.php', 5 )
-        .then((res)=>{
-          let data = res.data;
-          let renderActiveVet = data.map((item) =>  <Doctors key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} />);
-        //   console.log(data);
-        //   setActiveVet(renderActiveVet);
-        //   setRenderActiveVet(false);
-          
+    event.currentTarget.classList.toggle('bg-salmon');
+ 
+    let id = (event.currentTarget.id);
+    console.log(id);
+
+    axios.post('http://localhost:80/project-api/readActiveDoctor.php',userId )
+    .then((res)=>{
+      let data = res.data;
+        setState(data);
+        state.map((data,index)=><DoctorInfo key={index} name={data.name} surname={data.surname} specialization={data.specialization} />)
+
+        console.log(data)
+
         })
         .catch(err=>{
-          console.log(err);
+        console.log(err);
         });
-
-
-    }
-
-
+}
   
-//   useEffect(()=>{
-
-     
-//     axios.post('http://localhost:80/project-api/readActiveDoctor.php',userId )
-//     .then((res)=>{
-//       let data = res.data;
-//       let renderActiveVet = data.map((item) =>  <Doctors key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} />);
-//       console.log(data);
-//       setActiveVet(renderActiveVet);
-//       setRenderActiveVet(false);
-      
-//     })
-//     .catch(err=>{
-//       console.log(err);
-//     });
-
-//  },[renderActiveVet]);
-
     return (
         <div>
-             <button  onClick={showVetInfo} className='individual-vet' id={props.uniqueId}   >
+    
+             <button  onClick={(e)=>{showVetInfo(e)}}  className='individual-vet' id={props.uniqueId}   >
                      <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
                      <div className='vet-block-text'>
                          <h2>Dr. {props.name + " " + props.surname}</h2>

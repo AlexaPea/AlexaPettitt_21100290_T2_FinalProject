@@ -13,7 +13,7 @@ import VetItem from './VetItem';
 
 const DoctorInfo = (props) => {
 
-    console.log(props.name);
+    // console.log(props.name);
     return (
         <div>
                  <div className='middle-pannel'>

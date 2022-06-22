@@ -224,7 +224,7 @@ const roomVal = (e) => { //e is for events
 
        
             {/* {props.modal} */}
-            <DoctorInfo/>
+            {/* <DoctorInfo/> */}
 
             
 

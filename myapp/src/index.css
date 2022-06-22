@@ -767,7 +767,7 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 }
 
 .right-pannel{
-  float: left;
+  float: right;
   height: 40vh;
   width: 23%;
   border-radius: 20px;
@@ -775,7 +775,10 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
   0  5px 10px rgba(154,160,185,0.05),
   0 15px 40px rgba(166,173,201,0.1);
   background-color: #FFFFFF;
-  margin-left: 20px;
+  margin-right: 30px;
+  margin-top: 360px;
+  margin-left: 1155px;
+  position: absolute;
 
   background: #f7f7f7;
 -webkit-box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
@@ -809,6 +812,7 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 }
 .family{
   width: 270px;
+  float: right;
   margin-left: 30px;
   margin-top: 30px;
 }
@@ -1972,7 +1976,7 @@ margin-top: 15px;
 
 }
 
-.primary-btn.addClient{
+.primary-btn.adClient{
 
   margin-top: 295px;
   margin-left: -670px;
@@ -1995,3 +1999,32 @@ margin-top: 15px;
 
 }
 
+
+.docInfoComp{
+  position: absolute;
+  width: 100%;
+  margin-top: -150px;
+  margin-left: 455px;
+}
+
+
+
+
+
+.OptionButton{
+  width: 100%;
+  outline: none;
+  background-color: none;
+  border: none;
+  cursor: pointer;
+
+}
+.OptionButton.active{
+  color: #a85f5f;
+}
+.OptionButton .active{
+  color: #a85f5f;
+}
+.ActiveButton{
+  color: #a85f5f;
+}

@@ -1,38 +1,53 @@
 
 import Calendarcom from 'react-calendar';
-import {useState} from 'react';
+
 import styled from 'styled-components';
 
+import { useState, useEffect } from 'react'
 
 
 import React from 'react';
+import moment from "moment";
 
 
 
 
 const Calendar = () => {
 
-    const CalendarChange = () => {
-        console.log("hi");
-    };
-
     	
 const [date, setDate] = useState(new Date());
+const [formatDate, setFormatDate] = useState();
+
+//    console.log(new Intl.DateTimeFormat('en-US').format(date));
 const onDateChange = (newDate) => {
-    // let NewDate = new Intl.DateTimeFormat('en-US').format(date);
+
     setDate(newDate);
-    
-    console.log(newDate);
+  
 }
+
+// useEffect(() => {
+//   console.log(date);
+//   setFormatDate(new Intl.DateTimeFormat('en-US').format(date));
+//   console.log(formatDate);
+// }, [date, onDateChange])
+
+useEffect(() => {
+  console.log(date);
+  setFormatDate(moment(date).format("YYYY-MM-DD"));
+  console.log(formatDate);
+}, [date, onDateChange])
+
+
+
 
 const locale = 'fr-CA';
     
     return (
         <>
            <CalendarContainer>
-                 <Calendarcom calendarType='US' format="dd-MM-yyyy" className='react-calendar' 
+                 <Calendarcom calendarType='US' format="yyyy-mm-dd" className='react-calendar' 
                   onChange={onDateChange}           
-                  value={date} />
+                  value={date}  locale={"en-US"} />
              </CalendarContainer>
         </>
      

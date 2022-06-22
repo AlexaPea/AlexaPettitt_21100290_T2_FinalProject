@@ -1,6 +1,5 @@
 import React from 'react';
 import wave from '../Images/wave.png';
-import dp from '../Images/placeholder.jpg';
 import headImg from '../Images/headerImg2.png';
 import searchIcon from "../Images/search_icon.svg";
 import Navigation from './Navigation';
@@ -12,6 +11,10 @@ import Helmet from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import MakeBooking from './MakeBooking';
 import AddTask from './AddTask';
+import axios from 'axios';
+import TaskPost from './TaskPost.js';
+import UserInfo from './UserInfo';
+import AppointmentItems from './AppointmentItems';
 
 
 const Appointments = (props) => {
@@ -26,14 +29,24 @@ const Appointments = (props) => {
         link.href = {Logo};
       }, []);
 
+      const navigate = useNavigate();
+
+      const [userId, setUserId] = useState({
+        activeUser: sessionStorage.getItem('activeUser'),
+    });
+
+  
+
+
       //get active user info
       useEffect(()=>{
         const userSession = sessionStorage.getItem('activeUser');
-        console.log(userSession);
+        console.log(userId);
       if(userSession === '' || userSession === undefined){
       navigate('/');
-      }
-      }, []);
+      }   
+    }, []);
+ 
 
     //  handleBooking
     const [isShownBooking, setIsShownBooking] = useState(false);
@@ -54,21 +67,88 @@ const Appointments = (props) => {
       };
      
 
-      //Logout
-      const navigate = useNavigate();
-
-      const setLogOut = (e) => {
-   
-        sessionStorage.clear();
-    
-        navigate('/Login');
-    
-    
-      };
+ 
       //current date and time
       const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
       
+
+
+  //show all tasks
+
+  const [renderTask, setRenderTask] = useState();
+  const [tasks, setTasks] = useState();
+
+  const user = sessionStorage.getItem('activeUser');
+
+
+
+  useEffect(()=>{
+
+    axios.post('http://localhost:80/project-api/readTasks.php',userId )
+    .then((res)=>{
+      let data = res.data;
+      let renderTask = data.map((item) =>  <TaskPost key={item.id} rerender={setRenderTask} uniqueId={item.id} receptionist={item.receptionist} taskName={item.taskName} taskDescription={item.taskDescription}  />);
+      console.log(data);
+      setTasks(renderTask);
+      setRenderTask(false);
+      
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+
+ },[renderTask]);
+
+ //show user info
+ 
+  //show all tasks
+
+  const [renderUserInfo, setRenderUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState();
+  const [greetingName, setGreetingName] = useState();
+
+  useEffect(()=>{
+
+    axios.post('http://localhost:80/project-api/readUserInfo.php',userId )
+    .then((res)=>{
+      let data = res.data;
+      let renderUserInfo = data.map((item) =>  <UserInfo key={item.id} rerender={setRenderUserInfo} name={item.name} surname={item.surname} rank={item.rank}  age={item.age} profileImage={item.profileImage}/>);
+      setUserInfo(renderUserInfo);
+      setRenderUserInfo(false);
+      setGreetingName(data[0].name); 
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+
+ },[renderUserInfo]);
+
+ //show all appoints
+
+ const [renderAppointents, setRenderAppointents] = useState();
+ const [appointmentItems, setAppointmentItems] = useState();
+
+
+ useEffect(()=>{
+
+   axios.post('http://localhost:80/project-api/readAppointments.php',userId )
+   .then((res)=>{
+     let data = res.data;
+     let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
+     console.log(data);
+     setAppointmentItems(renderAppointents);
+     setRenderAppointents(false);
+     
+   })
+   .catch(err=>{
+     console.log(err);
+   });
+
+},[renderAppointents]);
+
+
+
     return (
         <div>
              {/* 👇️ show component on click */}
@@ -103,7 +183,7 @@ const Appointments = (props) => {
                 <div className='block one'>
                 <img className='headerimg' src={headImg}/>
                 <div className='greeting2'>
-                    <h1 id='greeting-head-2'> Hello, {props.activeuser} </h1>
+                    <h1 id='greeting-head-2'> Hello, {greetingName} </h1>
                     <h2 id='greeting-msg-2'> Have a nice day at work! </h2>
                     <div className='wave-container'>
                         <img className='wave' src={wave}/>
@@ -141,36 +221,8 @@ const Appointments = (props) => {
                             <th>Time</th>
                             <th>Room</th>
                         </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
+                        {appointmentItems}
+                       
                         </tbody>
                     </table>
 
@@ -186,41 +238,14 @@ const Appointments = (props) => {
                    
             <div className='right-panel'>
            
-                <div className='profile'>
-                <img className='profileImg' src={dp}/>
-                    <div className='profileHeading'> 
-                        <div className='addButton'></div>
-                    
-                    </div>
-                    <div className='profileInfo'>
-                        
-                        <div className='text'>
-                            <h3>Jessica Jones</h3>
-                            <p>Receptionist</p>
-                            <p>Rank</p>
-                            
-                        </div>
-
-                        <button className='primary-btn' id='btn' onClick={setLogOut}>Log Out</button>
-                        {/* <table className='reception'>
-                            <tr>
-                                <td>balh</td>
-                                <td>balh</td>
-                                <td>balh</td>
-                            </tr>
-                        </table> */}
-                    </div>
-                </div>
+               {userInfo}
 
                 <div className='tasks'>
                     <h1 className='tasks-head'>Tasks</h1>
                     <button className='addBtn tasks' id="btn" onClick={addTask}><div className='plus-icon'><UilPlus/></div></button>
                     <div className='task-container'>
-                        <div className='individual-task'>
-                            <h5>Email Mrs Poter</h5>
-                            <p>Regarding invoice</p>
-
-                        </div>
+                       {tasks}
+                       {renderTask}
                     </div>
                     
                 </div>

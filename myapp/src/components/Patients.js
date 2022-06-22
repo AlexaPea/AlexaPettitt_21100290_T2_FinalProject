@@ -10,6 +10,8 @@ import { useState, useEffect } from 'react';
 import Helmet from "react-helmet";
 import { UilPlus } from '@iconscout/react-unicons';
 import AddClient from './AddClient';
+import axios from 'axios';
+import ClientItem from './ClientItem';
 
 const Patients = (props) => {
 
@@ -31,6 +33,36 @@ const Patients = (props) => {
         setIsShown(current => !current);
    
      };
+
+     //show clients
+  
+  const [renderClientInfo, setRenderClientInfo] = useState();
+  const [clients, setClients] = useState();
+
+  const user = sessionStorage.getItem('activeUser');
+
+  const [userId, setUserId] = useState({
+    activeUser: sessionStorage.getItem('activeUser'),
+});
+
+  useEffect(()=>{
+
+    axios.post('http://localhost:80/project-api/readClients.php',userId )
+    .then((res)=>{
+      let data = res.data;
+      let renderClientInfo = data.map((item) =>  <ClientItem key={item.id} rerender={setRenderClientInfo} uniqueId={item.id} name={item.name} surname={item.surname} petName={item.petName} petType={item.petType} />);
+      console.log(data);
+      setClients(renderClientInfo);
+      setRenderClientInfo(false);
+      
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+
+ },[renderClientInfo]);
+
+
 
     return (
         
@@ -56,13 +88,7 @@ const Patients = (props) => {
                 <div className='order-text'>A-Z</div>
                 </div>
             <div className='clients-container'>
-                <div className='individual-client'>
-                     <div className='client-block-img'>  <img className='profileImg client' src={dp}/></div>
-                     <div className='client-block-text'>
-                         <h2>Rachel Geller</h2>
-                         <h4>Timmy | Golden Retriever</h4>
-                     </div>
-                </div>
+                {clients}
 
                 
             </div>
@@ -72,8 +98,8 @@ const Patients = (props) => {
                 <div className='edit-icon'><UilEdit/></div>
             <div className='client-block main'>  <img className='client-block-img main' src={pet}/></div>
             <div className='client-maintext one'>  
-                <h1>Timmy</h1>
-                <h3>Golden Retriever</h3>
+                <h1>{props.petName}</h1>
+                <h3>{props.petType}</h3>
                 {/* <div className='special'>Surgury</div> */}
             </div>
              
@@ -84,15 +110,15 @@ const Patients = (props) => {
                     <tbody>
                     <tr>
                         <th>Breed</th>
-                        <td>Golden Retriever</td>
+                        <td>{props.petType}</td>
                     </tr>
                     <tr>
                         <th>Gender</th>
-                        <td>Male</td>
+                        <td>{props.petGender}</td>
                     </tr>
                     <tr>
                         <th>Age</th>
-                        <td>2</td>
+                        <td>{props.petAge}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -157,7 +183,7 @@ const Patients = (props) => {
             <div className='right-pannel-client'>
                 <div className='edit-icon client'><UilEdit/></div>
             <div className='client-maintext two'>  
-                <h1 className='owner-name'>Rachel Geller</h1>
+                <h1 className='owner-name'>{props.name + " " + props.surname}</h1>
                 <h3>Owner</h3>
             </div>
             <div className='client-info'>
@@ -167,15 +193,15 @@ const Patients = (props) => {
                     <tbody>
                     <tr>
                         <th>Email</th>
-                        <td>Sam@petcare.co.za</td>
+                        <td>{props.email}</td>
                     </tr>
                     <tr>
                         <th>Telephone</th>
-                        <td>0671674070</td>
+                        <td>{props.phoneNumber}</td>
                     </tr>
                     <tr>
                         <th>Patient Id</th>
-                        <td>10528465</td>
+                        <td>{props.clientId}</td>
                     </tr>
               
                     </tbody>
@@ -190,11 +216,11 @@ const Patients = (props) => {
                 <tbody>
                     <tr>
                         <th>Medical Aid Number</th>
-                        <td>54544</td>
+                        <td>{props.medicalAidNum}</td>
                     </tr>
                     <tr>
                         <th>Id Number</th>
-                        <td>0112158132</td>
+                        <td>{props.clientId}</td>
                     </tr>
                     </tbody>
                 </table>

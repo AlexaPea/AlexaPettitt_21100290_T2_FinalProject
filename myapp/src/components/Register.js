@@ -24,6 +24,14 @@ const Login = (props) => {
         link.href = {Logo};
       }, []);
       
+
+//       $('#image_upload').on('change', function() {
+//         //this line will set the contents to empty before you run your function
+//         $('div.gallery-preview').html('');
+
+//         //now call your function  
+//         imagesPreview(this, 'div.gallery-preview');
+//  });
     
     //about useNavigate
     const navigate = useNavigate();
@@ -40,6 +48,7 @@ const Login = (props) => {
         contact:'',
         password:'',
         passwordCon:'',
+        image:'',
     });
 
     //we must create a useState for every error error message
@@ -53,6 +62,7 @@ const Login = (props) => {
     const [passwordConError, setPasswordConError] = useState();
     const [ageError, setAgeError] = useState();
     const [genderError, setGenderError] = useState();
+    const [imageError, setImageError] = useState();
 
 
     //check if input is available
@@ -76,6 +86,25 @@ const Login = (props) => {
 
 
     }
+
+    const imageVal = (e) => {           
+        let file = e.target.files[0];
+        let reader = new FileReader();
+
+        reader.onloadend = function() {
+        console.log(reader.result);
+        let imgFile = reader.result;
+
+        setInputs({...inputs, image: imgFile});
+
+        let image = new Image();
+        image.src = reader.result;
+        document.getElementById('profileimg').appendChild(image);
+        
+        }
+        reader.readAsDataURL(file);
+}
+
 
     const lastVal = (e) => { //e is for events
 
@@ -293,6 +322,7 @@ const Login = (props) => {
                 console.log(response);
 
                 if(response.status === 200){
+                    sessionStorage.setItem('activeUser', inputs.email); //sets active user in sessionStorage
                     navigate("/");
                 }
 
@@ -327,6 +357,11 @@ const Login = (props) => {
             <form>
                 <h1>Hello There!</h1>
                 <h2>Let's get you registered!</h2>
+
+                <div className='imageArea'>
+                <p>Upload a Profile Image</p>
+                <input name="imageUrl" className='imgInput' type="file" onChange={imageVal} placeholder="Upload profile picture"/>
+            </div>
 
                 
                     {nameError}

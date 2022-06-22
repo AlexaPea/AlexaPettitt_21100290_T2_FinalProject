@@ -467,6 +467,7 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 
 .vets-container{
  height:455px;
+ width: 100%;
  overflow-y: scroll;
  overflow-x: hidden;
  float:left ;
@@ -484,6 +485,30 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 }
 
 .vets-container::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-image: linear-gradient(180deg, #D69EAF 0%, #D69EAF 99%);
+  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+}
+
+.task-container{
+  height:230px;
+  width: 100%;
+ overflow-y: scroll;
+ overflow-x: hidden;
+ float:left ;
+}
+/*custom scrollbar*/
+.task-container::-webkit-scrollbar {
+  width: 5px;
+  
+}
+.task-container::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+  
+}
+
+.task-container::-webkit-scrollbar-thumb {
   border-radius: 100px;
   background-image: linear-gradient(180deg, #D69EAF 0%, #D69EAF 99%);
   box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
@@ -513,8 +538,9 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
  border-bottom: 1px solid #D69EAF;
  
 } */
-.individual-appointment{
+tr.individual-appointment{
   background-color: #f7f7f7;
+  width: 500px;
   border-radius: 20px;
   height:50px;
   margin-top: 100px;
@@ -640,13 +666,16 @@ small{
   margin-left: 8px;
   margin-bottom: 0px;
   height: 100px;
+  outline: none;
+  border: none;
+  font-family: poppins;
 
   
 }
 .vet-block-text{
   padding: 20px;
   float: left;
-  width: 140px;
+  width: 200px;
 }
 
 .vet-block-text h2{
@@ -661,7 +690,7 @@ small{
 .vet-block-text h4{
   font-weight: 400;
   font-size: 14px;
-  width: 100%;
+  width: 300px;
   float: left;
   text-align: left;
   margin-top: 0px;
@@ -1244,12 +1273,12 @@ form{
 
 .left-register{
   width: 40%;
-  height: 80vh;
+  height: 88vh;
   border-radius: 15px;
   padding: 20px;
   margin: 30px;
   margin-left: 170px;
-  margin-top: 50px;
+  margin-top: 20px;
   box-shadow:
   0  5px 10px rgba(154,160,185,0.05),
   0 15px 40px rgba(166,173,201,0.2);
@@ -1262,11 +1291,19 @@ form{
   box-shadow: 12px 12px 24px #cb96a6, -12px -12px 24px #e1a6b8;
 
 }
+.bg-salmon {
+  background: #cb96a641;
+  
+}
+.bg-salmon h4 {
+  color: #989898;
+  
+}
 
 .left-register input, .left-register select{
   width: 41%;
   padding: 15px;
-  margin: 12px 0;
+  margin: 10px 0;
   background-color: #e4e4e4;
   border: none;
   border-radius: 10px;
@@ -1443,6 +1480,21 @@ margin-top: 1.5px;
   width: 40px;
 }
 
+.imageArea{
+  width: 100%;
+}
+
+.imageArea p{
+  font-size: 12px;
+  margin-bottom: 3px;
+  padding: 0;
+}
+
+.imageArea input{
+  margin-top: 0;
+  width: 90%;
+}
+
 
 /*Neomorphism button effect*/
 #btn {
@@ -1557,6 +1609,7 @@ margin-top: 1.5px;
   padding: 0px;
   margin-left: 20px;
   border-left:4px solid #D69EAF;
+  margin-bottom: 0px;
 }
 .individual-task h5{
  font-weight: 400;
@@ -1565,6 +1618,7 @@ margin-top: 1.5px;
   text-align: left;
   margin-left: 5px;
   margin-bottom: 0;
+  margin-top: 12px;
 
 }
 .individual-task p{
@@ -1573,8 +1627,9 @@ margin-top: 1.5px;
   text-align: left;
   margin-left: 10px;
   margin-top: 0px;
-  padding-bottom: 5px;
+  padding-bottom: 1px;
   color: rgb(169, 169, 169);
+  margin-bottom: 0;
   
 
 }
@@ -1939,3 +1994,4 @@ margin-top: 15px;
   margin-left: 300px;
 
 }
+

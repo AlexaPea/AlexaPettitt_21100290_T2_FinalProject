@@ -9,11 +9,15 @@ import { useState, useEffect } from 'react'
 import Helmet from "react-helmet";
 import { UilPlus } from '@iconscout/react-unicons';
 import AddDoctor from './AddDoctor';
+import axios from 'axios';
+import VetItem from './VetItem';
+import DoctorInfo from './DoctorInfo';
+import { useNavigate } from 'react-router-dom';
 
 
 const Doctors = (props) => {
 
-    useEffect(() => {
+    useEffect((props) => {
         const link = document.querySelector("link[rel~='icon']");
         if (!link) {
           link = document.createElement('link');
@@ -32,6 +36,154 @@ const Doctors = (props) => {
          setIsShown(current => !current);
     
       };
+
+
+      //show all doctors
+
+
+  const [renderVetInfo, setRenderVetInfo] = useState();
+  const [vets, setVets] = useState();
+
+  const user = sessionStorage.getItem('activeUser');
+
+  const [userId, setUserId] = useState({
+    activeUser: sessionStorage.getItem('activeUser'),
+});
+
+  useEffect(()=>{
+
+    axios.post('http://localhost:80/project-api/readDoctors.php',userId )
+    .then((res)=>{
+      let data = res.data;
+      let renderVetInfo = data.map((item) =>  <VetItem key={item.id} rerender={setRenderVetInfo} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization}  />);
+      console.log(data);
+      setVets(renderVetInfo);
+      setRenderVetInfo(false);
+      
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+
+ },[renderVetInfo]);
+
+
+ //Add Booking
+      //get active user
+      const Navigate = useNavigate();
+  
+
+  const [inputs, setInputs] = useState({
+      vet: '',
+      client: '',
+      date: '',
+      time: '',
+      room:'',
+  });
+
+  const [vetNameError, setVetNameError] = useState();
+  const [clientNameError, setClientNameError] = useState();
+  const [dateError, setDateError] = useState();
+  const [timeError, setTimeError] = useState();
+  const [roomError, setRoomError] = useState();
+ 
+
+
+  //get info from input
+  const vetNameVal = (e) => { //e is for events
+
+      const value = e.target.value;
+      setInputs({...inputs, vet: value});
+
+      //if first input is empty, set error message to nothing
+      if(inputs.vet !== ''){setVetNameError();}
+
+
+  }
+
+  const clientNameVal = (e) => { //e is for events
+
+      const value = e.target.value;
+      setInputs({...inputs, client: value});
+
+      //if first input is empty, set error message to nothing
+      if(inputs.client !== ''){setClientNameError();}
+
+
+  }
+
+  
+  const dateVal = (e) => { //e is for events
+
+    const value = e.target.value;
+    setInputs({...inputs, date: value});
+
+    //if first input is empty, set error message to nothing
+    if(inputs.date !== ''){setDateError();}
+
+
+}
+
+const timeVal = (e) => { //e is for events
+
+    const value = e.target.value;
+    setInputs({...inputs, time: value});
+
+    //if first input is empty, set error message to nothing
+    if(inputs.time !== ''){setTimeError();}
+
+
+}
+
+const roomVal = (e) => { //e is for events
+
+    const value = e.target.value;
+    setInputs({...inputs, room: value});
+
+    //if first input is empty, set error message to nothing
+    if(inputs.room !== ''){setRoomError();}
+
+
+}
+
+
+  const handleSubmit = (e) =>{
+      e.preventDefault();
+      console.log(inputs); //error check
+
+    //   if(inputs.taskName === ''){
+    //       setTaskNameError(<MiniModalLeft message="Please add task name"/>);
+    //   }else{
+    //       setTaskNameError();
+    //   }
+     
+
+      //checks if some of the input values are equal to nothing
+      let result = Object.values(inputs).some(o => o === "");
+
+      if(result){
+          console.log("There is an Error");
+      }else{
+          axios.post('http://localhost:80/project-api/makeBooking.php', inputs)
+          .then(function(response){
+              console.log(response);
+
+              if(response.status === 200){
+                 console.log("Booking has been made!");
+                  setIsShown(current => !current);
+                 Navigate('/Doctors');
+              }else{
+                  console.log('error');
+              }
+
+          });
+      }
+
+    
+  }
+
+
+
 
 
     return (
@@ -60,56 +212,8 @@ const Doctors = (props) => {
                 <div className='order-text'>A-Z</div>
                 </div>
             <div className='vets-container'>
-                <div className='individual-vet'>
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
-                     <div className='vet-block-text'>
-                         <h2>Dr. Sam Smith</h2>
-                         <h4>Speciality</h4>
-                     </div>
-                </div>
-
-                <div className='individual-vet'>
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
-                     <div className='vet-block-text'>
-                         <h2>Dr. Sam Smith</h2>
-                         <h4>Speciality</h4>
-                     </div>
-                </div>
-                <div className='individual-vet'>
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
-                     <div className='vet-block-text'>
-                         <h2>Dr. Sam Smith</h2>
-                         <h4>Speciality</h4>
-                     </div>
-                </div>
-                <div className='individual-vet'>
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
-                     <div className='vet-block-text'>
-                         <h2>Dr. Sam Smith</h2>
-                         <h4>Speciality</h4>
-                     </div>
-                </div>
-                <div className='individual-vet'>
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
-                     <div className='vet-block-text'>
-                         <h2>Dr. Sam Smith</h2>
-                         <h4>Speciality</h4>
-                     </div>
-                </div>
-                <div className='individual-vet'>
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
-                     <div className='vet-block-text'>
-                         <h2>Dr. Sam Smith</h2>
-                         <h4>Speciality</h4>
-                     </div>
-                </div>
-                <div className='individual-vet'>
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
-                     <div className='vet-block-text'>
-                         <h2>Dr. Sam Smith</h2>
-                         <h4>Speciality</h4>
-                     </div>
-                </div>
+               
+             {vets}
             </div>
 {/* 
             <img className='bottom-dog' src={dog}/>
@@ -122,9 +226,9 @@ const Doctors = (props) => {
                 <div className='edit-icon'><UilEdit/></div>
             <div className='vet-block main'>  <img className='vet-block-img main' src={dp}/></div>
             <div className='vet-maintext'>  
-                <h1>Dr. Sam Smith</h1>
+                <h1>Dr. {props.name + " " + props.surname}</h1>
                 <h3>Vetenarian</h3>
-                <div className='special'>Surgury</div>
+                <div className='special'>{props.specialization}</div>
             </div>
             <div className='vet-info'>
                 <h2 className='start-heading'>Bio</h2>
@@ -133,19 +237,19 @@ const Doctors = (props) => {
                     <tbody>
                     <tr>
                         <th>Name</th>
-                        <td>Sam</td>
+                        <td>{props.name}</td>
                     </tr>
                     <tr>
                         <th>Surname</th>
-                        <td>Smith</td>
+                        <td>{props.surname}</td>
                     </tr>
                     <tr>
                         <th>Gender</th>
-                        <td>Female</td>
+                        <td>{props.gender}</td>
                     </tr>
                     <tr>
                         <th>Age</th>
-                        <td>35</td>
+                        <td>{props.age}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -158,11 +262,11 @@ const Doctors = (props) => {
                 <tbody>
                     <tr>
                         <th>Email</th>
-                        <td>Sam@petcare.co.za</td>
+                        <td>{props.email}</td>
                     </tr>
                     <tr>
                         <th>Telephone</th>
-                        <td>0671674070</td>
+                        <td>{props.contact}</td>
                     </tr>
                     <tr>
                         <th>Password</th>
@@ -170,11 +274,11 @@ const Doctors = (props) => {
                     </tr>
                     <tr>
                         <th>Doctor Id</th>
-                        <td>10528465</td>
+                        <td>{props.doctorId}</td>
                     </tr>
                     <tr>
                         <th>Room</th>
-                        <td>1 35</td>
+                        <td>{props.room}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -183,6 +287,9 @@ const Doctors = (props) => {
 
 
             </div>
+            
+
+            
 
             <div className='img-holder'>
                     <img className='family' src={family}/>
@@ -193,7 +300,7 @@ const Doctors = (props) => {
                 <div className='book-option'>
                     <h3>New Booking</h3>
                     <div className='book-container'>
-                        <input list="docList" className='booking-input' type='text' placeholder='doctor'/>
+                        <input onChange={vetNameVal} name="vet" list="docList" className='booking-input' type='text' placeholder='doctor'/>
                         <datalist id="docList">
                             <option value="Sarah"/>
                             <option value="Josh"/>
@@ -201,7 +308,7 @@ const Doctors = (props) => {
                             <option value="Tanielle"/>
                             <option value="Tony"/>
                         </datalist>
-                        <input list="clientList" className='booking-input' type='text' placeholder='client'/>
+                        <input onChange={clientNameVal} name="client" list="clientList" className='booking-input' type='text' placeholder='client'/>
                         <datalist id="clientList">
                             <option value="Sarah"/>
                             <option value="Josh"/>
@@ -209,11 +316,11 @@ const Doctors = (props) => {
                             <option value="Tanielle"/>
                             <option value="Tony"/>
                         </datalist>
-                        <input className='booking-input' type='date' placeholder='Date'/>
-                        <input className='booking-input' type='time' placeholder='time'/>
-                        <input className='booking-input' type='number' placeholder='room'/>
+                        <input name="date" onChange={dateVal} className='booking-input' type='date' placeholder='Date'/>
+                        <input name="time" onChange={timeVal} className='booking-input' type='time' placeholder='time'/>
+                        <input name="room" onChange={roomVal} className='booking-input' type='number' placeholder='room'/>
 
-                        <button className='primary-btn' id='btn'>Book appointment</button>
+                        <button className='primary-btn' id='btn' onClick={handleSubmit}>Book appointment</button>
                     </div>
 
                 </div>

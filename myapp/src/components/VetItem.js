@@ -26,6 +26,8 @@ const VetItem = (props) => {
     
 
 const [state, setState] = useState();
+const [activeVet, setActiveVet] = useState();
+const [renderActiveVet, setRenderActiveVet] = useState();
 const showVetInfo = (event) => {
 
     event.currentTarget.classList.toggle('bg-salmon');

@@ -35,17 +35,20 @@ const showVetInfo = (event) => {
 
     axios.post('http://localhost:80/project-api/readActiveDoctor.php',userId )
     .then((res)=>{
-      let data = res.data;
-        setState(data);
-        state.map((data,index)=><DoctorInfo key={index} name={data.name} surname={data.surname} specialization={data.specialization} />)
-
-        console.log(data)
-
-        })
-        .catch(err=>{
+    let data = res.data;
+    let info =(data.map((item) =>  <DoctorInfo key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} />)) 
+    
+         console.log(data);
+      //   setActiveVet(renderActiveVet);
+      //   setRenderActiveVet(false);
+    
+      })
+      .catch(err=>{
         console.log(err);
-        });
+      });
 }
+
+    
   
     return (
         <div>

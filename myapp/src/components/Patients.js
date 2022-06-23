@@ -15,6 +15,10 @@ import ClientItem from './ClientItem';
 
 const Patients = (props) => {
 
+//=============================================================================
+// Dynamically load favicon
+//=============================================================================
+
     useEffect(() => {
         const link = document.querySelector("link[rel~='icon']");
         if (!link) {
@@ -25,12 +29,10 @@ const Patients = (props) => {
         link.href = {Logo};
       }, []);
     
-       //  handleAddClient
-       const [isShown, setIsShown] = useState(false);
-
  
-
-     //show clients
+//=============================================================================
+// Output client list
+//=============================================================================
   
   const [renderClientInfo, setRenderClientInfo] = useState();
   const [clients, setClients] = useState();
@@ -58,10 +60,11 @@ const Patients = (props) => {
 
  },[renderClientInfo]);
 
+ //=============================================================================
+// Render add client pop up
+//=============================================================================
+
  const [modal, setModal] = useState();
-
- //  handleAddDoc
-
 
  const handleAddClient = (event) => {
  
@@ -69,6 +72,10 @@ const Patients = (props) => {
     setModal(<AddClient upRender={props.rerender} rerender={setModal}/>)
 
 };
+
+//=============================================================================
+// HTML code
+//=============================================================================
 
 
     return (
@@ -83,7 +90,7 @@ const Patients = (props) => {
           
            {modal}
 
-<br/>
+            <br/>
             <div className='left-list'>
             <button class='addBtn two' id="btn" onClick={handleAddClient}><div className='plus-icon' ><UilPlus/></div></button>
                 <h3>Search client at PetCare</h3>

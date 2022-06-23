@@ -1,41 +1,43 @@
 import React from 'react';
-
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 
 
-
 const UserInfo = (props) => {
 
-         //Logout
-         const navigate = useNavigate();
+ //=============================================================================
+// Logout user
+//=============================================================================
+    const navigate = useNavigate();
 
-         const setLogOut = (e) => {
-      
-           sessionStorage.clear();
-       
-           navigate('/Login');
-       
-       
+    const setLogOut = (e) => {
+        sessionStorage.clear();
+         navigate('/Login');
          };
 
-         const [renderImage, setRenderImage] = useState();
+         
 
+//=============================================================================
+// get active users info and output it
+//=============================================================================
+    const [renderImage, setRenderImage] = useState();
 
-         //get active user info
-         useEffect(()=>{
-           const userSession = sessionStorage.getItem('activeUser');
-        
-         if(userSession === '' || userSession === undefined){
-         navigate('/');
-         }
-   
+    useEffect(()=>{
+
+        const userSession = sessionStorage.getItem('activeUser');
+
+        //kick user out if not logged in
+        if(userSession === '' || userSession === undefined){
+        navigate('/');
+        }
+    
          let userProfile = {activeUser: userSession};
    
          axios.post('http://localhost:80/project-api/readUserInfo.php', userProfile)
          .then((res)=>{
            let data = res.data;
+           //get image to output
            let source = data[0].profileImage;
            let renderpath = 'http://localhost:80/project-api/' + source;
            setRenderImage(renderpath);
@@ -48,7 +50,9 @@ const UserInfo = (props) => {
        
        }, []);
 
-
+//=============================================================================
+// HTML code
+//=============================================================================
     return (
         <div>
              <div className='profile'>
@@ -67,13 +71,7 @@ const UserInfo = (props) => {
                         </div>
 
                         <button className='primary-btn' id='btn' onClick={setLogOut}>Log Out</button>
-                        {/* <table className='reception'>
-                            <tr>
-                                <td>balh</td>
-                                <td>balh</td>
-                                <td>balh</td>
-                            </tr>
-                        </table> */}
+                 
                     </div>
                 </div>
             

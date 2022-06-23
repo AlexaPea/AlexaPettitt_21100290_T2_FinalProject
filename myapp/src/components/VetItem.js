@@ -15,47 +15,56 @@ const inactive = {}
 
 const VetItem = (props) => {
     
+//=============================================================================
+// Declaring Variables
+//=============================================================================
 
+ const user = sessionStorage.getItem('activeUser');
 
-
-  
-
-      const user = sessionStorage.getItem('activeUser');
-
-      const [userId, setUserId] = useState({
+const [userId, setUserId] = useState({
         activeUser: sessionStorage.getItem('activeUser'),
     });
-    
-    
-
 const [state, setState] = useState();
 const [activeVet, setActiveVet] = useState();
 const [itemId, setItemId] = useState();
 const [renderActiveVet, setRenderActiveVet] = useState();
+
+//=============================================================================
+// Onclick event to show vet
+//=============================================================================
+
 const showVetInfo = (event) => {
 
+    //Toggles colour
     // event.currentTarget.classList.toggle('bg-salmon');
  
+
+    //set Id to id of clicked div
     let id = (event.currentTarget.id);
     setItemId(id);
-  
-    console.log(id);
+    //console.log(id);
 
+
+    //read clicked doctor
     axios.post('http://localhost:80/project-api/readActiveDoctor.php',itemId )
     .then((res)=>{
     let data = res.data;
+    //render clicked doctors card
     setActiveVet(data.map((item) =>  <DoctorInfo key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} />)) 
-    
-         console.log(data);
-      //   setActiveVet(renderActiveVet);
-      //   setRenderActiveVet(false);
-    
+    // console.log(data);
+
       })
       .catch(err=>{
         console.log(err);
       });
-}
-    //show specific doctors
+
+}//end of onClick
+
+
+
+//=============================================================================
+// set colour of clicked doctor card
+//=============================================================================
     const [activeItem, setActiveItem] = useState(0);
     const handleClick = (itemId) => () => {
       setActiveItem(itemId);
@@ -73,28 +82,45 @@ const showVetInfo = (event) => {
     function changeTimeLine(value){
         setActiveButton(value) //update your current active button state 
     }
-// console.log(itemId);
 
-axios.post('http://localhost:80/project-api/readActiveDoctor.php',itemId )
-.then((res)=>{
-let data = res.data;
-setActiveVet(data.map((item) =>  <DoctorInfo key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} />)) 
+//=============================================================================
+//Attempt to render image on vetItem
+//=============================================================================
 
-    //  console.log(data);
-  //   setActiveVet(renderActiveVet);
-  //   setRenderActiveVet(false);
 
-  })
-  .catch(err=>{
-    console.log(err);
-  });
+  //const [renderImage, setRenderImage] = useState(props.image);
+
+//   axios.post('http://localhost:80/project-api/readDoctors.php',userId )
+//     .then((res)=>{
+//       let data = res.data;
+//       for(let i=0; i<data.length; i++){
+//         let data = res.data;
+//       console.log(data[i].profileImage);
+//       let source = data[i].profileImage;
+//       let renderpath = 'http://localhost:80/project-api/' + source;
+//       setRenderImage(renderpath);
+
+//       }
+
+
+      
+//     })
+//     .catch(err=>{
+//       console.log(err);
+//     });
+
+
+
+//=============================================================================
+// html code
+//=============================================================================
   
     return (
         
         <div>
             <div onClick={(e)=>{showVetInfo(e)}}  className='individual-vet' id={props.uniqueId}  >
              <div className={`OptionButton ${activeButton === itemId && "activeOp"}`} value={itemId} onClick={e => changeTimeLine(e.target.value)}   >
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={dp}/></div>
+                     <div className='vet-block-img'>  <img className='profileImg vet' src={props.image}/></div>
                      <div className='vet-block-text'>
                          <h2>Dr. {props.name + " " + props.surname}</h2>
                          <h4>{props.specialization}</h4>

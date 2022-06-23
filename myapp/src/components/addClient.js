@@ -8,7 +8,10 @@ import { Navigate } from 'react-router-dom';
 
 const AddClient = (props) => {
 
-      //object will all inputs
+//=============================================================================
+//Get client info
+//=============================================================================
+
       const [inputs, setInputs] = useState({
         name:'',
         surname:'',
@@ -178,6 +181,11 @@ const petImageVal = (e) => {
 
 
     }
+
+//=============================================================================
+// Onclick addClient
+//=============================================================================
+
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(inputs); //error check
@@ -190,28 +198,29 @@ const petImageVal = (e) => {
         }else{
             axios.post('http://localhost:80/project-api/addClient.php', inputs)
             .then(function(response){
-                console.log(response);
-
+                //console.log(response);
                 if(response.status === 200){
                    console.log("Client has been added!");
                    props.rerender();
                 }else{
                     console.log('error');
                 }
-
             });
         }
-
-      
     }
 
-
+//=============================================================================
+// Close addClient pop up
+//=============================================================================
+   
     const closeAddClient = (event) => {
         event.preventDefault();
         props.rerender();
-    
       };
 
+//=============================================================================
+// HTML Code
+//=============================================================================
 
     return (
         <div className='addClient'>

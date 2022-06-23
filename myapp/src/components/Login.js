@@ -8,6 +8,21 @@ import axios from 'axios';
 
 const Login = (props) => {
 
+//=============================================================================
+// Variables
+//=============================================================================
+    
+    const navigate = useNavigate();
+
+    const [inputs, setInputs] = useState({
+        email: '',
+        password: ''
+    });
+
+//=============================================================================
+// Dynamically load favicon
+//=============================================================================
+
     useEffect(() => {
         const link = document.querySelector("link[rel~='icon']");
         if (!link) {
@@ -18,12 +33,9 @@ const Login = (props) => {
         link.href = {Logo};
       }, []);
 
-    const navigate = useNavigate();
-
-  const [inputs, setInputs] = useState({
-      email: '',
-      password: ''
-  });
+//=============================================================================
+// Get Input values
+//=============================================================================
 
   const emailVal = (e) => {
 
@@ -47,11 +59,12 @@ const Login = (props) => {
 
   }
 
+//=============================================================================
+// Onclick submit
+//=============================================================================
+
   const handleSubmit = (e) =>{
     e.preventDefault();
-
-    console.log(inputs); //must remove this on hand in
-
     axios.post('http://localhost:80/project-api/userLogin.php', inputs)
     .then(function(response){
       console.log(response);
@@ -65,7 +78,10 @@ const Login = (props) => {
     });
 }
       
-      
+//=============================================================================
+// HTML Code
+//=============================================================================     
+
     return (
         <div className='login-page'>
               <Helmet>

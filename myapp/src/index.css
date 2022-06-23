@@ -2049,6 +2049,8 @@ margin-top: 15px;
 
 }
 
+
+
 .add-doctor .docImgInput {
   background-color: #e2e2e296;
   color: #2b2b2b;
@@ -2076,4 +2078,25 @@ margin-top: 15px;
   margin-bottom: 0px;
   color: #989898;
 
+}
+
+.wait{
+  margin-top: 15px;
+  width: 250px;
+}
+
+.waitText{
+ color: #acacac;
+ font-family: poppins;
+ font-weight: 200;
+ font-size: 16px;
+ margin-top: -5px;
+}
+.waitHeading{
+  color: #acacac;
+  font-family: poppins;
+  font-weight: 500;
+  font-size: 28px;
+  margin-top: 135px;
+  margin-bottom: 3px;
 }

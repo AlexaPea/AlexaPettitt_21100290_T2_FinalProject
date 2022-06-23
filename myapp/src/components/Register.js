@@ -14,6 +14,16 @@ import Helmet from "react-helmet";
 
 const Login = (props) => {
 
+//=============================================================================
+// Variables
+//=============================================================================
+
+    const navigate = useNavigate();
+    
+//=============================================================================
+// Dynamically load fav icon
+//=============================================================================
+
     useEffect(() => {
         const link = document.querySelector("link[rel~='icon']");
         if (!link) {
@@ -25,20 +35,14 @@ const Login = (props) => {
       }, []);
       
 
-//       $('#image_upload').on('change', function() {
-//         //this line will set the contents to empty before you run your function
-//         $('div.gallery-preview').html('');
 
-//         //now call your function  
-//         imagesPreview(this, 'div.gallery-preview');
-//  });
     
-    //about useNavigate
-    const navigate = useNavigate();
-    
+ //=============================================================================
+// Get user input
+//=============================================================================   
 
-    //check if theres a field that's not generated/has no value
-    //object will all inputs
+
+    //object holds all inputs
     const [inputs, setInputs] = useState({
         first:'',
         last:'',
@@ -135,30 +139,6 @@ const Login = (props) => {
         }
     }
 
-    const authenticateEmail = () => { //rather make it authenticate email
-        axios.post('http://localhost:80/project-api/authenticateEmail.php', inputs)
-        .then(function(response){
-            //just to know what's happening
-            console.log(response);
-
-            //want to check if it's available or not
-            if(response.data ==="Available"){
-                setEmailIcon(Okay); //okay is the imported svg - the tick
-                setEmailAvail();
-            } else if(response.data === "Not Available"){
-                setEmailIcon(NotOkay);
-                setEmailAvail(<MiniModalLeft message="Email is not available" />);
-
-            }else if(response.data === ''){
-                setEmailIcon();
-                setEmailAvail();
-                setEmailError();
-            }
-        });
-    }
-
-
-
     const contactVal = (e) => { //e is for events
 
         //validation
@@ -251,6 +231,35 @@ const Login = (props) => {
     }
 
 
+//=============================================================================
+// Authentication
+//=============================================================================
+const authenticateEmail = () => { //rather make it authenticate email
+    axios.post('http://localhost:80/project-api/authenticateEmail.php', inputs)
+    .then(function(response){
+        //just to know what's happening
+        console.log(response);
+
+        //want to check if it's available or not
+        if(response.data ==="Available"){
+            setEmailIcon(Okay); //okay is the imported svg - the tick
+            setEmailAvail();
+        } else if(response.data === "Not Available"){
+            setEmailIcon(NotOkay);
+            setEmailAvail(<MiniModalLeft message="Email is not available" />);
+
+        }else if(response.data === ''){
+            setEmailIcon();
+            setEmailAvail();
+            setEmailError();
+        }
+    });
+}
+
+ //=============================================================================
+// Onclick submit
+//=============================================================================
+
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(inputs); //error check
@@ -319,25 +328,20 @@ const Login = (props) => {
         }else{
             axios.post('http://localhost:80/project-api/addUser.php', inputs)
             .then(function(response){
-                console.log(response);
-
-                if(response.status === 200){
+                
+                    if(response.status === 200){
                     sessionStorage.setItem('activeUser', inputs.email); //sets active user in sessionStorage
                     navigate("/");
                 }
 
             });
         }
-
-      
     }
 
 
-   
-
-
-
-
+//=============================================================================
+// HTML code
+//=============================================================================
 
     return (
         <div className='login-page'>

@@ -9,9 +9,11 @@ import axios from 'axios';
 import MakeBooking from './MakeBooking';
 
 
-
-
 const Calendar = (props) => {
+
+//=============================================================================
+// Variables
+//=============================================================================
 const [modal, setModal] = useState();
     	
 const [date, setDate] = useState(new Date());
@@ -19,9 +21,7 @@ const [formatDate, setFormatDate] = useState();
 
 //    console.log(new Intl.DateTimeFormat('en-US').format(date));
 const onDateChange = (newDate) => {
-
     setDate(newDate);
-  
 }
 
 const [inputs, setInputs] = useState({
@@ -29,24 +29,18 @@ const [inputs, setInputs] = useState({
   userId:'',
 });
 
-
-
-
-// useEffect(() => {
-//   console.log(date);
-//   setFormatDate(new Intl.DateTimeFormat('en-US').format(date));
-//   console.log(formatDate);
-// }, [date, onDateChange])
+//=============================================================================
+// format date - to match database
+//=============================================================================
 
 useEffect(() => {
-  // console.log(date);
   setFormatDate(moment(date).format("YYYY-MM-DD"));
-  // console.log(formatDate);
 }, [date, onDateChange])
 
-//  handleBooking
-const [isShownBooking, setIsShownBooking] = useState(false);
-const [isShownTask, setIsShownTask] = useState(false);
+
+//=============================================================================
+// Render booking pop up
+//=============================================================================
 
 const handleBooking = (event) => {
      event.preventDefault();
@@ -54,10 +48,10 @@ const handleBooking = (event) => {
 
   };
 
- 
+ //=============================================================================
+// Render appointments
+//=============================================================================
 
-
-//show all appoints
 const [userId, setUserId] = useState({
   activeUser: sessionStorage.getItem('activeUser'),
 });
@@ -69,7 +63,7 @@ const [appointmentItems, setAppointmentItems] = useState();
 
 useEffect(()=>{
 
-  
+  //attempt to put needed data into inputs
   setInputs({...inputs, date: formatDate});
   setInputs({...inputs, userId: userId});
 
@@ -90,9 +84,9 @@ useEffect(()=>{
 // },[renderAppointents, handleBooking]);
 
 
-
-
-const locale = 'fr-CA';
+//=============================================================================
+// HTML Code
+//=============================================================================
     
     return (
         <>

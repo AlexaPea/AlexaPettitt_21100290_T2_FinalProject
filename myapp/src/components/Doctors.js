@@ -5,6 +5,7 @@ import family from '../Images/family.png';
 import {UilEdit , UilArrowDown } from '@iconscout/react-unicons';
 import Navigation from './Navigation';
 import Logo from '../Images/logo.png';
+import docs from '../Images/docs.png';
 import { useState, useEffect } from 'react'
 import Helmet from "react-helmet";
 import { UilPlus } from '@iconscout/react-unicons';
@@ -16,6 +17,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Doctors = (props) => {
+
+//=============================================================================
+// Dynamically load favicon
+//=============================================================================
 
     useEffect((props) => {
         const link = document.querySelector("link[rel~='icon']");
@@ -31,8 +36,9 @@ const Doctors = (props) => {
    
 
 
-      //show all doctors
-
+//=============================================================================
+// Display doctor list
+//=============================================================================
 
   const [renderVetInfo, setRenderVetInfo] = useState();
   const [vets, setVets] = useState();
@@ -43,12 +49,42 @@ const Doctors = (props) => {
     activeUser: sessionStorage.getItem('activeUser'),
 });
 
+const [renderImage, setRenderImage] = useState();
+const [i, setI] = useState(0);
+
+
+//attempt to get images to render
   useEffect(()=>{
 
     axios.post('http://localhost:80/project-api/readDoctors.php',userId )
     .then((res)=>{
+     setI(i+1);
       let data = res.data;
-      let renderVetInfo = data.map((item) =>  <VetItem key={item.id} rerender={setRenderVetInfo} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization}  />);
+      console.log(data[i].profileImage);
+      let source = data[i].profileImage;
+      let renderpath = 'http://localhost:80/project-api/' + source;
+      setRenderImage(renderpath);
+      console.log(source);
+         
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+
+
+    //render vet items
+    axios.post('http://localhost:80/project-api/readDoctors.php',userId )
+    .then((res)=>{
+      let data = res.data;
+    //   for(let i=0; i<data.length; i++){
+    //     let data = res.data;
+    //   console.log(data[i].profileImage);
+    //   let source = data[i].profileImage;
+    //   let renderpath = 'http://localhost:80/project-api/' + source;
+    //   setRenderImage(renderpath);
+
+    //   }
+      let renderVetInfo = data.map((item) =>  <VetItem key={item.id} rerender={setRenderVetInfo} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} image={renderImage}  />);
       console.log(data);
       setVets(renderVetInfo);
       setRenderVetInfo(false);
@@ -58,14 +94,14 @@ const Doctors = (props) => {
       console.log(err);
     });
 
- },[renderVetInfo]);
+ },[]);
 
 
- //Add Booking
-      //get active user
-      const Navigate = useNavigate();
+
   
-
+//=============================================================================
+// Add Booking
+//=============================================================================
   const [inputs, setInputs] = useState({
       vet: '',
       client: '',
@@ -139,19 +175,15 @@ const roomVal = (e) => { //e is for events
 
 }
 
+//=============================================================================
+// Onclick submit booking
+//=============================================================================
+
+const Navigate = useNavigate();
 
   const handleSubmit = (e) =>{
       e.preventDefault();
-      console.log(inputs); //error check
-
-    //   if(inputs.taskName === ''){
-    //       setTaskNameError(<MiniModalLeft message="Please add task name"/>);
-    //   }else{
-    //       setTaskNameError();
-    //   }
-     
-
-      //checks if some of the input values are equal to nothing
+      //console.log(inputs); //error check
       let result = Object.values(inputs).some(o => o === "");
 
       if(result){
@@ -163,7 +195,6 @@ const roomVal = (e) => { //e is for events
 
               if(response.status === 200){
                  console.log("Booking has been made!");
-                  setIsShown(current => !current);
                  Navigate('/Doctors');
               }else{
                   console.log('error');
@@ -175,27 +206,28 @@ const roomVal = (e) => { //e is for events
     
   }
 
-  const [vetModal, setVetModal] = useState();
+//=============================================================================
+// Render Add Doc pop up
+//=============================================================================
 
-     //  handleAddDoc
-     const [isShown, setIsShown] = useState(false);
+const [vetModal, setVetModal] = useState();
 
-     const handleAddDoc = (event) => {
+ const handleAddDoc = (event) => {
      
         event.preventDefault();
         setVetModal(<AddDoctor upRender={props.rerender} rerender={setVetModal}/>)
  
    };
 
-
-
-
+//=============================================================================
+// HTML Code
+//=============================================================================
 
     return (
         <div className='vet-page'>
            
           {vetModal}
-          {/* {isShown && <addDoctor />} */}
+         
         
             <Helmet>
                 <title>Vets</title>
@@ -205,8 +237,7 @@ const roomVal = (e) => { //e is for events
            
             <br/>
             <div className='left-list'>
-            {/* 👇️ show component on click */}
-          {isShown && <AddDoctor />}
+    
             
             <button class='addBtn two' id="btn" onClick={handleAddDoc}><div className='plus-icon' ><UilPlus/></div></button>
                 <h3>Search Vet in PetCare</h3>
@@ -217,13 +248,16 @@ const roomVal = (e) => { //e is for events
                 <div className='order-text'>A-Z</div>
                 </div>
             <div className='vets-container'>
-               
              {vets}
             </div>
 
                 
             </div>
-<div className='middle-holder'></div>
+<div className='middle-holder'>
+    <h1 className='waitHeading'>What Are You Waiting For!</h1>
+    <h2 className='waitText'>Click on a Vet for More Information.</h2>
+<img className='wait' src={docs}/>
+</div>
        
             {/* {props.modal} */}
             {/* <DoctorInfo/> */}
@@ -232,6 +266,7 @@ const roomVal = (e) => { //e is for events
 
             <div className='img-holder'>
                     <img className='family' src={family}/>
+                
             </div>
 
             <div className='right-pannel'>

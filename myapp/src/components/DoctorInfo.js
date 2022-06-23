@@ -8,12 +8,11 @@ import Helmet from "react-helmet";
 import VetItem from './VetItem';
 
 
-
-
-
 const DoctorInfo = (props) => {
 
-    // console.log(props.name);
+//=============================================================================
+// HTML Code - doctor info
+//=============================================================================
     return (
         <div>
                  <div className='middle-pannel'>

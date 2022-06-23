@@ -7,22 +7,14 @@ import { useNavigate } from 'react-router-dom';
 
 const MakeBooking = (props) => {
 
+//=============================================================================
+// Variables
+//=============================================================================
 
-
-    //  handleBooking
-    const [isShown, setIsShown] = useState(false);
-
-    const closeBooking = (event) => {
-        event.preventDefault();
-        props.rerender();
-    
-      };
-
- 
-          //get active user
-          const navigate = useNavigate();
+   
+      const navigate = useNavigate();
   
-          const [userId, setUserId] = useState({
+      const [userId, setUserId] = useState({
               activeUser: sessionStorage.getItem('activeUser'),
           });
       
@@ -40,8 +32,22 @@ const MakeBooking = (props) => {
       const [dateError, setDateError] = useState();
       const [timeError, setTimeError] = useState();
       const [roomError, setRoomError] = useState();
+
+//=============================================================================
+// Close Booking
+//=============================================================================
+
+    const closeBooking = (event) => {
+        event.preventDefault();
+        props.rerender();
+      };
+
+ 
+
      
-  
+ //=============================================================================
+// Get input values
+//============================================================================= 
   
       //get info from input
       const vetNameVal = (e) => { //e is for events
@@ -100,17 +106,13 @@ const MakeBooking = (props) => {
 
     }
   
+//=============================================================================
+// Onclick submit
+//=============================================================================
   
       const handleSubmit = (e) =>{
           e.preventDefault();
           console.log(inputs); //error check
-  
-        //   if(inputs.taskName === ''){
-        //       setTaskNameError(<MiniModalLeft message="Please add task name"/>);
-        //   }else{
-        //       setTaskNameError();
-        //   }
-         
   
           //checks if some of the input values are equal to nothing
           let result = Object.values(inputs).some(o => o === "");
@@ -120,23 +122,21 @@ const MakeBooking = (props) => {
           }else{
               axios.post('http://localhost:80/project-api/makeBooking.php', inputs)
               .then(function(response){
-                  console.log(response);
+                //   console.log(response);
   
                   if(response.status === 200){
                      console.log("Booking has been made!");
-                      setIsShown(current => !current);
                       props.rerender();
                   }else{
                       console.log('error');
                   }
-  
               });
           }
-          
-        
       }
 
-      
+  //=============================================================================
+// HTML code
+//=============================================================================    
      
 
     return (

@@ -3,14 +3,17 @@ import { useState, useEffect } from 'react'
 
 const AppointmentItems = (props) => {
 
+//=============================================================================
+// Get vets initials and surname
+//=============================================================================
+
     const [name, setName] = useState(props.vet);
-    // const last =name.Substring(name.IndexOf(" ") + 1);;
     const fullName = name[0].substring(0, 1).toUpperCase();
     const getLast = name.split(' ');
-    
 
-
-    
+//=============================================================================
+// HTML Code
+//=============================================================================    
     return (
       
              <tr className='individual-appointment'>

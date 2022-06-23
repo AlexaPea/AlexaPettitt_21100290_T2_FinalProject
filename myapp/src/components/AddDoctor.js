@@ -9,7 +9,10 @@ import { Navigate } from 'react-router-dom';
 
 const AddDoctor = (props) => {
 
-      //object will all inputs
+//=============================================================================
+// Get vet input
+//=============================================================================
+
       const [inputs, setInputs] = useState({
         first:'',
         last:'',
@@ -220,6 +223,9 @@ const AddDoctor = (props) => {
          }
     }
 
+//=============================================================================
+// Onclick add Vet
+//============================================================================= 
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -280,9 +286,6 @@ const AddDoctor = (props) => {
             setSpecializationError();
         }
 
-
-        
-
         //checks if some of the input values are equal to nothing
         let result = Object.values(inputs).some(o => o === "");
 
@@ -291,19 +294,17 @@ const AddDoctor = (props) => {
         }else{
             axios.post('http://localhost:80/project-api/addVet.php', inputs)
             .then(function(response){
-                console.log(response);
-
+               // console.log(response);
                 if(response.status === 200){
                    console.log("Vet has been added!");
                    props.rerender();
                 }
-
             });
         }
-
-      
     }
-
+//=============================================================================
+// Close add vet pop up
+//=============================================================================
     
     const closeAddVet = (event) => {
         event.preventDefault();
@@ -311,9 +312,9 @@ const AddDoctor = (props) => {
     
       };
 
-   
-
-
+//=============================================================================
+// HTML Code
+//=============================================================================
 
     return (
         <div className='add-doctor'>

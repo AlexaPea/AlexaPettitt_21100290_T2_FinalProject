@@ -9,8 +9,19 @@ import { useNavigate } from 'react-router-dom';
 
 
 const AddTask = (props) => {
+//=============================================================================
+// Variables
+//=============================================================================
 
+    const navigate = useNavigate();
 
+    const [userId, setUserId] = useState({
+        activeUser: sessionStorage.getItem('activeUser'),
+    });
+
+//=============================================================================
+// Get active user
+//=============================================================================
     useEffect(()=>{
       const userSession = sessionStorage.getItem('activeUser');
       console.log(userSession);
@@ -20,13 +31,10 @@ const AddTask = (props) => {
     }
     }, []);
 
-        //get active user
-        const navigate = useNavigate();
 
-        const [userId, setUserId] = useState({
-            activeUser: sessionStorage.getItem('activeUser'),
-        });
-    
+//=============================================================================
+// Get task input
+//=============================================================================    
 
     const [inputs, setInputs] = useState({
         activeUser: sessionStorage.getItem('activeUser'),
@@ -61,7 +69,9 @@ const AddTask = (props) => {
 
     }
 
-
+//=============================================================================
+// Onclick add task
+//============================================================================= 
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(inputs); //error check
@@ -71,7 +81,6 @@ const AddTask = (props) => {
         }else{
             setTaskNameError();
         }
-       
 
         //checks if some of the input values are equal to nothing
         let result = Object.values(inputs).some(o => o === "");
@@ -81,30 +90,29 @@ const AddTask = (props) => {
         }else{
             axios.post('http://localhost:80/project-api/addTask.php', inputs)
             .then(function(response){
-                console.log(response);
-
+                // console.log(response);
                 if(response.status === 200){
                    console.log("Task has been added!");
                    props.rerender();
                 }else{
                     console.log('error');
                 }
-
             });
         }
-
-      
-
-      
     }
 
-
+//=============================================================================
+// Close addTask pop up
+//=============================================================================
     const closeTask = (event) => {
         event.preventDefault();
         props.rerender();
     
       };
 
+//=============================================================================
+// HTML Code
+//=============================================================================
 
     return (
         <div>

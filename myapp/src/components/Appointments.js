@@ -18,6 +18,10 @@ import AddTask from './AddTask';
 
 const Appointments = (props) => {
 
+//=============================================================================
+// Dynamically load favicon
+//=============================================================================
+
     useEffect(() => {
         const link = document.querySelector("link[rel~='icon']");
         if (!link) {
@@ -34,10 +38,9 @@ const Appointments = (props) => {
         activeUser: sessionStorage.getItem('activeUser'),
     });
 
-  
-
-
-      //get active user info
+//=============================================================================
+// Get active user info
+//=============================================================================
       useEffect(()=>{
         const userSession = sessionStorage.getItem('activeUser');
         console.log(userId);
@@ -46,40 +49,35 @@ const Appointments = (props) => {
       }   
     }, []);
  
+//=============================================================================
+// Render add task pop up
+//=============================================================================
 
-    //  handleBooking
-    const [isShownBooking, setIsShownBooking] = useState(false);
-    const [isShownTask, setIsShownTask] = useState(false);
+    const [Modal, setModal] = useState();
 
-
-      // show add task option
-
-      const [Modal, setModal] = useState();
-
-
-      const addTask = (event) => {
-     
+    const addTask = (event) => {
         event.preventDefault();
         setModal(<AddTask upRender={props.rerender} rerender={setModal}/>)
-    
-      };
+    };
      
+//=============================================================================
+// Set current date
+//=============================================================================
 
- 
-      //current date and time
-      const current = new Date();
-  const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const current = new Date();
+
+     const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
       
 
 
-  //show all tasks
+//=============================================================================
+// Render all tasks
+//=============================================================================
 
   const [renderTask, setRenderTask] = useState();
   const [tasks, setTasks] = useState();
 
   const user = sessionStorage.getItem('activeUser');
-
-
 
   useEffect(()=>{
 
@@ -98,9 +96,10 @@ const Appointments = (props) => {
 
  },[renderTask, addTask]);
 
- //show user info
- 
-  //show all tasks
+
+//=============================================================================
+// Render user info
+//=============================================================================
 
   const [renderUserInfo, setRenderUserInfo] = useState();
   const [userInfo, setUserInfo] = useState();
@@ -121,38 +120,14 @@ const Appointments = (props) => {
     });
 
  },[]);
- //renderUserInfo, navigate
 
-//  //show all appoints
-
-//  const [renderAppointents, setRenderAppointents] = useState();
-//  const [appointmentItems, setAppointmentItems] = useState();
-
-
-//  useEffect(()=>{
-
-//    axios.post('http://localhost:80/project-api/readAppointments.php',userId )
-//    .then((res)=>{
-//      let data = res.data;
-//      let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
-//      console.log(data);
-//      setAppointmentItems(renderAppointents);
-//      setRenderAppointents(false);
-     
-//    })
-//    .catch(err=>{
-//      console.log(err);
-//    });
-
-// },[renderAppointents]);
-
-
+ //=============================================================================
+// HTML Code
+//=============================================================================
 
     return (
         <div>
-        
-     
-                   
+                       
          <Helmet>
             <title>Appointments</title>
             <link rel="icon" href={Logo}/>
@@ -168,9 +143,7 @@ const Appointments = (props) => {
                     <h2 className='greeting-msg'>{date} </h2>
                  
                     <div className="search"><input type="text" placeholder="Search..."/><img src={searchIcon}/></div>  
-                    
-                    
-                    
+
 
                 </div>
             </div>
@@ -187,12 +160,6 @@ const Appointments = (props) => {
                     </div>
                 </div>
 
-                {/* <div className='block two'>
-                    <h1 className='block-head'> 00 </h1>
-                    <hr/>
-                    <h2 className='block-text'> Doctors On Duty </h2>
-                </div> */}
-
                 <div className='block three'>
                     <h1 className='block-head'> 00 </h1>
                     <hr/>
@@ -200,34 +167,7 @@ const Appointments = (props) => {
                 </div>
             </div>
 
-            {/* <div className='row3'>
-                <div className='calendar'>
-                    <div className='block-heading' id='calendar-heading'> Calendar </div>
-                    <Calendar/>
-
-                </div>
-                <div className='appointments'>
-                    <div className='block-heading'> Appointments </div>
-                    <button className='addBtn' id="btn" onClick={handleBooking}><div className='plus-icon' ><UilPlus/></div></button>
-                    <table className='appointments-table'>
-                        <tbody>
-                        <tr className='row-heading'>
-                            <th>Doctor</th>
-                            <th>Patient</th>
-                            <th>Time</th>
-                            <th>Room</th>
-                        </tr>
-                        {appointmentItems}
-                       
-                        </tbody>
-                    </table>
-
-                </div>
-            </div> */}
-
             <Calendar/>
-
-
 
 
             </div>

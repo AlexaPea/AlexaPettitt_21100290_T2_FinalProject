@@ -360,7 +360,7 @@ const Login = (props) => {
 
                 <div className='imageArea'>
                 <p>Upload a Profile Image</p>
-                <input name="imageUrl" className='imgInput' type="file" onChange={imageVal} placeholder="Upload profile picture"/>
+                <input name="imageUrl" id="profileimg" className='imgInput' type="file" onChange={imageVal} placeholder="Upload profile picture"/>
             </div>
 
                 

@@ -10,12 +10,11 @@ import Logo from '../Images/logo.png';
 import Helmet from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import MakeBooking from './MakeBooking';
-import AddTask from './AddTask';
 import axios from 'axios';
 import TaskPost from './TaskPost.js';
 import UserInfo from './UserInfo';
 import AppointmentItems from './AppointmentItems';
-
+import AddTask from './AddTask';
 
 const Appointments = (props) => {
 
@@ -52,17 +51,16 @@ const Appointments = (props) => {
     const [isShownBooking, setIsShownBooking] = useState(false);
     const [isShownTask, setIsShownTask] = useState(false);
 
-    const handleBooking = (event) => {
-     
-        setIsShownBooking(current => !current);
-    
-      };
 
       // show add task option
 
+      const [Modal, setModal] = useState();
+
+
       const addTask = (event) => {
      
-        setIsShownTask(current => !current);
+        event.preventDefault();
+        setModal(<AddTask upRender={props.rerender} rerender={setModal}/>)
     
       };
      
@@ -89,7 +87,7 @@ const Appointments = (props) => {
     .then((res)=>{
       let data = res.data;
       let renderTask = data.map((item) =>  <TaskPost key={item.id} rerender={setRenderTask} uniqueId={item.id} receptionist={item.receptionist} taskName={item.taskName} taskDescription={item.taskDescription}  />);
-      console.log(data);
+    //   console.log(data);
       setTasks(renderTask);
       setRenderTask(false);
       
@@ -98,7 +96,7 @@ const Appointments = (props) => {
       console.log(err);
     });
 
- },[renderTask]);
+ },[renderTask, addTask]);
 
  //show user info
  
@@ -122,49 +120,47 @@ const Appointments = (props) => {
       console.log(err);
     });
 
- },[renderUserInfo]);
+ },[]);
+ //renderUserInfo, navigate
 
- //show all appoints
+//  //show all appoints
 
- const [renderAppointents, setRenderAppointents] = useState();
- const [appointmentItems, setAppointmentItems] = useState();
+//  const [renderAppointents, setRenderAppointents] = useState();
+//  const [appointmentItems, setAppointmentItems] = useState();
 
 
- useEffect(()=>{
+//  useEffect(()=>{
 
-   axios.post('http://localhost:80/project-api/readAppointments.php',userId )
-   .then((res)=>{
-     let data = res.data;
-     let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
-     console.log(data);
-     setAppointmentItems(renderAppointents);
-     setRenderAppointents(false);
+//    axios.post('http://localhost:80/project-api/readAppointments.php',userId )
+//    .then((res)=>{
+//      let data = res.data;
+//      let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
+//      console.log(data);
+//      setAppointmentItems(renderAppointents);
+//      setRenderAppointents(false);
      
-   })
-   .catch(err=>{
-     console.log(err);
-   });
+//    })
+//    .catch(err=>{
+//      console.log(err);
+//    });
 
-},[renderAppointents]);
+// },[renderAppointents]);
 
 
 
     return (
         <div>
-             {/* 👇️ show component on click */}
-            {isShownBooking && <MakeBooking />}
-
-              {/* 👇️ show component on click */}
-              {isShownTask && <AddTask />}
-
+        
+     
+                   
          <Helmet>
             <title>Appointments</title>
             <link rel="icon" href={Logo}/>
          </Helmet>
          
             <Navigation/>
-            
-
+         
+            {Modal}
             <div className='left-panel'>
             <div className='row1'>
                 <div className='greetiing'>
@@ -204,7 +200,7 @@ const Appointments = (props) => {
                 </div>
             </div>
 
-            <div className='row3'>
+            {/* <div className='row3'>
                 <div className='calendar'>
                     <div className='block-heading' id='calendar-heading'> Calendar </div>
                     <Calendar/>
@@ -227,25 +223,26 @@ const Appointments = (props) => {
                     </table>
 
                 </div>
-            </div>
+            </div> */}
+
+            <Calendar/>
 
 
 
 
             </div>
 
-            
-                   
+         
             <div className='right-panel'>
            
                {userInfo}
-
+   
                 <div className='tasks'>
                     <h1 className='tasks-head'>Tasks</h1>
                     <button className='addBtn tasks' id="btn" onClick={addTask}><div className='plus-icon'><UilPlus/></div></button>
                     <div className='task-container'>
                        {tasks}
-                       {renderTask}
+                       
                     </div>
                     
                 </div>

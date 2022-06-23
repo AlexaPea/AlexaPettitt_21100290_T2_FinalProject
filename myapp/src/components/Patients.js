@@ -28,11 +28,7 @@ const Patients = (props) => {
        //  handleAddClient
        const [isShown, setIsShown] = useState(false);
 
-       const handleAddClient = (event) => {
-       
-        setIsShown(current => !current);
-   
-     };
+ 
 
      //show clients
   
@@ -62,6 +58,17 @@ const Patients = (props) => {
 
  },[renderClientInfo]);
 
+ const [modal, setModal] = useState();
+
+ //  handleAddDoc
+
+
+ const handleAddClient = (event) => {
+ 
+    event.preventDefault();
+    setModal(<AddClient upRender={props.rerender} rerender={setModal}/>)
+
+};
 
 
     return (
@@ -73,9 +80,8 @@ const Patients = (props) => {
                 <link rel="icon" href={Logo}/>
             </Helmet>
             <Navigation/>
-             {/* 👇️ show component on click */}
-             {isShown && <AddClient />}
-           
+          
+           {modal}
 
 <br/>
             <div className='left-list'>

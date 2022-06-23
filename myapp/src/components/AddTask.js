@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
-const AddTask = () => {
+const AddTask = (props) => {
 
 
     useEffect(()=>{
@@ -85,7 +85,7 @@ const AddTask = () => {
 
                 if(response.status === 200){
                    console.log("Task has been added!");
-                   Navigate('/');
+                   props.rerender();
                 }else{
                     console.log('error');
                 }
@@ -94,16 +94,23 @@ const AddTask = () => {
         }
 
       
+
+      
     }
 
 
+    const closeTask = (event) => {
+        event.preventDefault();
+        props.rerender();
+    
+      };
 
 
     return (
         <div>
             <div className='task-form-container'>
                 <form id='addTask'>
-                <button className='closeBtn' id="btn" ><div className='close-icon'><UilTimes/></div></button>
+                <button className='closeBtn' id="btn" onClick={closeTask}><div className='close-icon'><UilTimes/></div></button>
                 <div className='heading task'>
                         <h1>Add Task</h1>
                         <h3>Let's get productive!</h3>

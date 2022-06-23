@@ -73,14 +73,14 @@ const showVetInfo = (event) => {
     function changeTimeLine(value){
         setActiveButton(value) //update your current active button state 
     }
-console.log(itemId);
+// console.log(itemId);
 
 axios.post('http://localhost:80/project-api/readActiveDoctor.php',itemId )
 .then((res)=>{
 let data = res.data;
 setActiveVet(data.map((item) =>  <DoctorInfo key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} />)) 
 
-     console.log(data);
+    //  console.log(data);
   //   setActiveVet(renderActiveVet);
   //   setRenderActiveVet(false);
 

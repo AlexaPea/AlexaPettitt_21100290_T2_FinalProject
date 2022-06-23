@@ -1,19 +1,18 @@
-
+import AppointmentItems from './AppointmentItems';
+import { UilPlus } from '@iconscout/react-unicons'
 import Calendarcom from 'react-calendar';
-
 import styled from 'styled-components';
-
 import { useState, useEffect } from 'react'
-
-
 import React from 'react';
 import moment from "moment";
+import axios from 'axios';
+import MakeBooking from './MakeBooking';
 
 
 
 
-const Calendar = () => {
-
+const Calendar = (props) => {
+const [modal, setModal] = useState();
     	
 const [date, setDate] = useState(new Date());
 const [formatDate, setFormatDate] = useState();
@@ -25,6 +24,14 @@ const onDateChange = (newDate) => {
   
 }
 
+const [inputs, setInputs] = useState({
+  date:'',
+  userId:'',
+});
+
+
+
+
 // useEffect(() => {
 //   console.log(date);
 //   setFormatDate(new Intl.DateTimeFormat('en-US').format(date));
@@ -32,10 +39,55 @@ const onDateChange = (newDate) => {
 // }, [date, onDateChange])
 
 useEffect(() => {
-  console.log(date);
+  // console.log(date);
   setFormatDate(moment(date).format("YYYY-MM-DD"));
-  console.log(formatDate);
+  // console.log(formatDate);
 }, [date, onDateChange])
+
+//  handleBooking
+const [isShownBooking, setIsShownBooking] = useState(false);
+const [isShownTask, setIsShownTask] = useState(false);
+
+const handleBooking = (event) => {
+     event.preventDefault();
+    setModal(<MakeBooking upRender={props.rerender} rerender={setModal}/>)
+
+  };
+
+ 
+
+
+//show all appoints
+const [userId, setUserId] = useState({
+  activeUser: sessionStorage.getItem('activeUser'),
+});
+
+
+const [renderAppointents, setRenderAppointents] = useState();
+const [appointmentItems, setAppointmentItems] = useState();
+
+
+useEffect(()=>{
+
+  
+  setInputs({...inputs, date: formatDate});
+  setInputs({...inputs, userId: userId});
+
+  axios.post('http://localhost:80/project-api/readAppointments.php',userId )
+  .then((res)=>{
+    let data = res.data;
+    let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
+    // console.log(data);
+    setAppointmentItems(renderAppointents);
+    setRenderAppointents(false);
+    
+  })
+  .catch(err=>{
+    console.log(err);
+  });
+
+},[renderAppointents]);
+// },[renderAppointents, handleBooking]);
 
 
 
@@ -44,11 +96,36 @@ const locale = 'fr-CA';
     
     return (
         <>
-           <CalendarContainer>
+        {modal}
+            <div className='row3'>
+                <div className='calendar'>
+                    <div className='block-heading' id='calendar-heading'> Calendar </div>
+                    <CalendarContainer>
                  <Calendarcom calendarType='US' format="yyyy-mm-dd" className='react-calendar' 
                   onChange={onDateChange}           
                   value={date}  locale={"en-US"} />
-             </CalendarContainer>
+                </CalendarContainer>
+
+                </div>
+                <div className='appointments'>
+                    <div className='block-heading'> Appointments </div>
+                    <button className='addBtn' id="btn" onClick={handleBooking}><div className='plus-icon' ><UilPlus/></div></button>
+                    <table className='appointments-table'>
+                        <tbody>
+                        <tr className='row-heading'>
+                            <th>Doctor</th>
+                            <th>Patient</th>
+                            <th>Time</th>
+                            <th>Room</th>
+                        </tr>
+                        {appointmentItems}
+                       
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+          
         </>
      
     );

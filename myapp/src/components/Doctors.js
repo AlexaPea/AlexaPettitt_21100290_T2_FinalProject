@@ -28,14 +28,7 @@ const Doctors = (props) => {
       }, []);
 
 
-        //  handleAddDoc
-        const [isShown, setIsShown] = useState(false);
-
-        const handleAddDoc = (event) => {
-        
-         setIsShown(current => !current);
-    
-      };
+   
 
 
       //show all doctors
@@ -182,6 +175,18 @@ const roomVal = (e) => { //e is for events
     
   }
 
+  const [vetModal, setVetModal] = useState();
+
+     //  handleAddDoc
+     const [isShown, setIsShown] = useState(false);
+
+     const handleAddDoc = (event) => {
+     
+        event.preventDefault();
+        setVetModal(<AddDoctor upRender={props.rerender} rerender={setVetModal}/>)
+ 
+   };
+
 
 
 
@@ -189,7 +194,7 @@ const roomVal = (e) => { //e is for events
     return (
         <div className='vet-page'>
            
-          {/* 👇️ show component on click */}
+          {vetModal}
           {/* {isShown && <addDoctor />} */}
         
             <Helmet>
@@ -215,13 +220,10 @@ const roomVal = (e) => { //e is for events
                
              {vets}
             </div>
-{/* 
-            <img className='bottom-dog' src={dog}/>
-             */}
-                
+
                 
             </div>
-
+<div className='middle-holder'></div>
        
             {/* {props.modal} */}
             {/* <DoctorInfo/> */}

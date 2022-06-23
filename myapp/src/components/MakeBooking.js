@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const MakeBooking = () => {
+const MakeBooking = (props) => {
 
 
 
@@ -13,8 +13,8 @@ const MakeBooking = () => {
     const [isShown, setIsShown] = useState(false);
 
     const closeBooking = (event) => {
-     
-        setIsShown(current => !current);
+        event.preventDefault();
+        props.rerender();
     
       };
 
@@ -125,14 +125,14 @@ const MakeBooking = () => {
                   if(response.status === 200){
                      console.log("Booking has been made!");
                       setIsShown(current => !current);
-                     Navigate('/');
+                      props.rerender();
                   }else{
                       console.log('error');
                   }
   
               });
           }
-  
+          
         
       }
 

@@ -669,6 +669,7 @@ small{
   outline: none;
   border: none;
   font-family: poppins;
+  cursor: pointer;
 
   
 }
@@ -722,14 +723,21 @@ small{
   height: 90vh;
   width: 35%;
   border-radius: 20px;
-  box-shadow:
-  0  5px 10px rgba(154,160,185,0.05),
-  0 15px 40px rgba(166,173,201,0.1);
-  background-color: #FFFFFF;
   margin-left: 20px;
-
+  z-index: -10;
   background: #f7f7f7;
--webkit-box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
+/* -webkit-box-shadow: 1px 2px 4px #ebebeb, -1px -2px 0px #ffffff;
+box-shadow: 1px 2px 4px #ebebeb, -1px -2px 0px #ffffff; */
+}
+.middle-holder{
+  float: left;
+  height: 90vh;
+  width: 35%;
+  border-radius: 20px;
+  margin-left: 20px;
+  z-index: -10;
+  background: #f7f7f7;
+  -webkit-box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 }
 
@@ -1757,10 +1765,10 @@ margin-top: 15px;
 .add-doctor{
   background-color: #fafafa;
   width: 500px;
-  height:550px;
+  height:590px;
 
-  margin-top: 55px;
-  margin-left: 400px;
+  margin-top: 48px;
+  margin-left: 590px;
   z-index: 3;
   position: absolute;
 
@@ -1852,8 +1860,8 @@ margin-top: 15px;
 }
 
 .heading.doc h3{
- margin-left: 60px;
-  margin-top: -40px;
+ margin-left: -80px;
+  margin-top: -27px;
   color: #D69EAF;
   margin-bottom: 20px;
 }
@@ -1898,7 +1906,7 @@ margin-top: 15px;
  
 
 }
-.task-form-container h3{
+.task-form-container h3, .add-doctor-form h3{
   color: #D69EAF;
   font-weight: 300;
   font-size: 16px;
@@ -1989,7 +1997,7 @@ margin-top: 15px;
 }
 
 .booking-input.doc.gen{
-  width: 180px;
+  width: 167px;
   float: left;
 
 }
@@ -2027,4 +2035,45 @@ margin-top: 15px;
 }
 .ActiveButton{
   color: #a85f5f;
+}
+
+.addClient .OwnerImgInput, .addClient .petImgInput {
+  background-color: #e2e2e296;
+  color: #2b2b2b;
+  border: none;
+  padding:6px;
+  width: 116%;
+  float: left;
+  border-radius: 10px;
+  margin: 5px;
+
+}
+
+.add-doctor .docImgInput {
+  background-color: #e2e2e296;
+  color: #2b2b2b;
+  border: none;
+  padding:6px;
+  width: 83%;
+  float: left;
+  border-radius: 10px;
+  margin: 5px;
+
+}
+
+
+.addClient .imageArea p{
+  margin-left: -90px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #989898;
+
+}
+
+.add-doctor .imageArea p{
+  margin-left: -210px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #989898;
+
 }

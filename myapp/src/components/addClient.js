@@ -6,7 +6,7 @@ import MiniModalRight from './FormModalRight';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-const AddClient = () => {
+const AddClient = (props) => {
 
       //object will all inputs
       const [inputs, setInputs] = useState({
@@ -20,6 +20,8 @@ const AddClient = () => {
         petType:'',
         petAge:'',
         petGender:'',
+        ownerImg:'',
+        petImg:'',
     });
 
     const [nameError, setNameError] = useState();
@@ -44,6 +46,42 @@ const AddClient = () => {
 
 
     }
+
+    const OwnerImageVal = (e) => {           
+        let file = e.target.files[0];
+        let reader = new FileReader();
+
+        reader.onloadend = function() {
+        console.log(reader.result);
+        let imgFile = reader.result;
+
+        setInputs({...inputs, ownerImg: imgFile});
+
+        let image = new Image();
+        image.src = reader.result;
+        document.getElementById('ownerImg').appendChild(image);
+        }
+        reader.readAsDataURL(file);
+}
+
+const petImageVal = (e) => {           
+    let file = e.target.files[0];
+    let reader = new FileReader();
+
+    reader.onloadend = function() {
+    console.log(reader.result);
+    let imgFile = reader.result;
+
+    setInputs({...inputs, petImg: imgFile});
+
+    let image = new Image();
+    image.src = reader.result;
+    document.getElementById('petImg').appendChild(image);
+    
+    }
+    reader.readAsDataURL(file);
+}
+
 
     const surnameVal = (e) => { //e is for events
 
@@ -156,7 +194,7 @@ const AddClient = () => {
 
                 if(response.status === 200){
                    console.log("Client has been added!");
-                   Navigate('/');
+                   props.rerender();
                 }else{
                     console.log('error');
                 }
@@ -168,12 +206,17 @@ const AddClient = () => {
     }
 
 
+    const closeAddClient = (event) => {
+        event.preventDefault();
+        props.rerender();
+    
+      };
 
 
     return (
         <div className='addClient'>
             <form id='add-client-form'>
-            <button className='closeBtn addClient' id="btn" ><div className='close-icon'><UilTimes/></div></button>
+            <button className='closeBtn addClient' id="btn" onClick={closeAddClient} ><div className='close-icon'><UilTimes/></div></button>
                 <div className='greeting'>
                     <h1>Add Client</h1>
                     <h3 className='subheading'>Let's get this pet registered!</h3>
@@ -183,6 +226,10 @@ const AddClient = () => {
                     <h3>Client Information</h3>
 
                     <div className='input-holder owner'>
+                    <div className='imageArea'>
+                    <p>Upload a Owner Profile Image</p>
+                    <input name="ownerImageUrl" id="ownerImg" className='OwnerImgInput' type="file" onChange={OwnerImageVal}/>
+                     </div>
                                                 
                         <input onChange={nameVal} name='name' className='booking-input doc full' type='text' placeholder='First Name'/>
 
@@ -204,6 +251,10 @@ const AddClient = () => {
                 <div className='pet-info-form'>
 
                   <h3>Pet Information</h3>
+                  <div className='imageArea'>
+                    <p>Upload a Pet Profile Image</p>
+                    <input name="petImageUrl" id="petImg" className='petImgInput' type="file" onChange={petImageVal}/>
+                     </div>
 
                   <div className='input-holder pet'></div>
 

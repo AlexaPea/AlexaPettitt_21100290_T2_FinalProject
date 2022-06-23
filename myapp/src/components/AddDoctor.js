@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
 
-const AddDoctor = () => {
+const AddDoctor = (props) => {
 
       //object will all inputs
       const [inputs, setInputs] = useState({
@@ -22,6 +22,7 @@ const AddDoctor = () => {
         contact:'',
         password:'',
         passwordCon:'',
+        docImg:'',
     });
 
     const [nameError, setNameError] = useState();
@@ -36,6 +37,22 @@ const AddDoctor = () => {
     const [ageError, setAgeError] = useState();
     const [genderError, setGenderError] = useState();
 
+    const docImageVal = (e) => {           
+        let file = e.target.files[0];
+        let reader = new FileReader();
+
+        reader.onloadend = function() {
+        console.log(reader.result);
+        let imgFile = reader.result;
+
+        setInputs({...inputs, docImg: imgFile});
+
+        let image = new Image();
+        image.src = reader.result;
+        document.getElementById('docImg').appendChild(image);
+        }
+        reader.readAsDataURL(file);
+}
     //get info from input
     const firstVal = (e) => { //e is for events
 
@@ -278,7 +295,7 @@ const AddDoctor = () => {
 
                 if(response.status === 200){
                    console.log("Vet has been added!");
-                   Navigate('/Doctors');
+                   props.rerender();
                 }
 
             });
@@ -288,7 +305,11 @@ const AddDoctor = () => {
     }
 
     
-
+    const closeAddVet = (event) => {
+        event.preventDefault();
+        props.rerender();
+    
+      };
 
    
 
@@ -298,7 +319,7 @@ const AddDoctor = () => {
         <div className='add-doctor'>
             <div className='add-doctor-form'>
                 <form id="doctorForm">
-                <button className='closeBtn' id="btn" ><div className='close-icon'><UilTimes/></div></button>
+                <button className='closeBtn' id="btn" onClick={closeAddVet}><div className='close-icon'><UilTimes/></div></button>
                     <div className='heading doc'>
                    
                         <h1>Add New Vet</h1>
@@ -307,6 +328,11 @@ const AddDoctor = () => {
                     </div>
 
                     <div className='new-doc-container'>
+
+                    <div className='imageArea'>
+                    <p>Upload a Owner Profile Image</p>
+                    <input name="docImageUrl" id="docImg" className='docImgInput' type="file" onChange={docImageVal}/>
+                     </div>
 
                          {/* {nameError} */}
                         <input className='booking-input doc full' name='first' onChange={firstVal} type='text' placeholder='First Name'/>

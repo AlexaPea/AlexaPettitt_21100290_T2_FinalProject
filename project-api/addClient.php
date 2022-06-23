@@ -24,13 +24,16 @@ $petName = $data->petName;
 $petType = $data->petType;
 $petAge = $data->petAge;
 $petGender = $data->petGender;
+$ownerImage = $data->ownerImg;
+$petImage = $data->petImg;
+
 
 
 echo ($first);
 //this is the value pushed to the databasse
 $passwordEncrypt = md5($password);
 
-$sql = "INSERT INTO clients(id, profileImage, name, surname, email, phoneNumber, clientId, medicalAidNum, petImage, petType, petName, petAge, petGender) VALUES (NULL,'','$name','$surname','$email','$contact','$clientId','$medicalAidNum','','$petType','$petName','$petAge','$petGender');";
+$sql = "INSERT INTO clients(id, profileImage, name, surname, email, phoneNumber, clientId, medicalAidNum, petImage, petType, petName, petAge, petGender) VALUES (NULL,'$ownerImage','$name','$surname','$email','$contact','$clientId','$medicalAidNum','$petImage','$petType','$petName','$petAge','$petGender');";
 $result = mysqli_query($conn, $sql);
 
 if(!$result){

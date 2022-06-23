@@ -8,12 +8,12 @@ header('Access-Control-Headers: *');
 $request_body = file_get_contents('php://input');
 $data = json_decode($request_body);
 
-$uniqueId = $data->id;
+$formatDate = $data->date;
 
-if($uniqueId === ""){
+if($formatDate === ""){
     echo "";
 } else {
-    $sql = "SELECT * FROM booking;";
+    $sql = "SELECT * FROM booking WHERE date='$formatDate';";
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
 

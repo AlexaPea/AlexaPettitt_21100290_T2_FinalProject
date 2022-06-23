@@ -23,13 +23,14 @@ $contact = $data->contact;
 $age = $data->age;
 $gender = $data->gender;
 $password = $data->password;
+$docImg = $data->docImg;
 
 
 echo ($first);
 //this is the value pushed to the databasse
 $passwordEncrypt = md5($password);
 
-$sql = "INSERT INTO vets (id, profileImage, name, surname, age, gender, email, password, phoneNumber, doctorId, specialization, room) VALUES (NULL,'','$first','$last','$age','$gender','$email','$passwordEncrypt','$contact','$vetId','$specialization','$room')";
+$sql = "INSERT INTO vets (id, profileImage, name, surname, age, gender, email, password, phoneNumber, doctorId, specialization, room) VALUES (NULL,'$docImg','$first','$last','$age','$gender','$email','$passwordEncrypt','$contact','$vetId','$specialization','$room')";
 $result = mysqli_query($conn, $sql);
 
 if(!$result){

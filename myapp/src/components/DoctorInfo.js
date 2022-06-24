@@ -6,18 +6,43 @@ import Logo from '../Images/logo.png';
 import { useState, useEffect } from 'react'
 import Helmet from "react-helmet";
 import VetItem from './VetItem';
+import EditDoctor from './EditDoctor';
 
 
 const DoctorInfo = (props) => {
 
+    const [renderImage, setRenderImage] = useState();
+useEffect(()=>{
+
+    
+    console.log(props.profileImg)
+    let source = props.profileImg;
+    let renderpath = 'http://localhost:80/project-api/' + source;
+    setRenderImage(renderpath);
+
+ },[]);
+
+//=============================================================================
+// Edit Task
+//=============================================================================
+
+const [modal, setModal] = useState();
+
+const editDoctor = () => {
+    console.log("clicked");
+    setModal(<EditDoctor upRender={props.rerender} rerender={setModal} name={props.name} surname={props.surname} id={props.uniqueId} specialization={props.specialization} gender={props.gender} age={props.age} email={props.email} contact={props.contact} doctorId={props.doctorId} room={props.room} docImg={props.profileImg}/>)
+  }
+
+   
 //=============================================================================
 // HTML Code - doctor info
 //=============================================================================
     return (
         <div>
-                 <div className='middle-pannel'>
-                <div className='edit-icon'><UilEdit/></div>
-            <div className='vet-block main'>  <img className='vet-block-img main' src={dp}/></div>
+            {modal}
+                 <div className='middle-pannel vetInfo'>
+                <div className='edit-icon' onClick={editDoctor}><UilEdit/></div>
+            <div className='vet-block main'>  <img className='vet-block-img main' src={renderImage}/></div>
             <div className='vet-maintext'>  
                 <h1>Dr. {props.name + " " + props.surname}</h1>
                 <h3>Vetenarian</h3>

@@ -23,10 +23,10 @@ const [userId, setUserId] = useState({
 const [state, setState] = useState();
 const [activeVet, setActiveVet] = useState();
 const [itemId, setItemId] = useState();
-const [renderActiveVet, setRenderActiveVet] = useState();
+const [renderActiveVet, setRenderActiveVet] = useState(true);
 
 const [inputs, setInputs] = useState({
-    userId: {activeUser: sessionStorage.getItem('activeUser')},
+    userId: sessionStorage.getItem('activeUser'),
     itemId:'',
 });
 
@@ -41,25 +41,27 @@ const showVetInfo = (event) => {
     //document.classList.remove('bg-salmon');
     //event.currentTarget.classList.toggle('bg-salmon');
  
-   
+    event.preventDefault();
+    setRenderActiveVet(false);
    
     //set Id to id of clicked div
-    let id = (event.currentTarget.id);
+    let id = event.currentTarget.id;
     setItemId(event.currentTarget.id);
     console.log(id);
 
-    const value = event.currentTarget.id;
+    let value = event.currentTarget.id;
+    console.log(value);
     setInputs({...inputs, itemId: value});
-
+    console.log(inputs);
     //if first input is empty, set error message to nothing
-    if(inputs.itemId !== ''){console.log("no id")}
+    if(inputs.itemId == ''){console.log("no id")}
 
     //read clicked doctor
-    axios.post('http://localhost:80/project-api/readActiveDoctor.php',userId )
+    axios.post('http://localhost:80/project-api/readActiveDoctor.php',inputs)
     .then((res)=>{
     let data = res.data;
     //render clicked doctors card
-    setActiveVet(data.map((item) =>  <DoctorInfo key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} />)) 
+    setActiveVet(data.map((item) =>  <DoctorInfo key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} profileImg={item.profileImage} />)) 
     // console.log(data);
 
       })
@@ -81,42 +83,22 @@ const showVetInfo = (event) => {
    
     const [activeButton, setActiveButton] = useState();
 
-    useEffect(()=>{
-
-        //setActiveButton(itemId) //update your current active button state 
-        // console.log(activeButton +" is active");
-       
-       }, [showVetInfo]);
-    
-
 //=============================================================================
 //Attempt to render image on vetItem
 //=============================================================================
+const [renderImage, setRenderImage] = useState();
+useEffect(()=>{
+
+    
+    console.log(props.profileImage)
+    let source = props.profileImage;
+    let renderpath = 'http://localhost:80/project-api/' + source;
+    setRenderImage(renderpath);
+
+ },[]);
 
 
-  //const [renderImage, setRenderImage] = useState(props.image);
-
-//   axios.post('http://localhost:80/project-api/readDoctors.php',userId )
-//     .then((res)=>{
-//       let data = res.data;
-//       for(let i=0; i<data.length; i++){
-//         let data = res.data;
-//       console.log(data[i].profileImage);
-//       let source = data[i].profileImage;
-//       let renderpath = 'http://localhost:80/project-api/' + source;
-//       setRenderImage(renderpath);
-
-//       }
-
-
-      
-//     })
-//     .catch(err=>{
-//       console.log(err);
-//     });
-
-
-
+   
 //=============================================================================
 // html code
 //=============================================================================
@@ -127,7 +109,7 @@ const showVetInfo = (event) => {
             <button  onClick={(e)=>{showVetInfo(e)}} className={activeButton === ("1") && "active"} data-value={props.uniqueId} id={props.uniqueId}   >
             <div className='individual-vet' id={props.uniqueId}  >
              
-                     <div className='vet-block-img'>  <img className='profileImg vet' src={props.image}/></div>
+                     <div className='vet-block-img'>  <img className='profileImg vet' src={renderImage}/></div>
                      <div className='vet-block-text'>
                          <h2>Dr. {props.name + " " + props.surname}</h2>
                          <h4>{props.specialization}</h4>

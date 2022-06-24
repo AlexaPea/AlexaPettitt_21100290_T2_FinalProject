@@ -15,13 +15,17 @@ const Calendar = (props) => {
 // Variables
 //=============================================================================
 const [modal, setModal] = useState();
-    	
+let presentDate = new Date("YYYY-MM-DD");  	
 const [date, setDate] = useState(new Date());
-const [formatDate, setFormatDate] = useState();
 
+const [formatDate, setFormatDate] = useState();
+console.log(date);
 //    console.log(new Intl.DateTimeFormat('en-US').format(date));
 const onDateChange = (newDate) => {
     setDate(newDate);
+    setFormatDate(moment(date).format("YYYY-MM-DD"));
+    setRenderAppointents(true);
+
 }
 
 const [inputs, setInputs] = useState({
@@ -38,9 +42,9 @@ const [userId, setUserId] = useState({
 // format date - to match database
 //=============================================================================
 
-useEffect(() => {
-  setFormatDate(moment(date).format("YYYY-MM-DD"));
-}, [date, onDateChange])
+// useEffect(() => {
+//   setFormatDate(moment(date).format("YYYY-MM-DD"));
+// }, [date, onDateChange])
 
 // useEffect(() => {
   // setInputs({...inputs, date: formatDate});
@@ -73,29 +77,26 @@ const [appointmentItems, setAppointmentItems] = useState();
 // },[renderAppointents, handleBooking]);
 useEffect(()=>{
 
-  //attempt to put needed data into inputs
-  // setInputs({...inputs, date: formatDate});
-  // setInputs({...inputs, userId: userId});
 
   console.log(formatDate);
-  axios.post('http://localhost:80/project-api/readAppointments.php',inputs )
-  .then((res)=>{
-    let data = res.data;
-    console.log(data);
-    let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
-    // console.log(data);
-    setAppointmentItems(renderAppointents);
-    setRenderAppointents(false);
+//   axios.post('http://localhost:80/project-api/readAppointments.php',formatDate )
+//   .then((res)=>{
+//     let data = res.data;
+//     console.log(data);
+//     let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
+//     // console.log(data);
+//     setAppointmentItems(renderAppointents);
+//     setRenderAppointents(false);
     
-  })
-  .catch(err=>{
-    console.log(err);
-  });
+//   })
+//   .catch(err=>{
+//     console.log(err);
+//   });
 
-},[renderAppointents]);
+// },[renderAppointents]);
 // },[renderAppointents, handleBooking]);
 
-
+});
 //=============================================================================
 // HTML Code
 //=============================================================================

@@ -49,43 +49,18 @@ const Doctors = (props) => {
     activeUser: sessionStorage.getItem('activeUser'),
 });
 
-const [renderImage, setRenderImage] = useState();
-const [i, setI] = useState(0);
 
 
-//attempt to get images to render
   useEffect(()=>{
-
-    axios.post('http://localhost:80/project-api/readDoctors.php',userId )
-    .then((res)=>{
-     setI(i+1);
-      let data = res.data;
-      console.log(data[i].profileImage);
-      let source = data[i].profileImage;
-      let renderpath = 'http://localhost:80/project-api/' + source;
-      setRenderImage(renderpath);
-      console.log(source);
-         
-    })
-    .catch(err=>{
-      console.log(err);
-    });
-
 
     //render vet items
     axios.post('http://localhost:80/project-api/readDoctors.php',userId )
     .then((res)=>{
       let data = res.data;
-    //   for(let i=0; i<data.length; i++){
-    //     let data = res.data;
-    //   console.log(data[i].profileImage);
-    //   let source = data[i].profileImage;
-    //   let renderpath = 'http://localhost:80/project-api/' + source;
-    //   setRenderImage(renderpath);
+      let id =data.id;
+      console.log(data[0].profileImage);
+      let renderVetInfo = data.map((item) =>  <VetItem key={item.id} rerender={setRenderVetInfo} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} profileImage={item.profileImage}  />);
 
-    //   }
-      let renderVetInfo = data.map((item) =>  <VetItem key={item.id} rerender={setRenderVetInfo} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} image={renderImage}  />);
-      console.log(data);
       setVets(renderVetInfo);
       setRenderVetInfo(false);
       

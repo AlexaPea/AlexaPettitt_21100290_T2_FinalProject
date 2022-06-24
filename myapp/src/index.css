@@ -657,7 +657,7 @@ small{
   margin-top: 3px;
 }
 
-.individual-vet{
+.individual-vet, .individual-client{
   width: 95%;
   background-color: rgb(240, 240, 240);
   float: left;
@@ -719,6 +719,7 @@ small{
 }
 
 .middle-pannel{
+
   float: left;
   height: 90vh;
   width: 35%;
@@ -1776,9 +1777,23 @@ margin-top: 15px;
   -6px -6px 10px rgba(255, 255, 255, .5),
   6px 6px 8px rgba(255, 255, 255, .075),
   6px 6px 10px rgba(0, 0, 0, .08);
-
-
 }
+.edit-doctor{
+  background-color: #fafafa;
+  width: 500px;
+  height:590px;
+
+  margin-top: -80px;
+  margin-left: -150px;
+  z-index: 30;
+  position: absolute;
+
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
+  -6px -6px 10px rgba(255, 255, 255, .5),
+  6px 6px 8px rgba(255, 255, 255, .075),
+  6px 6px 10px rgba(0, 0, 0, .08);
+}
+
 
 #doctorForm{
   margin: 15px;
@@ -1907,6 +1922,14 @@ margin-top: 15px;
 
 }
 .task-form-container h3, .add-doctor-form h3{
+  color: #D69EAF;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+  margin-top: -15px;
+
+}
+.edit-doctor-form h3{
   color: #D69EAF;
   font-weight: 300;
   font-size: 16px;
@@ -2062,6 +2085,17 @@ margin-top: 15px;
   margin: 5px;
 
 }
+.edit-doctor .docImgInput {
+  background-color: #e2e2e296;
+  color: #2b2b2b;
+  border: none;
+  padding:6px;
+  width: 83%;
+  float: left;
+  border-radius: 10px;
+  margin: 5px;
+
+}
 
 
 .addClient .imageArea p{
@@ -2073,6 +2107,13 @@ margin-top: 15px;
 }
 
 .add-doctor .imageArea p{
+  margin-left: -210px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #989898;
+
+}
+.edit-doctor .imageArea p{
   margin-left: -210px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -2106,8 +2147,17 @@ margin-top: 15px;
 }
 
 
-.vet button{
+.vet button, .clientDiv button{
   width: 100%;
+  outline: none;
+  border: none;
+  background-color: none;
+  background: none;
+}
+
+.clientDiv button{
+  width: 100%;
+  height: 200px;
   outline: none;
   border: none;
   background-color: none;
@@ -2237,4 +2287,16 @@ margin-top: 20px;
   .taskImg{
     width: 250px;
     margin-bottom: 20px;
+  }
+
+  .middle-pannel.vetInfo{
+    position: absolute;
+    z-index: 20;
+    margin-top: -300;
+  
+  }
+
+  .wait.cat{
+    width: 350px;
+    margin-left: 70px;
   }

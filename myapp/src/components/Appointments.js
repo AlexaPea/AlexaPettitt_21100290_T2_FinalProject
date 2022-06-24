@@ -43,7 +43,6 @@ const Appointments = (props) => {
 //=============================================================================
       useEffect(()=>{
         const userSession = sessionStorage.getItem('activeUser');
-        console.log(userId);
       if(userSession === '' || userSession === undefined){
       navigate('/');
       }   

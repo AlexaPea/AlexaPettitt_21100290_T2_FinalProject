@@ -9,10 +9,6 @@ import { useState, useEffect } from 'react';
 import Doctors from './Doctors';
 
 
-const activeButton = {color: 'green'}
-const inactive = {}
-
-
 const VetItem = (props) => {
     
 //=============================================================================
@@ -29,24 +25,37 @@ const [activeVet, setActiveVet] = useState();
 const [itemId, setItemId] = useState();
 const [renderActiveVet, setRenderActiveVet] = useState();
 
+const [inputs, setInputs] = useState({
+    userId: {activeUser: sessionStorage.getItem('activeUser')},
+    itemId:'',
+});
+
 //=============================================================================
 // Onclick event to show vet
 //=============================================================================
 
 const showVetInfo = (event) => {
-
-    //Toggles colour
-    // event.currentTarget.classList.toggle('bg-salmon');
  
-
+    
+    //Toggles colour
+    //document.classList.remove('bg-salmon');
+    //event.currentTarget.classList.toggle('bg-salmon');
+ 
+   
+   
     //set Id to id of clicked div
     let id = (event.currentTarget.id);
-    setItemId(id);
-    //console.log(id);
+    setItemId(event.currentTarget.id);
+    console.log(id);
 
+    const value = event.currentTarget.id;
+    setInputs({...inputs, itemId: value});
+
+    //if first input is empty, set error message to nothing
+    if(inputs.itemId !== ''){console.log("no id")}
 
     //read clicked doctor
-    axios.post('http://localhost:80/project-api/readActiveDoctor.php',itemId )
+    axios.post('http://localhost:80/project-api/readActiveDoctor.php',userId )
     .then((res)=>{
     let data = res.data;
     //render clicked doctors card
@@ -58,6 +67,8 @@ const showVetInfo = (event) => {
         console.log(err);
       });
 
+
+
 }//end of onClick
 
 
@@ -66,22 +77,17 @@ const showVetInfo = (event) => {
 // set colour of clicked doctor card
 //=============================================================================
     const [activeItem, setActiveItem] = useState(0);
-    const handleClick = (itemId) => () => {
-      setActiveItem(itemId);
-      console.log("active "+ itemId)
-    };
-
+    
+   
     const [activeButton, setActiveButton] = useState();
 
-    useEffect(() => {
-        //creates placeholder information
-        changeTimeLine('1');
-    }, [])
-    
+    useEffect(()=>{
 
-    function changeTimeLine(value){
-        setActiveButton(value) //update your current active button state 
-    }
+        //setActiveButton(itemId) //update your current active button state 
+        // console.log(activeButton +" is active");
+       
+       }, [showVetInfo]);
+    
 
 //=============================================================================
 //Attempt to render image on vetItem
@@ -117,16 +123,17 @@ const showVetInfo = (event) => {
   
     return (
         
-        <div>
-            <div onClick={(e)=>{showVetInfo(e)}}  className='individual-vet' id={props.uniqueId}  >
-             <div className={`OptionButton ${activeButton === itemId && "activeOp"}`} value={itemId} onClick={e => changeTimeLine(e.target.value)}   >
+        <div className='vet'>
+            <button  onClick={(e)=>{showVetInfo(e)}} className={activeButton === ("1") && "active"} data-value={props.uniqueId} id={props.uniqueId}   >
+            <div className='individual-vet' id={props.uniqueId}  >
+             
                      <div className='vet-block-img'>  <img className='profileImg vet' src={props.image}/></div>
                      <div className='vet-block-text'>
                          <h2>Dr. {props.name + " " + props.surname}</h2>
                          <h4>{props.specialization}</h4>
                      </div>
                 </div>
-                </div>
+                </button>
                 <div className='docInfoComp'>
 
                 {activeVet}    

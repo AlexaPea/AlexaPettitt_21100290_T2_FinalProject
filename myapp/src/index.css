@@ -2100,3 +2100,141 @@ margin-top: 15px;
   margin-top: 135px;
   margin-bottom: 3px;
 }
+.vet .active .individual-vet{
+  background: #cb96a641;
+  background-color: #cb96a641;
+}
+
+
+.vet button{
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: none;
+  background: none;
+}
+
+.edit-task-form-container{
+  background-color: #fafafa;
+  width: 500px;
+  height:450px;
+  z-index: 3;
+  position: absolute;
+  border-radius: 30px;
+
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
+  -6px -6px 10px rgba(255, 255, 255, .5),
+  6px 6px 8px rgba(255, 255, 255, .075),
+  6px 6px 10px rgba(0, 0, 0, .08);
+  position: absolute;
+  margin-top: -300px;
+  margin-left: -700px;
+}
+.edit-task-form-container input{
+
+  background-color: #e2e2e296;
+  color: #2b2b2b;
+  border: none;
+  padding:8px;
+  width: 100%;
+  float: left;
+  border-radius: 10px;
+  margin: 5px;
+
+}
+.edit-task-form-container textarea{
+
+background-color: #e2e2e296;
+color: #2b2b2b;
+border: none;
+padding:8px;
+width: 100%;
+height: 100px;
+float: left;
+border-radius: 10px;
+margin: 5px;
+font-family: poppins;
+
+}
+.edit-task-form-container label{
+text-align: left;
+font-size: 14px;
+margin-top: 10px;
+}
+
+.edit-task-form-container .heading h1{
+color: #2b2b2b;
+font-weight: 400;
+font-size: 26px;
+text-align: center;
+
+
+}
+.edit-task-form-container h3{
+color: #D69EAF;
+font-weight: 300;
+font-size: 16px;
+text-align: center;
+margin-top: -40px;
+
+}
+
+.edit-task-form-container .primary-btn{
+margin-top: 20px;
+}
+
+.tick-icon{
+  color: #b7b7b7;
+  margin: 0;
+  padding: 0;
+  margin-right: -180px;
+  margin-top: -27px;
+  padding-bottom: 12px;
+}
+
+.delete-task-form-container{
+  background-color: #fafafa;
+  width: 430px;
+  height:500px;
+  z-index: 3;
+  position: absolute;
+  border-radius: 30px;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
+  -6px -6px 10px rgba(255, 255, 255, .5),
+  6px 6px 8px rgba(255, 255, 255, .075),
+  6px 6px 10px rgba(0, 0, 0, .08);
+  position: absolute;
+  margin-top: -320px;
+  margin-left: -680px;
+
+}
+
+.delete-task-form-container .heading h1{
+  color: #2b2b2b;
+  font-weight: 400;
+  font-size: 26px;
+  text-align: center;
+  
+  
+  }
+  .delete-task-form-container h3{
+  color: #D69EAF;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+  margin-top: -40px;
+  margin-bottom: 30px;
+  
+  }
+
+  .primary-btn.stillBusy{
+    background-color: #fafafa;
+    color: #D69EAF;
+    margin-left: 15px;
+
+  }
+
+  .taskImg{
+    width: 250px;
+    margin-bottom: 20px;
+  }

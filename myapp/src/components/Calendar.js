@@ -29,6 +29,11 @@ const [inputs, setInputs] = useState({
   userId:'',
 });
 
+const [userId, setUserId] = useState({
+  activeUser: sessionStorage.getItem('activeUser'),
+});
+
+
 //=============================================================================
 // format date - to match database
 //=============================================================================
@@ -36,6 +41,12 @@ const [inputs, setInputs] = useState({
 useEffect(() => {
   setFormatDate(moment(date).format("YYYY-MM-DD"));
 }, [date, onDateChange])
+
+// useEffect(() => {
+  // setInputs({...inputs, date: formatDate});
+  // setInputs({...inputs, userId: userId});
+// console.log(inputs)
+// }, [onDateChange])
 
 
 //=============================================================================
@@ -52,24 +63,25 @@ const handleBooking = (event) => {
 // Render appointments
 //=============================================================================
 
-const [userId, setUserId] = useState({
-  activeUser: sessionStorage.getItem('activeUser'),
-});
+
 
 
 const [renderAppointents, setRenderAppointents] = useState();
 const [appointmentItems, setAppointmentItems] = useState();
 
 
+// },[renderAppointents, handleBooking]);
 useEffect(()=>{
 
   //attempt to put needed data into inputs
-  setInputs({...inputs, date: formatDate});
-  setInputs({...inputs, userId: userId});
+  // setInputs({...inputs, date: formatDate});
+  // setInputs({...inputs, userId: userId});
 
-  axios.post('http://localhost:80/project-api/readAppointments.php',userId )
+  console.log(formatDate);
+  axios.post('http://localhost:80/project-api/readAppointments.php',inputs )
   .then((res)=>{
     let data = res.data;
+    console.log(data);
     let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
     // console.log(data);
     setAppointmentItems(renderAppointents);

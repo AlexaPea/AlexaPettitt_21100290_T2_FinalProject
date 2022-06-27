@@ -20,7 +20,7 @@
 <p align="center">
 
   <a href="https://github.com/AlexaPea/AlexaPettitt_21100290_T2_FinalProject">
-    <img src="pokemonproject/src/Images/docs.png" alt="Logo" width="140" height="140">
+    <img src="AlexaPettitt_21100290_T2_FinalProject/myapp/src/Images/docs.png" alt="Logo" width="140" height="140">
   </a>
   
   <h3 align="center">PetCare</h3>
@@ -70,8 +70,7 @@
 
 <!--PROJECT DESCRIPTION-->
 ## About the Project
-<!-- header image of project -->
-![image1](pokemonproject/src/Images/Ideation/intro.png)
+
 
 ### Project Description
 
@@ -123,7 +122,6 @@ Run the following in the command-line to install all the required dependencies:
 ## Features and Functionality
 
 <!-- note how you can use your gitHub link. Just make a path to your assets folder -->
-![image2](AlexaPettitt_21100290_T2_FinalProject/src/Images/mockups/mockup1.png)
 
 
 ### User Protection
@@ -153,7 +151,6 @@ In order to ensure that petCare exudes a distinct brand identity, I initially br
 
 ![image5](AlexaPettitt_21100290_T2_FinalProject/src/Images/login.png)
 <br>
-<!-- ![image6][image6] -->
 
 ### MoodBoards
 I then created mood boards with numerous concepts, colour schemes and styles. This helped me visualise how I wanted to present the petCare brand and my website as a whole.
@@ -218,9 +215,6 @@ What aspects of this final build contribute to the `Above And Beyond` Component 
 
 ### Mockups
 
-![image9](AlexaPettitt_21100290_T2_FinalProject/src/Images/mockups/mockup2.png)
-<br>
-![image10](AlexaPettitt_21100290_T2_FinalProject/src/Images/mockups/mockup3.png)
 
 <!-- VIDEO DEMONSTRATION -->
 ### Video Demonstration

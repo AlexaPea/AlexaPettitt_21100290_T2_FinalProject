@@ -126,20 +126,15 @@ Run the following in the command-line to install all the required dependencies:
 ![image2](AlexaPettitt_21100290_T2_FinalProject/src/Images/mockups/mockup1.png)
 
 
-### All The PokeApi Data Your Heart Desires! 
-Using the PokeApi, we have collected and communicated all relevant Pokemon data into once seemless react experience!
+### User Protection
+PetCare values our employee's time and safety. To prove this, we have provided authentication and validation upon login, in addition to password protection.
 
 
-### View General Stats!
-The home page provides our fellow trainers with API generated content! Here they are able to view the basic knowledge needed to begin their journey!
+### Faster means of completing tasks
+Completing your daily tasks has now been made easier! Users are able to view, create and delete appointments, as well as client and doctor information - with just a few clicks! You can even update your own profile while you're at it! 
 
-
-### Compare Any Two Pokemon!
-Poke-Pal allows you to select any two Pokemon of your choosing to compare! Here you are able to see each Pokemons statistics, catch rate, and who would win in battle!
-
-
-### View Growth Rates!
-The Timeline page provides users the opportunity to view the different Pokemon growth rates through graphs. As you toggle between different rate, relevent information will be provided!
+### Easy Schedualing
+PetCare provides you with the ability to stay on track, by providing a daily overview of appointments. You are also able to view other days by clicking on the calendar. each user is also able to keep track of their own personal to-dos.
 
 
 
@@ -152,22 +147,20 @@ The Timeline page provides users the opportunity to view the different Pokemon g
 
 The `Conceptual Process` is the set of actions, activities and research that was done when starting this project.
 
-### Ideation
-In order to begin my website ideation process, I first needed to choose an API. I chose to make use of PokeApi.
+### Brainstorm
+In order to ensure that petCare exudes a distinct brand identity, I initially brainstormed ideas of what type of company my website would be for, and what they stood for.
 
 
 ![image5](AlexaPettitt_21100290_T2_FinalProject/src/Images/login.png)
 <br>
 <!-- ![image6][image6] -->
 
+### MoodBoards
+I then created mood boards with numerous concepts, colour schemes and styles. This helped me visualise how I wanted to present the petCare brand and my website as a whole.
+
+
 ### Wireframes
-Once I had a clear concept for the website I wanted to achieve, I began creating wireframes.
-
-
-### Custom UI
-I then gained UI and branding inspiration using Pinterest, Behance and Dribble. I found myself gravitating to clean, simplistic yet playful designs which I felt would compliment my API data and create a memorable branding for the website.
-
-
+Once I had decided on an idea, I then began wireframing. This allowed for smoother front end development.
 ![image8](AlexaPettitt_21100290_T2_FinalProject/src/Images/Ideation/byeClient.png)
 
 <!-- DEVELOPMENT PROCESS -->
@@ -175,53 +168,50 @@ I then gained UI and branding inspiration using Pinterest, Behance and Dribble. 
 
 The `Development Process` is the technical implementations and functionality done in the frontend and backend of the application.
 
-I began the Development process by choosing an API, and ultimately decided on the PokeAPI. This API data would dynamically populate my websites content. Once I completed my ideation for my website. I continued to the website creation.
-
-React, a javascript library, was utilized in the creation of my project. Allowing the creation of the numerous components required in my project. This allowed for the practice of object-orientated programming.
-
-I then installed the necesarry libraries and plugins required for the website, this included Charts.js which would be utilized to visually communiate my API data, through dynamically populated charts.
+React, a javascript library was utilized in the creation of my project. Allowing the establishment of our website, through object-orientated programming.
+We further developed PetCare and its functionality through the introduction of PHP. This allowed us to extract, replace and add, relevant data to our databases. Which were accessed through the use of MAMP.
 
 
 ### Implementation Process
 <!-- stipulate all of the functionality you included in the project -->
 <!-- This is your time to shine, explain the technical nuances of your project, how did you achieve the final outcome!-->
 
-* Utilized React `Charts.JS` dependency for Data visualization
-* Implemented Routing with `React-Router v6`.
-* API End Point: https://pokeapi.co/ 
+* Created application using react
+Here I set up my files and created the components which I would use in my website. I also implemented the basic frontend.
+
+
+* Created my database
+I then created my database, which would hold all the vital information for petCare.
+
+* Began implementation of php
+I slowly began making use of php, in order to create communication between my code and the database.
+
+* Implemented Functionality
+Through the use of react,php and sql, I was able to implement the required functionality.
 
 
 #### Highlights
 <!-- stipulated the highlight you experienced with the project -->
-* Through this project I gained more skills which have aided me in my growth as a developer. 
-* I learnt new libraries, such as react and charts.js, which have encouraged me to push myself to learn even more libraries and plugins that could enhance my capabilities as a full stack developer.
-* I also found that creating a website based on content I am interested in has made me feel more motivated and encouraged to pursue development further.
+Being able to create a website with as much functionality as petcare was was very fulfilling and challenged me as a developer but my skills have definitely grown. Along with my excitement towards real-world projects. 
 
 #### Challenges
 <!-- stipulated the challenges you faced with the project and why you think you faced it or how you think you'll solve it (if not solved) -->
-* I struggled with adjusting to React and the numerous hooks.
-* I found that I faced many challenges with the assynchronous API calls, often struggling with retrieving the data successfully.
-* Using props across components was a challenge in certain cirumstances as props would read as undefined.
-
-* However, through numerous trials and errors, i was able to overcome these issues.
-
+For this assignment, I struggled with adapting to the introduction of PHP and how to render information extracted using PHP.  However, through numerous trials and errors, I was able to overcome this.
 
 #### Above And Beyond
 
 What aspects of this final build contribute to the `Above And Beyond` Component of your brief?
 <!-- what did you learn outside of the classroom and implement into your project-->
-* I learnt how to change the button colours when active through the use of functions and function calls I had previously been unaware of.
-* I further studied the Chart.js documentation in order to style my graphs more proffessionaly.
-* I learnt how to created onClick functions in react.
-* I did further research on react-router-dom in  order to implement more components from that library i.e NavLinks
-
+* I implemented react calendar
+* I made use of moment.js
+* I enhanced the application by adding a to-do list
+* I made use of git-helmet and dynamically loaded a favicon in order to enhance navigation.
 
 ### Future Implementation
 <!-- stipulate functionality and improvements that can be implemented in the future. -->
 
-* In future I would like to add more graphs and contextualise these graphs to a greater degree.
+* In future I would like to add additional functionality - push above and beyond the brief
 * I would like to add additional pages to enhance my website and its contents,such as a trainer card page.
-* I would like to add more content to the "winner" block on my comparisons page.
 
 <!-- MOCKUPS -->
 ## Final Outcome
@@ -240,7 +230,7 @@ To see a run through of the application, click below:
 [View Demonstration](pokemonproject/src/Assets/video/demonstration.mp4)
 
 
-See the [open issues](https://github.com/AlexaPea/Pokemon/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/AlexaPea/AlexaPettitt_21100290_T2_FinalProject/issues) for a list of proposed features (and known issues).
 
 <!-- AUTHORS -->
 ## Authors

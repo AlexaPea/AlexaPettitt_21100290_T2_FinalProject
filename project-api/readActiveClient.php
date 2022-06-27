@@ -14,7 +14,7 @@ $id = $data->itemId;
 if($id === ""){
     echo "";
 } else {
-    $sql = "SELECT * FROM vets WHERE id ='$id';";
+    $sql = "SELECT * FROM clients WHERE id ='$id';";
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
 

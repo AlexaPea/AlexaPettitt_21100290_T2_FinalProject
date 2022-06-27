@@ -8,13 +8,12 @@ header('Access-Control-Headers: *');
 $request_body = file_get_contents('php://input');
 $data = json_decode($request_body);
 
-$id = $data->itemId;
+$name=$data->name;
 
-
-if($id === ""){
+if($data === ""){
     echo "";
 } else {
-    $sql = "SELECT * FROM vets WHERE id ='$id';";
+    $sql = "SELECT * FROM booking WHERE client='$name';";
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
 

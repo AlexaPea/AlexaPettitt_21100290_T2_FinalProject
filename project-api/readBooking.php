@@ -7,14 +7,12 @@ header('Access-Control-Headers: *');
 
 $request_body = file_get_contents('php://input');
 $data = json_decode($request_body);
+// $formatDate = $data->formatDate;
 
-$id = $data->itemId;
-
-
-if($id === ""){
-    echo "";
+if($formatDate === ""){
+    echo "nothing";
 } else {
-    $sql = "SELECT * FROM vets WHERE id ='$id';";
+    $sql = "SELECT * FROM bookings";
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
 
@@ -30,7 +28,7 @@ if($id === ""){
 
 
     } else {
-        echo "false";
+        echo "false" $formatDate;
     }
 }
 ?>

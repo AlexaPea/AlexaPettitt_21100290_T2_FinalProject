@@ -23,14 +23,22 @@ $contact = $data->contact;
 $age = $data->age;
 $gender = $data->gender;
 $password = $data->password;
-$docImg = $data->docImg;
+$image = $data->docImg;
 
 
 echo ($first);
 //this is the value pushed to the databasse
 $passwordEncrypt = md5($password);
 
-$sql = "INSERT INTO vets (id, profileImage, name, surname, age, gender, email, password, phoneNumber, doctorId, specialization, room) VALUES (NULL,'$docImg','$first','$last','$age','$gender','$email','$passwordEncrypt','$contact','$vetId','$specialization','$room')";
+list($type, $image) = explode(';', $image);
+list(, $image)      = explode(',', $image);
+$image = base64_decode($image);
+
+$newPath = 'profiles/' . time() . '.jpg';
+ 
+file_put_contents($newPath, $image);
+
+$sql = "INSERT INTO vets (id, profileImage, name, surname, age, gender, email, password, phoneNumber, doctorId, specialization, room) VALUES (NULL,'$newPath','$first','$last','$age','$gender','$email','$passwordEncrypt','$contact','$vetId','$specialization','$room')";
 $result = mysqli_query($conn, $sql);
 
 if(!$result){

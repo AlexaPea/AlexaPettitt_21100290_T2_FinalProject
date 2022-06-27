@@ -7,6 +7,7 @@ import React from 'react';
 import moment from "moment";
 import axios from 'axios';
 import MakeBooking from './MakeBooking';
+import AppointmentNone from './AppointmentNone';
 
 
 const Calendar = (props) => {
@@ -14,48 +15,49 @@ const Calendar = (props) => {
 //=============================================================================
 // Variables
 //=============================================================================
-const [modal, setModal] = useState();
-let presentDate = new Date("YYYY-MM-DD");  	
-const [date, setDate] = useState(new Date());
 
-const [formatDate, setFormatDate] = useState();
-console.log(date);
-//    console.log(new Intl.DateTimeFormat('en-US').format(date));
-const onDateChange = (newDate) => {
-    setDate(newDate);
-    setFormatDate(moment(date).format("YYYY-MM-DD"));
-    setRenderAppointents(true);
-
-}
+    	
+const [clickedDate, setClickedDate] = useState(new Date());
+const [formatDate, setFormatDate] = useState(moment(clickedDate).format("YYYY-MM-DD"));
 
 const [inputs, setInputs] = useState({
-  date:'',
-  userId:'',
+  userId: sessionStorage.getItem('activeUser'),
+  dateId:formatDate,
 });
 
-const [userId, setUserId] = useState({
-  activeUser: sessionStorage.getItem('activeUser'),
-});
+// const [formatDate, setFormatDate] = useState();
 
+//    console.log(new Intl.DateTimeFormat('en-US').format(date));
+// const onDateChange = (newDate) => {
+//     setDate(newDate);
+// }
 
 //=============================================================================
 // format date - to match database
 //=============================================================================
 
-// useEffect(() => {
-//   setFormatDate(moment(date).format("YYYY-MM-DD"));
-// }, [date, onDateChange])
 
-// useEffect(() => {
-  // setInputs({...inputs, date: formatDate});
-  // setInputs({...inputs, userId: userId});
-// console.log(inputs)
-// }, [onDateChange])
+//setFormatDate(moment(date).format("YYYY-MM-DD"));
+
+
+//=============================================================================
+// Date click
+//=============================================================================
+
+const onDateChange = (newDate) => {
+  setClickedDate(newDate); //sets the new day for the calendar
+  setFormatDate(moment(clickedDate).format("YYYY-MM-DD"));
+  setInputs({...inputs, dateId: formatDate});
+  console.log(formatDate);
+  setRenderAppointment(true);
+};
+ 
 
 
 //=============================================================================
 // Render booking pop up
 //=============================================================================
+const [modal, setModal] = useState();
 
 const handleBooking = (event) => {
      event.preventDefault();
@@ -63,54 +65,93 @@ const handleBooking = (event) => {
 
   };
 
+  // let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
  //=============================================================================
 // Render appointments
 //=============================================================================
 
 
+const [renderAppointment, setRenderAppointment] = useState();
+const [renderNoAppointment, setRenderNoAppointment] = useState();
+const [appointments, setAppointments] = useState();
+const [noAppointments, setNoAppointments] = useState();
+const [numAppointments, setNumAppointments] = useState();
+const [userName, setUsername] = useState(sessionStorage.getItem('activeUser'));
 
+// console.log(userName)
 
-const [renderAppointents, setRenderAppointents] = useState();
-const [appointmentItems, setAppointmentItems] = useState();
-
-
-// },[renderAppointents, handleBooking]);
 useEffect(()=>{
 
+  
+  console.log("this is updated inputs: "+ inputs)
+  axios.post('http://localhost:80/project-api/readAppointments.php',inputs )
+  .then((res)=>{
+    let data = res.data;
+    console.log(data.length);
+    let num = data.length;
+    if(num<10){
+      setNumAppointments("0" + num);
+      let renderAppointment = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointment} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} aDate={item.date} room={item.room}  />);
+      setAppointments(renderAppointment);
+      setRenderAppointment(false);
+    }else if(num>10){
+      setNumAppointments(num);
+      let renderAppointment = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointment} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} aDate={item.date} room={item.room}  />);
+      setAppointments(renderAppointment);
+      setRenderAppointment(false);
+    }else{
+      setNumAppointments("00");
+      setRenderAppointment(true);
+      let renderNoAppointment = data.map((item) =>  <AppointmentNone/>);
+      setNoAppointments(renderNoAppointment);
+      setRenderNoAppointment(false);
 
-  console.log(formatDate);
-//   axios.post('http://localhost:80/project-api/readAppointments.php',formatDate )
-//   .then((res)=>{
-//     let data = res.data;
-//     console.log(data);
-//     let renderAppointents = data.map((item) =>  <AppointmentItems key={item.id} rerender={setRenderAppointents} uniqueId={item.id} vet={item.vet} client={item.client} time={item.time} date={item.date} room={item.room}  />);
-//     // console.log(data);
-//     setAppointmentItems(renderAppointents);
-//     setRenderAppointents(false);
+      setRenderAppointment('');
+      setAppointments(renderAppointment);
+      setRenderAppointment(false);
+    }
+  
+   
     
-//   })
-//   .catch(err=>{
-//     console.log(err);
-//   });
+   
+    
+  //   console.log(data);
 
-// },[renderAppointents]);
-// },[renderAppointents, handleBooking]);
 
-});
+
+ 
+  })
+  .catch(err=>{
+    console.log(err);
+  });
+
+},[inputs.dateId]);
+
+
+
 //=============================================================================
 // HTML Code
 //=============================================================================
     
     return (
         <>
+        
         {modal}
+        <div className='row2 two'>
+        <div className='block three'>
+                    <h1 className='block-head'> {numAppointments} </h1>
+                    <hr/>
+                    <h2 className='block-text'> Appointments </h2>
+                </div>
+            </div>
+        
             <div className='row3'>
                 <div className='calendar'>
                     <div className='block-heading' id='calendar-heading'> Calendar </div>
                     <CalendarContainer>
                  <Calendarcom calendarType='US' format="yyyy-mm-dd" className='react-calendar' 
-                  onChange={onDateChange}           
-                  value={date}  locale={"en-US"} />
+                 onChange={onDateChange}           
+                  value={clickedDate}  locale={"en-US"} />
                 </CalendarContainer>
 
                 </div>
@@ -124,12 +165,15 @@ useEffect(()=>{
                             <th>Patient</th>
                             <th>Time</th>
                             <th>Room</th>
+                            <th>Delete</th>
                         </tr>
-                        {appointmentItems}
+                        {appointments}
                        
                         </tbody>
-                    </table>
 
+                        
+                    </table>
+                    {noAppointments}
                 </div>
             </div>
           

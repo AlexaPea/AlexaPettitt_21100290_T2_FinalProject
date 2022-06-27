@@ -97,7 +97,18 @@ a{
   padding-bottom: 50px;
 }
 .row2{
-  width: 110%;
+  width: 71.5%;
+  float: left;
+  /* margin: 20px; */
+  border-radius: 20px;
+  text-align: center;
+  /* margin: 20px; */
+  display: inline;
+  
+
+}
+.row2.two{
+  width: 10.5%;
   float: left;
   /* margin: 20px; */
   border-radius: 20px;
@@ -177,6 +188,10 @@ a{
   background: #f7f7f7;
 -webkit-box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
+}
+
+.block.three{
+  width: 305px;
 }
 
 .row2 h1{
@@ -727,6 +742,7 @@ small{
   margin-left: 20px;
   z-index: -10;
   background: #f7f7f7;
+  margin-top: -120px;
 /* -webkit-box-shadow: 1px 2px 4px #ebebeb, -1px -2px 0px #ffffff;
 box-shadow: 1px 2px 4px #ebebeb, -1px -2px 0px #ffffff; */
 }
@@ -769,10 +785,15 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
   0 15px 40px rgba(166,173,201,0.1);
   background-color: #FFFFFF;
   margin-left: 20px;
+  margin-top: -120px;
 
   background: #f7f7f7;
 -webkit-box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
 box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
+}
+
+.right-pannel-client.two{
+  margin-top: 80px;
 }
 
 .right-pannel{
@@ -900,6 +921,7 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
   font-weight: 400;
   font-size: 14px;
   margin-bottom: 10px;
+  margin-left: 0px;
   color: rgb(213, 213, 213);
 }
 
@@ -915,7 +937,7 @@ box-shadow: 12px 12px 24px #ebebeb, -12px -12px 24px #ffffff;
   color: #D69EAF;
   border-radius: 15px;
   padding: 5px;
-  width: 65px;
+  width: 95px;
   font-weight: 400;
   font-size: 12px;
   text-align: center;
@@ -945,13 +967,14 @@ button{
 .vet-info, .client-info{
   float: left;
   width: 100%;
+ 
 }
 
 .client-info.two .appointments-holder{
   float: left;
   margin-top: 35px;
   width: 100%;
-  height: 270px;
+  height: 220px;
   overflow-y: scroll;
 }
 
@@ -1123,7 +1146,7 @@ button{
 .client-block-text{
   padding: 20px;
   float: left;
-  width: 180px;
+  width: 230px;
 }
 
 .client-block-text h2{
@@ -1781,10 +1804,10 @@ margin-top: 15px;
 .edit-doctor{
   background-color: #fafafa;
   width: 500px;
-  height:590px;
+  height:550px;
 
-  margin-top: -80px;
-  margin-left: -150px;
+  margin-top: -85px;
+  margin-left: -30px;
   z-index: 30;
   position: absolute;
 
@@ -1815,6 +1838,10 @@ margin-top: 15px;
 
 .booking-input.doc.gen{
   width: 165px;
+}
+
+.booking-input.doc.gen:focus{
+ background-color: #daa6b576;
 }
 
 
@@ -2292,7 +2319,7 @@ margin-top: 20px;
   .middle-pannel.vetInfo{
     position: absolute;
     z-index: 20;
-    margin-top: -300;
+
   
   }
 
@@ -2300,3 +2327,223 @@ margin-top: 20px;
     width: 350px;
     margin-left: 70px;
   }
+
+  .noaps-holder h1{
+    color: #7d7d7d;
+    font-size: 18px;
+    font-family: poppins;
+    font-weight: 500;
+    margin-top: 30px;
+
+  }
+
+  .noaps-holder h3{
+    color: #D69EAF;
+    font-size: 14px;
+    font-family: poppins;
+    font-weight: 300;
+    margin-top: -10px;
+
+  }
+
+  .noaps-holder{
+    float: left;
+    width: 60%;
+ 
+
+  }
+
+.noAps img{
+  float: left;
+  width: 170px;
+}
+
+.noAps{
+  width: 100%;
+
+}
+
+.edit-doctor .closeBtn.editVet{
+  width: 33px;
+  margin-right: 50px;
+}
+
+.edit-doctor .heading.doc h3 {
+
+  margin-top: -46px;
+
+}
+
+.edit-doctor .primary-btn.editVet{
+  background-color: #D69EAF;
+  width: 150px;
+  height:40px;
+  margin-left: -50px;
+
+}
+
+.edit-doctor .primary-btn.editVet.two{
+  background-color: #fafafa;
+  color: #D69EAF;
+  width: 150px;
+  height:40px;
+  margin-left: 20px;
+
+}
+
+
+.trash{
+  width: 1px;
+  margin-top: -6px;
+  float: left;
+  margin-right: 30px;
+}
+
+.delete-task-form-container.deleteVet{
+  margin-top: -80px;
+  margin-left: 30px;
+  z-index: 30;
+  height: 520px;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .6),
+  -6px -6px 10px rgba(255, 255, 255, .5),
+  6px 6px 8px rgba(255, 255, 255, .075),
+  6px 6px 10px rgba(0, 0, 0, .08);
+
+}
+
+.delete-task-form-container.deleteVet img{
+width: 180px;
+
+}
+
+.delete-task-form-container.deleteVet .primary-btn, .addClient.editClientblock .primary-btn{
+  width: 150px;
+  height:40px;
+
+}
+
+.delete-task-form-container.deleteVet .primary-btn.deleteVet , .addClient.editClientblock .primary-btn{
+  background-color: #D69EAF;
+  color: #fafafa;
+  
+  }
+
+  .delete-task-form-container.deleteVet .closeBtn, .addClient.editClientblock .closeBtn{
+    width: 30px;
+    margin-top: -12px;
+
+  }
+
+  .addClient.editClientblock .closeBtn{
+    margin-top: 15px;
+  }
+
+  input:focus{
+    outline-color: #d69eaf7c;
+  }
+
+  input{
+    caret-color: #D69EAF;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+ ::selection{
+    background-color: #d69eaf7c;
+  }
+
+.deleteVet.button{
+  margin-top: 5px;
+  width: 350px;
+    color: #D69EAF;
+  box-shadow: none;
+  box-shadow: 0;
+  border: none;
+  outline: none;
+  text-align: left;
+  margin-left: -150px;
+  }
+  .deleteVet.client.button{
+    margin-top: 30px;
+    color: #D69EAF;
+  }
+
+.task-img-holder.Clientdelete img{
+    width: 300px;
+    margin-left: -80px;
+  }
+
+  .addClient.editClientblock{
+    position: absolute;
+    margin-left: -600px;
+    margin-top: -130px;
+  }
+
+.addClient.editClientblock #add-client-form .subheading{
+  margin-top: -35px;
+  margin-left: -7px;
+  margin-bottom: 10px;
+}
+
+.addClient.editClientblock #add-client-form .pet-info-form h3{
+  margin-top: -33px;
+}
+
+.addClient.editClientblock .primary-btn{
+  margin-left: -650px;
+  margin-top: 300px;
+}
+
+.trashTd{
+  color: #d69eaf;
+}
+
+.delete-task-form-container.deleteAp{
+  position: absolute;
+  margin-top: -410px;
+
+}
+
+.delete-task-form-container.deleteAp.delete-task-form-container h3{
+  margin-top: -12px;
+
+}
+
+.delete-task-form-container.deleteAp.delete-task-form-container img{
+width: 250px;
+margin-left: 2px;
+
+}
+
+.editApModal{
+  margin-top: -500px;
+  margin-left: -500px;
+}
+.editApModal #homeForm .primary-btn{
+  margin-top: 500px;
+margin-left: -50px;
+  float: left;
+  margin: 0;
+}
+
+.editApModal #homeForm .primary-btn.white{
+  color: #d69eaf;
+  background-color: #fafafa;
+  float: left;
+  margin-left: 20px;
+}
+
+.editApButtons{
+  width: 90%;
+  margin-top: 148px;
+  margin-left: 30px;
+}
+
+.userEdit{
+  color: #D69EAF;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 250px;
+  cursor: pointer;
+}
+

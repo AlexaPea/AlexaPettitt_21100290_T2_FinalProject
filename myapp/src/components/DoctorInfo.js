@@ -7,9 +7,13 @@ import { useState, useEffect } from 'react'
 import Helmet from "react-helmet";
 import VetItem from './VetItem';
 import EditDoctor from './EditDoctor';
+import DeleteVetModal from './DeleteVetModal';
+import { UilTrashAlt } from '@iconscout/react-unicons'
 
 
 const DoctorInfo = (props) => {
+   
+    
 
     const [renderImage, setRenderImage] = useState();
 useEffect(()=>{
@@ -22,16 +26,31 @@ useEffect(()=>{
 
  },[]);
 
+ //=============================================================================
+// Delete vet
 //=============================================================================
-// Edit Task
+
+const [deleteVetModal, setDeleteVetModal] = useState();
+
+const deleteVet = () => {
+  
+    setDeleteVetModal(<DeleteVetModal upRender={props.rerender} rerender={setDeleteVetModal} id={props.uniqueId} />);
+    //  props.rerender();
+  }
+
+ 
+
+//=============================================================================
+// Edit Doctor
 //=============================================================================
 
 const [modal, setModal] = useState();
 
 const editDoctor = () => {
     console.log("clicked");
-    setModal(<EditDoctor upRender={props.rerender} rerender={setModal} name={props.name} surname={props.surname} id={props.uniqueId} specialization={props.specialization} gender={props.gender} age={props.age} email={props.email} contact={props.contact} doctorId={props.doctorId} room={props.room} docImg={props.profileImg}/>)
-  }
+    setModal(<EditDoctor upRender={props.rerender} rerender={setModal} name={props.name} surname={props.surname} id={props.uniqueId} specialization={props.specialization} gender={props.gender} age={props.age} email={props.email} contact={props.contact} doctorId={props.doctorId} room={props.room} docImg={'http://localhost:80/project-api/' + props.profileImg}/>)
+    console.log('http://localhost:80/project-api/' + props.profileImg);
+}
 
    
 //=============================================================================
@@ -40,6 +59,7 @@ const editDoctor = () => {
     return (
         <div>
             {modal}
+            {deleteVetModal}
                  <div className='middle-pannel vetInfo'>
                 <div className='edit-icon' onClick={editDoctor}><UilEdit/></div>
             <div className='vet-block main'>  <img className='vet-block-img main' src={renderImage}/></div>
@@ -102,9 +122,11 @@ const editDoctor = () => {
                 </table>
                 {/* <button className='primary-btn vet'>Edit</button> */}
             </div>
+            <button className='deleteVet button' onClick={deleteVet}><div className='trash'><UilTrashAlt/></div>Would you like to delete this Client?</button>
 
 
             </div>
+         
             
         </div>
     );

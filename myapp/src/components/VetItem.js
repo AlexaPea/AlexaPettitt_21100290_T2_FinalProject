@@ -20,10 +20,10 @@ const VetItem = (props) => {
 const [userId, setUserId] = useState({
         activeUser: sessionStorage.getItem('activeUser'),
     });
-const [state, setState] = useState();
+
 const [activeVet, setActiveVet] = useState();
 const [itemId, setItemId] = useState();
-const [renderActiveVet, setRenderActiveVet] = useState(true);
+const [renderActiveVet, setRenderActiveVet] = useState();
 
 const [inputs, setInputs] = useState({
     userId: sessionStorage.getItem('activeUser'),
@@ -40,9 +40,9 @@ const showVetInfo = (event) => {
     //Toggles colour
     //document.classList.remove('bg-salmon');
     //event.currentTarget.classList.toggle('bg-salmon');
- 
+    setRenderActiveVet(true);
     event.preventDefault();
-    setRenderActiveVet(false);
+    
    
     //set Id to id of clicked div
     let id = event.currentTarget.id;
@@ -61,12 +61,14 @@ const showVetInfo = (event) => {
     .then((res)=>{
     let data = res.data;
     //render clicked doctors card
+    setRenderActiveVet(true);
     setActiveVet(data.map((item) =>  <DoctorInfo key={item.id} rerender={setRenderActiveVet} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} age={item.age} gender={item.gender} email={item.email} contact={item.phoneNumber} doctorId={item.doctorId} room={item.room} profileImg={item.profileImage} />)) 
     // console.log(data);
 
       })
       .catch(err=>{
         console.log(err);
+        setRenderActiveVet(true);
       });
 
 

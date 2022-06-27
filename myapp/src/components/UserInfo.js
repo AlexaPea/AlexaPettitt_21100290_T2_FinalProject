@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
-
+import {UilEdit , UilArrowDown } from '@iconscout/react-unicons';
 
 const UserInfo = (props) => {
 
@@ -51,11 +51,24 @@ const UserInfo = (props) => {
        }, []);
 
 //=============================================================================
+// Logout user
+//=============================================================================
+   
+
+    const editUserInfo = (e) => {
+        sessionStorage.clear();
+         navigate('/Login');
+         };
+
+        
+
+//=============================================================================
 // HTML code
 //=============================================================================
     return (
         <div>
              <div className='profile'>
+                <div className='userEdit' onClick={editUserInfo}><UilEdit/></div>
                 <img className='profileImg' src={renderImage}/>
                     <div className='profileHeading'> 
                         <div className='addButton'></div>

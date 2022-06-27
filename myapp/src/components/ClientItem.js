@@ -56,7 +56,7 @@ const ClientItem = (props) => {
      .then((res)=>{
      let data = res.data;
      //render clicked doctors card
-     setActiveClient(data.map((item) =>  <ClientInfo key={item.id} rerender={setRenderActiveClient} uniqueId={item.id} name={item.name} surname={item.surname} petName={item.petName} petType={item.petType} petAge={item.petAge} petGender={item.petGender} email={item.email} contact={item.phoneNumber} clientId={item.clientId} medicalAidNum={item.medicalAidNum} profileImg={item.profileImage} petImg={item.petImage} />)) 
+     setActiveClient(data.map((item) =>  <ClientInfo key={item.id} rerender={setRenderActiveClient} uniqueId={item.id} name={item.name} surname={item.surname} petName={item.petName} petType={item.petType} petAge={item.petAge} petGender={item.petGender} email={item.email} contact={item.phoneNumber} clientId={item.clientId} medicalAidNum={item.medicalAidNum} profileImg={item.profileImage} petImage={item.petImage} />)) 
      // console.log(data);
  
        })

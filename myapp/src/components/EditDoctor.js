@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import axios from 'axios';
 import { UilTimes } from '@iconscout/react-unicons';
+import DeleteVetModal from './DeleteVetModal';
 
 const EditDoctor = (props) => {
 
@@ -11,7 +12,6 @@ const EditDoctor = (props) => {
 
       const [updatedDoctor, setUpdatedDoctor] = useState({
         first: props.name,
-        docImg: props.profileImage,
         last: props.surname,
         specialization: props.specialization,
         vetId: props.doctorId,
@@ -20,6 +20,8 @@ const EditDoctor = (props) => {
         age:props.age,
         gender:props.gender,
         contact:props.contact,
+        password:props.password,
+        id:props.id,
     });
 
 //set input fields to original values
@@ -35,6 +37,8 @@ useEffect(()=>{
     document.getElementById('updateAge').value = props.age;
     document.getElementById('updateGender').value = props.gender;
     document.getElementById('updateContact').value = props.contact;
+    document.getElementById('updatePassword').value = props.password;
+    document.getElementById('updatePasswordCon').value = props.password;
     
   },[]);
 
@@ -42,29 +46,17 @@ useEffect(()=>{
 //=============================================================================
 // Close popup
 //=============================================================================
-      const closeEditVet = () => {
+    const closeEditVet = () => {
         props.rerender();
       }
+
+          
+
 
 //=============================================================================
 // Get values
 //=============================================================================
-const docImageVal = (e) => {           
-    let file = e.target.files[0];
-    let reader = new FileReader();
 
-    reader.onloadend = function() {
-    console.log(reader.result);
-    let imgFile = reader.result;
-
-    setUpdatedDoctor({...updatedDoctor, docImg: imgFile});
-
-    let image = new Image();
-    image.src = reader.result;
-    document.getElementById('docImg').appendChild(image);
-    }
-    reader.readAsDataURL(file);
-}
 //get info from input
 const firstVal = (e) => { //e is for events
 
@@ -131,6 +123,14 @@ const ageVal = (e) => { //e is for events
 
 }
 
+
+const genderVal = (e) => { //e is for events
+
+    const value = e.target.value;
+    setUpdatedDoctor({...updatedDoctor, gender: value});
+
+}
+
 const passwordVal = (e) => { //e is for events
 
    
@@ -140,29 +140,36 @@ const passwordVal = (e) => { //e is for events
   
 }
 
+const passwordConVal = (e) => { //e is for events
 
-const genderVal = (e) => { //e is for events
 
     const value = e.target.value;
-    setUpdatedDoctor({...updatedDoctor, gender: value});
+   setUpdatedDoctor({...updatedDoctor, passwordCon: value});
+
 
 }
 
-// const passwordConVal = (e) => { //e is for events
+/////////////////////update
+const updateVet = (e) => {
+    e.preventDefault();
 
+    axios.post('http://localhost:80/project-api/updateVet.php', updatedDoctor)
+      .then((res)=>{
+        let data = res.data;
+        console.log(data); 
+        props.upRender(true);
+        props.rerender();
+      });
+  }
 
-//     const value = e.target.value;
-//     setInputs({...inputs, passwordCon: value});
-
-
-// }
 
     return (
         <div>
+          
               <div className='edit-doctor'>
             <div className='edit-doctor-form'>
                 <form id="doctorForm">
-                <button className='closeBtn' id="btn" onClick={closeEditVet}><div className='close-icon'><UilTimes/></div></button>
+                <button className='closeBtn editVet' id="btn" onClick={closeEditVet}><div className='close-icon'><UilTimes/></div></button>
                     <div className='heading doc'>
                    
                         <h1>Edit Vet</h1>
@@ -172,24 +179,20 @@ const genderVal = (e) => { //e is for events
 
                     <div className='new-doc-container'>
 
-                    <div className='imageArea'>
-                    <p>Upload a Owner Profile Image</p>
-                    <input name="docImageUrl" id="docImg" className='docImgInput' type="file" onChange={docImageVal}/>
-                     </div>
 
                          {/* {nameError} */}
-                        <input className='booking-input doc full' id="updateName" name='first' onChange={firstVal} type='text' placeholder='First Name'/>
+                        <input className='booking-input doc full' id="updateName" name='first' onBlur={firstVal} type='text' placeholder='First Name'/>
                         {/* {lastError} */}
-                        <input className='booking-input doc full' id="updateSurname" name='last' type='text' placeholder='Last Name' onChange={lastVal}/>
+                        <input className='booking-input doc full' id="updateSurname" name='last' type='text' placeholder='Last Name' onBlur={lastVal}/>
 
                         
                   
                         {/* {ageError} */}
-                    <input name='age' id="updateAge" className="booking-input doc" type='text' placeholder='Age' onChange={ageVal}/>
+                    <input name='age' id="updateAge" className="booking-input doc" type='text' placeholder='Age' onBlur={ageVal}/>
                 
 
                     {/* {genderError} */}
-                    <select name="gender" id="updateGender" className="booking-input doc gen" onChange={genderVal}>
+                    <select name="gender" id="updateGender" className="booking-input doc gen" onBlur={genderVal}>
                         <option value="none" selected>Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -198,30 +201,32 @@ const genderVal = (e) => { //e is for events
                 
              
                     {/* {emailError} */}
-                    <input name='email'id="updateEmail" className="booking-input doc" type='email' placeholder='Email' onChange={emailVal} />
+                    <input name='email'id="updateEmail" className="booking-input doc" type='email' placeholder='Email' onBlur={emailVal} />
 
                     {/* {contactError} */}
-                    <input name='contact' id="updateContact" className="booking-input doc" type='text' placeholder='Contact Number' onChange={contactVal}/>  
+                    <input name='contact' id="updateContact" className="booking-input doc" type='text' placeholder='Contact Number' onBlur={contactVal}/>  
 
                     {/* {specializationError} */}
-                    <input name='specialization' id="updateSpecialization" className="booking-input doc full" type='text' placeholder='Specialization' onChange={specializationVal} />    
+                    <input name='specialization' id="updateSpecialization" className="booking-input doc full" type='text' placeholder='Specialization' onBlur={specializationVal} />    
 
                     {/* {vetIdError} */}
-                    <input name='vetId' id="updateVetId" className="booking-input doc" type='text' placeholder='Vet Id' onChange={vetIdVal} />   
+                    <input name='vetId' id="updateVetId" className="booking-input doc" type='text' placeholder='Vet Id' onBlur={vetIdVal} />   
 
                     {/* {roomError} */}
-                    <input name='room' id="updateRoom" className="booking-input doc" type='number' placeholder='Room Number' onChange={roomVal} />       
+                    <input name='room' id="updateRoom" className="booking-input doc" type='number' placeholder='Room Number' onBlur={roomVal} />       
 
                     {/* {passwordError} */}
-                    <input name='password' className="booking-input doc"  type='password' placeholder='Password' onChange={passwordVal}/>
+                    <input name='password' className="booking-input doc" id="updatePassword" type='password' placeholder='Password' onBlur={passwordVal}/>
             
                     {/* {passwordConError} */}
-                    <input name='passwordCon' className="booking-input doc"  type='password' placeholder='Confirm password' />
+                    <input name='passwordCon' className="booking-input doc" id="updatePasswordCon" type='password' placeholder='Confirm password' onBlur={passwordConVal} />
        
 
                        
 
-                        <button className='primary-btn addVet' id='btn' >Edit Vet</button>
+                        <button className='primary-btn editVet' id='btn' onClick={updateVet} >Make Changes!</button>
+                        <button className='primary-btn editVet two' id='btn' onClick={closeEditVet} >Cancel</button>
+                        
                     </div>
                   
                 </form>

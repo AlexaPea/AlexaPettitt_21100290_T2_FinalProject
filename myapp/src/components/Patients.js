@@ -59,7 +59,7 @@ const Patients = (props) => {
       console.log(err);
     });
 
- },[renderClientInfo]);
+ },[]);
 
  //=============================================================================
 // Render add client pop up
@@ -110,7 +110,7 @@ const Patients = (props) => {
 
       {/* where info was taken */}
       <div className='middle-holder'>
-        <h1 className='waitHeading'>The Informations Waiting!</h1>
+        <h1 className='waitHeading'>Information At Your Fingertips!</h1>
         <h2 className='waitText'>Click on a Client for More Information.</h2>
     <img className='wait cat' src={waitPet}/>
     </div>

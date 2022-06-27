@@ -16,6 +16,7 @@ import UserInfo from './UserInfo';
 import AppointmentItems from './AppointmentItems';
 import AddTask from './AddTask';
 
+
 const Appointments = (props) => {
 
 //=============================================================================
@@ -93,7 +94,7 @@ const Appointments = (props) => {
       console.log(err);
     });
 
- },[]);
+ },[tasks]);
 
 
 //=============================================================================
@@ -159,12 +160,8 @@ const Appointments = (props) => {
                     </div>
                 </div>
 
-                <div className='block three'>
-                    <h1 className='block-head'> 00 </h1>
-                    <hr/>
-                    <h2 className='block-text'> Appointments </h2>
-                </div>
-            </div>
+            
+            </div> 
 
             <Calendar/>
 

@@ -15,6 +15,7 @@ const TaskPost = (props) => {
 
     const editTask = () => {
         console.log("clicked");
+        setModal(true);
         setModal(<EditTask upRender={props.rerender} rerender={setModal} originalTaskName={props.taskName} originalTaskDescription={props.taskDescription} id={props.uniqueId}  />)
       }
     

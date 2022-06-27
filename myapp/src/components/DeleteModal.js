@@ -2,13 +2,17 @@ import React from 'react';
 import { UilTimes } from '@iconscout/react-unicons';
 import task from '../Images/task.png';
 import axios from 'axios';
-import Confetti from 'react-dom-confetti';
+import { useState, useEffect } from 'react';
+// import Confetti from 'react-dom-confetti';
+import Confetti from 'react-confetti'
 
 const DeleteModal = (props) => {
 
     const closeModal = () => {
         props.rerender();
       }
+
+      const [confetRender, setConfetRender]=useState();
       
 
       const deleteTask = () => {
@@ -19,20 +23,27 @@ const DeleteModal = (props) => {
         .then((res)=>{
           let data = res.data;
           console.log(data); 
+          setConfetRender(      <Confetti
+            width={width}
+            height={height}
+          />)
           props.rerender();
+        
+
         });
         
         props.rerender();
       }
       
-
+      const { width, height } = 100;
     
     
        
     
     return (
         <div>
-            
+     
+            {confetRender}
           <div className='delete-task-form-container'>
                 <form id='addTask'>
                 <button className='closeBtn' id="btn" onClick={closeModal}><div className='close-icon'><UilTimes/></div></button>

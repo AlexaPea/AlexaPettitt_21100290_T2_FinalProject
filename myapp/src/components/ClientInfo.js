@@ -1,7 +1,12 @@
 import React from 'react';
 import {UilEdit , UilArrowDown } from '@iconscout/react-unicons';
 import dog from '../Images/dog.png';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { UilTrashAlt } from '@iconscout/react-unicons'
+import ClientAppointments from './ClientAppointments';
+import axios from 'axios';
+import DeleteClientModal from './DeleteClientModal';
+import EditClient from './EditClient';
 
 const ClientInfo = (props) => {
 
@@ -17,10 +22,75 @@ const ClientInfo = (props) => {
     
      },[]);
 
+
+/////////////////////////Read appoinyments
+
+//=============================================================================
+// Render all tasks
+//=============================================================================
+
+const [renderClientAp, setRenderClientAp] = useState();
+const [clientAps, setClientAps] = useState();
+//const [clientId, setClientId] = useState(props.name + " " + props.surname);
+//const [clientId, setClientId] = useState("Chelsea Schmoop");
+
+const [clientId, setClientId] = useState({
+    name: props.name + " " + props.surname,
+});
+
+
+const user = sessionStorage.getItem('activeUser');
+
+useEffect(()=>{
+
+  axios.post('http://localhost:80/project-api/readClientAps.php',clientId )
+  .then((res)=>{
+    let data = res.data;
+    let renderClientAp = data.map((item) =>  <ClientAppointments key={item.id} rerender={setRenderClientAp} uniqueId={item.id} vet={item.vet} client={props.petName} time={item.time} aDate={item.date} room={item.room}  />);
+  //   console.log(data);
+  setClientAps(renderClientAp);
+  setRenderClientAp(false);
+    
+  })
+  .catch(err=>{
+    console.log(err);
+  });
+
+},[]);
+
+ //=============================================================================
+// Delete client
+//=============================================================================
+
+const [deleteClientModal, setDeleteClientModal] = useState();
+
+const deleteClient = () => {
+  
+    setDeleteClientModal(<DeleteClientModal upRender={props.rerender} rerender={setDeleteClientModal} id={props.uniqueId} />);
+    //  props.rerender();
+  }
+
+ 
+//=============================================================================
+// Edit Client
+//=============================================================================
+
+const [modal, setModal] = useState();
+
+const editClient = () => {
+    console.log("clicked");
+    setModal(<EditClient upRender={props.rerender} rerender={setModal} name={props.name} surname={props.surname} id={props.uniqueId} petName={props.petName} petType={props.petType} petGender={props.petGender} petAge={props.petAge} email={props.email} contact={props.contact} clientId={props.clientId} medicalAidNum={props.medicalAidNum} />)
+   
+}
+
+   
+
     return (
         <div>
+            {modal}
+            {deleteClientModal}
                   <div className='middle-pannel-client'>
-                <div className='edit-icon'><UilEdit/></div>
+                <div className='edit-icon' onClick={editClient}><UilEdit/></div>
             <div className='client-block main'>  <img className='client-block-img main' src={renderImage}/></div>
             <div className='client-maintext one'>  
                 <h1>{props.petName}</h1>
@@ -58,46 +128,20 @@ const ClientInfo = (props) => {
                         <tbody>
                         <tr className='row-heading'>
                             <th>Doctor</th>
-                            <th>Patient</th>
+                            <th>Client</th>
                             <th>Time</th>
                             <th>Room</th>
                         </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
-                        <tr className='individual-appointment'>
-                            <td>Dr S. Smith</td>
-                            <td>Jason Craig</td>
-                            <td>08:30 am</td>
-                            <td>341</td>
-                        </tr>
+
+                        {clientAps}
+                        
                         </tbody>
                     </table>
 
                     </div>
                 </div>
                 {/* <button className='primary-btn vet'>Edit</button> */}
+                <button className='deleteVet client button' onClick={deleteClient}><div className='trash'><UilTrashAlt/></div>Would you like to delete this Client?</button>
             </div>
 
 
@@ -105,7 +149,7 @@ const ClientInfo = (props) => {
 
             <img className='dog' src={dog}/>
 
-            <div className='right-pannel-client'>
+            <div className='right-pannel-client two'>
                 <div className='edit-icon client'><UilEdit/></div>
             <div className='client-maintext two'>  
                 <h1 className='owner-name'>{props.name + " " + props.surname}</h1>

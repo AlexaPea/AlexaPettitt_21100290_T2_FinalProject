@@ -58,7 +58,7 @@ const Doctors = (props) => {
     .then((res)=>{
       let data = res.data;
       let id =data.id;
-      console.log(data[0].profileImage);
+     // console.log(data[0].profileImage);
       let renderVetInfo = data.map((item) =>  <VetItem key={item.id} rerender={setRenderVetInfo} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} profileImage={item.profileImage}  />);
 
       setVets(renderVetInfo);
@@ -170,7 +170,7 @@ const Navigate = useNavigate();
 
               if(response.status === 200){
                  console.log("Booking has been made!");
-                 Navigate('/Doctors');
+                 e.target.reset();
               }else{
                   console.log('error');
               }
@@ -245,6 +245,7 @@ const [vetModal, setVetModal] = useState();
             </div>
 
             <div className='right-pannel'>
+                <div id='myFormBook'>
                
                 <div className='book-option'>
                     <h3>New Booking</h3>
@@ -273,6 +274,7 @@ const [vetModal, setVetModal] = useState();
                     </div>
 
                 </div>
+            </div>
                 
             </div>
             

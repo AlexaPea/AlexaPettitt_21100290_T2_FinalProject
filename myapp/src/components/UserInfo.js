@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import {UilEdit , UilArrowDown } from '@iconscout/react-unicons';
+import EditUser from './EditUser';
 
 const UserInfo = (props) => {
 
@@ -55,11 +56,13 @@ const UserInfo = (props) => {
 //=============================================================================
    
 
-    const editUserInfo = (e) => {
-        sessionStorage.clear();
-         navigate('/Login');
-         };
+const [modal, setModal] = useState();
 
+const editUserInfo = () => {
+    console.log("clicked");
+    setModal(<EditUser upRender={props.rerender} rerender={setModal} name={props.name} surname={props.surname} id={props.uniqueId} age={props.age} gender={props.gender} contact={props.contact} password={props.password} email={props.email} />)
+   
+};
         
 
 //=============================================================================
@@ -67,6 +70,7 @@ const UserInfo = (props) => {
 //=============================================================================
     return (
         <div>
+            {modal}
              <div className='profile'>
                 <div className='userEdit' onClick={editUserInfo}><UilEdit/></div>
                 <img className='profileImg' src={renderImage}/>

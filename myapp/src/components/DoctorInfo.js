@@ -8,7 +8,8 @@ import Helmet from "react-helmet";
 import VetItem from './VetItem';
 import EditDoctor from './EditDoctor';
 import DeleteVetModal from './DeleteVetModal';
-import { UilTrashAlt } from '@iconscout/react-unicons'
+import { UilTrashAlt } from '@iconscout/react-unicons';
+import Sorry from './Sorry';
 
 
 const DoctorInfo = (props) => {
@@ -31,10 +32,17 @@ useEffect(()=>{
 //=============================================================================
 
 const [deleteVetModal, setDeleteVetModal] = useState();
+const [sorryNo, setSorryNo] = useState();
 
 const deleteVet = () => {
-  
+
+    
+  if(sessionStorage.getItem('activeUser')==="krugar@petcare.co.za"){
     setDeleteVetModal(<DeleteVetModal upRender={props.rerender} rerender={setDeleteVetModal} id={props.uniqueId} />);
+  }else{
+    setSorryNo(<Sorry upRender={props.rerender} rerender={setSorryNo} id={props.uniqueId} />);
+  }
+    
     //  props.rerender();
   }
 
@@ -47,9 +55,13 @@ const deleteVet = () => {
 const [modal, setModal] = useState();
 
 const editDoctor = () => {
+       
+  if(sessionStorage.getItem('activeUser')==="krugar@petcare.co.za"){
     console.log("clicked");
     setModal(<EditDoctor upRender={props.rerender} rerender={setModal} name={props.name} surname={props.surname} id={props.uniqueId} specialization={props.specialization} gender={props.gender} age={props.age} email={props.email} contact={props.contact} doctorId={props.doctorId} room={props.room} docImg={'http://localhost:80/project-api/' + props.profileImg}/>)
-    console.log('http://localhost:80/project-api/' + props.profileImg);
+  }else{
+    setSorryNo(<Sorry upRender={props.rerender} rerender={setSorryNo} id={props.uniqueId} />);
+  }
 }
 
    
@@ -59,6 +71,7 @@ const editDoctor = () => {
     return (
         <div>
             {modal}
+            {sorryNo}
             {deleteVetModal}
                  <div className='middle-pannel vetInfo'>
                 <div className='edit-icon' onClick={editDoctor}><UilEdit/></div>

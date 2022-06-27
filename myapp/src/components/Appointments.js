@@ -94,7 +94,7 @@ const Appointments = (props) => {
       console.log(err);
     });
 
- },[tasks]);
+ },[renderTask]);
 
 
 //=============================================================================
@@ -110,7 +110,7 @@ const Appointments = (props) => {
     axios.post('http://localhost:80/project-api/readUserInfo.php',userId )
     .then((res)=>{
       let data = res.data;
-      let renderUserInfo = data.map((item) =>  <UserInfo key={item.id} rerender={setRenderUserInfo} name={item.name} surname={item.surname} rank={item.rank}  age={item.age} profileImage={item.profileImage}/>);
+      let renderUserInfo = data.map((item) =>  <UserInfo key={item.id} rerender={setRenderUserInfo} name={item.name} surname={item.surname} rank={item.rank}  age={item.age} profileImage={item.profileImage} contact={item.phoneNumber} email={item.email} password={item.password}/>);
       setUserInfo(renderUserInfo);
       setRenderUserInfo(false);
       setGreetingName(data[0].name); 
@@ -119,7 +119,7 @@ const Appointments = (props) => {
       console.log(err);
     });
 
- },[]);
+ },[renderUserInfo]);
 
  //=============================================================================
 // HTML Code

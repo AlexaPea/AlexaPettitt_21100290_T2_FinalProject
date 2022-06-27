@@ -40,7 +40,7 @@ const Doctors = (props) => {
 // Display doctor list
 //=============================================================================
 
-  const [renderVetInfo, setRenderVetInfo] = useState();
+
   const [vets, setVets] = useState();
 
   const user = sessionStorage.getItem('activeUser');
@@ -50,7 +50,9 @@ const Doctors = (props) => {
 });
 
 
-
+const [renderVetInfo, setRenderVetInfo] = useState();
+const [renderVetNames, setRenderVetNames] = useState();
+const [vetNames, setVetNames] = useState();
   useEffect(()=>{
 
     //render vet items
@@ -60,8 +62,9 @@ const Doctors = (props) => {
       let id =data.id;
      // console.log(data[0].profileImage);
       let renderVetInfo = data.map((item) =>  <VetItem key={item.id} rerender={setRenderVetInfo} uniqueId={item.id} name={item.name} surname={item.surname} specialization={item.specialization} profileImage={item.profileImage}  />);
-
+      let renderVetNames = data.map((item) =>  <option uniqueId={item.id} value={item.name + " " + item.surname} />);
       setVets(renderVetInfo);
+      setVetNames(renderVetNames);
       setRenderVetInfo(false);
       
     })
@@ -69,7 +72,7 @@ const Doctors = (props) => {
       console.log(err);
     });
 
- },[]);
+ },[renderVetInfo]);
 
 
 
@@ -194,6 +197,30 @@ const [vetModal, setVetModal] = useState();
  
    };
 
+       //========================================================
+      //get client list
+      //======================================
+      const [renderClientInfo, setRenderClientInfo] = useState();
+  const [clients, setClients] = useState();
+
+      useEffect(()=>{
+
+        axios.post('http://localhost:80/project-api/readClients.php',userId )
+        .then((res)=>{
+          let data = res.data;
+          let renderClientInfo = data.map((item) =><option uniqueId={item.id} value={item.name + " " + item.surname} />);
+          console.log(data);
+          setClients(renderClientInfo);
+          setRenderClientInfo(false);
+          
+        })
+        .catch(err=>{
+          console.log(err);
+        });
+    
+     },[]);
+  
+
 //=============================================================================
 // HTML Code
 //=============================================================================
@@ -252,19 +279,11 @@ const [vetModal, setVetModal] = useState();
                     <div className='book-container'>
                         <input onChange={vetNameVal} name="vet" list="docList" className='booking-input' type='text' placeholder='doctor'/>
                         <datalist id="docList">
-                            <option value="Sarah"/>
-                            <option value="Josh"/>
-                            <option value="Daina"/>
-                            <option value="Tanielle"/>
-                            <option value="Tony"/>
+                       {vetNames}
                         </datalist>
                         <input onChange={clientNameVal} name="client" list="clientList" className='booking-input' type='text' placeholder='client'/>
                         <datalist id="clientList">
-                            <option value="Sarah"/>
-                            <option value="Josh"/>
-                            <option value="Daina"/>
-                            <option value="Tanielle"/>
-                            <option value="Tony"/>
+                           {clients}
                         </datalist>
                         <input name="date" onChange={dateVal} className='booking-input' type='date' placeholder='Date'/>
                         <input name="time" onChange={timeVal} className='booking-input' type='time' placeholder='time'/>

@@ -32,36 +32,40 @@ const ClientItem = (props) => {
  const showClient = (event) => {
   
      
-     //Toggles colour
-     //document.classList.remove('bg-salmon');
-     //event.currentTarget.classList.toggle('bg-salmon');
-  
-     event.preventDefault();
-     setRenderActiveClient(false);
+        //Toggles colour
+    //document.classList.remove('bg-salmon');
+    //event.currentTarget.classList.toggle('bg-salmon');
+    event.preventDefault();
+    setRenderActiveClient("true");
+    setActiveClient() ;
     
-     //set Id to id of clicked div
-     let id = event.currentTarget.id;
-     setItemId(event.currentTarget.id);
-     console.log(id);
- 
-     let value = event.currentTarget.id;
-     console.log(value);
-     setInputs({...inputs, itemId: value});
-     console.log(inputs);
-     //if first input is empty, set error message to nothing
-     if(inputs.itemId == ''){console.log("no id")}
+    
+   
+    //set Id to id of clicked div
+    let id = event.currentTarget.id;
+    setItemId(event.currentTarget.id);
+    //console.log(id);
+
+    let value = event.currentTarget.id;
+   //console.log(value);
+    setInputs({...inputs, itemId: value});
+    //console.log(inputs);
+    //if first input is empty, set error message to nothing
+    //if(inputs.itemId == ''){console.log("no id")}
  
      //read clicked doctor
      axios.post('http://localhost:80/project-api/readActiveClient.php',inputs)
      .then((res)=>{
      let data = res.data;
      //render clicked doctors card
+     setRenderActiveClient(true);
      setActiveClient(data.map((item) =>  <ClientInfo key={item.id} rerender={setRenderActiveClient} uniqueId={item.id} name={item.name} surname={item.surname} petName={item.petName} petType={item.petType} petAge={item.petAge} petGender={item.petGender} email={item.email} contact={item.phoneNumber} clientId={item.clientId} medicalAidNum={item.medicalAidNum} profileImg={item.profileImage} petImage={item.petImage} />)) 
      // console.log(data);
  
        })
        .catch(err=>{
          console.log(err);
+         setRenderActiveClient(true);
        });
  
  
@@ -73,7 +77,7 @@ const ClientItem = (props) => {
  //=============================================================================
  // set colour of clicked doctor card
  //=============================================================================
-     const [activeItem, setActiveItem] = useState(0);
+  
      
     
      const [activeButton, setActiveButton] = useState();
@@ -107,7 +111,7 @@ useEffect(()=>{
                  </div>
             </div>
             </button>
-            <div className='docInfoComp'>
+            <div className='docInfoComp client'>
         
             {activeClient}    
             </div>

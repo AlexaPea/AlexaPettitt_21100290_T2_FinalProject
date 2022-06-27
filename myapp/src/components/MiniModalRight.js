@@ -10,7 +10,7 @@ const MiniModalRight = (props) => {
 
   return (
     <div className='alertMiniModalRight'>
-      <div className='errorImg'><UilExclamationCircle size={19}/></div>
+      <div className='errorImg'><UilExclamationCircle size={14}/></div>
         {/* <img src={ErrorAsset} /> */}
         <small>{props.message}</small> 
     </div>

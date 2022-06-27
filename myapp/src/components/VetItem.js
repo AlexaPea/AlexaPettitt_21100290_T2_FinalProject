@@ -40,8 +40,10 @@ const showVetInfo = (event) => {
     //Toggles colour
     //document.classList.remove('bg-salmon');
     //event.currentTarget.classList.toggle('bg-salmon');
-    setRenderActiveVet(true);
     event.preventDefault();
+    setRenderActiveVet("true");
+    setActiveVet() ;
+    
     
    
     //set Id to id of clicked div

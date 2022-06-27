@@ -35,7 +35,7 @@ const [clientAps, setClientAps] = useState();
 //const [clientId, setClientId] = useState("Chelsea Schmoop");
 
 const [clientId, setClientId] = useState({
-    name: props.name + " " + props.surname,
+    name: (props.name + " " + props.surname),
 });
 
 
@@ -68,7 +68,7 @@ const deleteClient = () => {
   
     setDeleteClientModal(<DeleteClientModal upRender={props.rerender} rerender={setDeleteClientModal} id={props.uniqueId} />);
     //  props.rerender();
-  }
+  };
 
  
 //=============================================================================
@@ -81,7 +81,7 @@ const editClient = () => {
     console.log("clicked");
     setModal(<EditClient upRender={props.rerender} rerender={setModal} name={props.name} surname={props.surname} id={props.uniqueId} petName={props.petName} petType={props.petType} petGender={props.petGender} petAge={props.petAge} email={props.email} contact={props.contact} clientId={props.clientId} medicalAidNum={props.medicalAidNum} />)
    
-}
+};
 
    
 

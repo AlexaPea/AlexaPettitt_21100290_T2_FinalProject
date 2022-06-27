@@ -190,7 +190,7 @@ const Login = (props) => {
 
         //check validation
         if(!value.match(passwordRegex)){
-            setPasswordError(<MiniModalLeft message="Password must include..." />); //tooltip
+            setPasswordError(<MiniModalLeft message="Password must include a capital,symbols and numbers" />); //tooltip
             //Note: Explain why the format isn't valid in the message as well
         }
     }

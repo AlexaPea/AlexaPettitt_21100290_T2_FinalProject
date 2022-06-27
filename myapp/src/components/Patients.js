@@ -59,7 +59,7 @@ const Patients = (props) => {
       console.log(err);
     });
 
- },[]);
+ },[renderClientInfo]);
 
  //=============================================================================
 // Render add client pop up

@@ -134,6 +134,54 @@ const MakeBooking = (props) => {
           }
       }
 
+      //========================================================
+      //get client list
+      //======================================
+      const [renderClientInfo, setRenderClientInfo] = useState();
+  const [clients, setClients] = useState();
+
+      useEffect(()=>{
+
+        axios.post('http://localhost:80/project-api/readClients.php',userId )
+        .then((res)=>{
+          let data = res.data;
+          let renderClientInfo = data.map((item) =><option uniqueId={item.id} value={item.name + " " + item.surname} />);
+          console.log(data);
+          setClients(renderClientInfo);
+          setRenderClientInfo(false);
+          
+        })
+        .catch(err=>{
+          console.log(err);
+        });
+    
+     },[]);
+
+
+     //=========================================================
+//get docs
+     //=============================================================
+     const [renderVetInfo, setRenderVetInfo] = useState();
+     const [vets, setVets] = useState();
+     useEffect(()=>{
+   
+       //render vet items
+       axios.post('http://localhost:80/project-api/readDoctors.php',userId )
+       .then((res)=>{
+         let data = res.data;
+         let id =data.id;
+        // console.log(data[0].profileImage);
+         let renderVetInfo = data.map((item) =>  <option uniqueId={item.id} value={item.name + " " + item.surname} />);
+   
+         setVets(renderVetInfo);
+         setRenderVetInfo(false);
+         
+       })
+       .catch(err=>{
+         console.log(err);
+       });
+   
+    },[]);
   //=============================================================================
 // HTML code
 //=============================================================================    
@@ -154,19 +202,11 @@ const MakeBooking = (props) => {
                     <div className='new-book-container home'>
                         <input name="vet" list="docList" onChange={vetNameVal} className='booking-input home' type='text' placeholder='doctor'/>
                         <datalist id="docList">
-                            <option value="Sarah"/>
-                            <option value="Josh"/>
-                            <option value="Daina"/>
-                            <option value="Tanielle"/>
-                            <option value="Tony"/>
+                            {vets}
                         </datalist>
                         <input name="client" list="clientList"  onChange={clientNameVal} className='booking-input home' type='text' placeholder='client'/>
                         <datalist id="clientList">
-                            <option value="Sarah"/>
-                            <option value="Josh"/>
-                            <option value="Daina"/>
-                            <option value="Tanielle"/>
-                            <option value="Tony"/>
+                           {clients}
                         </datalist>
                         <input name="date"  onChange={dateVal} className='booking-input home' type='date' placeholder='Date'/>
                         <input name="time"   onChange={timeVal} className='booking-input home' type='time' placeholder='time'/>

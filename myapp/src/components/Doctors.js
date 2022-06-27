@@ -72,7 +72,7 @@ const [vetNames, setVetNames] = useState();
       console.log(err);
     });
 
- },[renderVetInfo]);
+ },[]);
 
 
 
